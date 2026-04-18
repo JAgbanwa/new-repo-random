@@ -152,13 +152,11 @@ $2r - 1 = 6u + 3 = 3(2u + 1) = 3\ell$, so $n - 6 = 6\ell$.
 
 By~\eqref{eq:star} with $k = 6$: $\tau(6\ell) \le 8$.
 
-The six primes being simultaneously prime now read, in terms of $\ell$:
-\begin{equation}
-  \ell,\quad s = 2\ell + 1,\quad r = \tfrac{3\ell+1}{2},\quad
-  q = 3\ell + 2,\quad p = 6\ell + 5.
-\end{equation}
-(We also need $\ell$ to be odd and $> 1$, i.e.\ prime; also $r$ an integer
-requires $3\ell + 1$ even, i.e.\ $\ell$ odd, which holds since $\ell = 2u+1$.)
+At this point the following are already established prime:
+$r = (3\ell+1)/2$, $q = 3\ell+2$, $p = 6\ell+5$, $s = 2\ell+1$.
+The quantity $\ell = 2u+1$ is odd by construction; the sub-case analysis below
+will show it must also be prime in any surviving configuration.
+(Integrality of $r$ requires $3\ell+1$ even, which holds since $\ell$ is odd.)
 
 We analyse the sub-cases for $\ell$:
 
@@ -188,6 +186,10 @@ We analyse the sub-cases for $\ell$:
 \item \emph{$3 \nmid \ell$, $\ell$ prime:}
   $\tau(6\ell) = 4 \cdot 2 = 8 \le 8$.  Consistent; we continue.
 \end{itemize}
+
+The first two sub-cases are contradictions; the third is the unique survivor.
+Hence $\ell$ is prime, and all five of $\ell$, $s$, $r$, $q$, $p$ are now
+established prime.
 
 \medskip
 \noindent\textit{Step 2d: Using $k = 5$ to pin down $\ell \pmod 5$ and
@@ -263,6 +265,9 @@ Every sub-case with $5 \mid v$ yields an immediate contradiction.
 
 Therefore $5 \nmid v$, and $v$ is prime.
 
+All six quantities $\ell$, $s = 2\ell+1$, $r = (3\ell+1)/2$, $q = 3\ell+2$,
+$p = 6\ell+5$, $v = (6\ell+1)/5$ are now established prime.
+
 \medskip
 \noindent\textit{Step 2e: Final contradiction via residues mod $7$ and $11$.}
 
@@ -276,36 +281,43 @@ and $\ell \ge 5$.
 
 \smallskip
 \noindent\emph{Modulo $7$.}  We show each residue $\ell \pmod 7$ forces one
-of the six quantities to be composite (or to yield a non-integer, contradicting
-primality):
+of the six prime quantities to equal $7$ (yielding a contradiction) or
+requires $\ell$ to be non-integer (impossible).  Recall: $\ell \ge 5$,
+$s = 2\ell+1 \ge 11$, $r \ge 7$, $q \ge 17$, $p \ge 35$, and
+$v = (6\ell+1)/5 > 6$ so $v \ge 7$.
 \begin{itemize}
   \item $\ell \equiv 0 \pmod 7$: Combined with $\ell \equiv 4 \pmod 5$, CRT gives
-    $\ell \equiv 49 \equiv 14 \pmod{35}$, which is even.  No odd prime satisfies
-    this.  Contradiction.
-  \item $\ell \equiv 1 \pmod 7$: $v = (6\ell+1)/5 \equiv (6+1) \cdot 3 = 21
-    \equiv 0 \pmod 7$ (using $5^{-1} \equiv 3 \pmod 7$).  So $7 \mid v$;
-    since $v$ is prime, $v = 7$, giving $6\ell + 1 = 35$, i.e.\ $\ell = 34/6$:
-    not an integer.  Contradiction.
-  \item $\ell \equiv 2 \pmod 7$: $r = (3\ell+1)/2 \equiv (6+1) \cdot 4 = 28
-    \equiv 0 \pmod 7$ (using $2^{-1} \equiv 4 \pmod 7$).  So $7 \mid r$;
-    since $r$ is prime, $r = 7$, giving $3\ell + 1 = 14$, i.e.\ $\ell = 13/3$:
-    not an integer.  Contradiction.
-  \item $\ell \equiv 3 \pmod 7$: $s = 2\ell + 1 \equiv 7 \equiv 0 \pmod 7$.
-    Since $s$ is prime, $s = 7$, giving $\ell = 3$.  But $\ell \equiv 4 \pmod 5$
-    while $3 \not\equiv 4 \pmod 5$.  Contradiction.
-  \item $\ell \equiv 4 \pmod 7$: $q = 3\ell + 2 \equiv 14 \equiv 0 \pmod 7$.
-    Since $q$ is prime, $q = 7$, giving $\ell = 5/3$: not an integer.
+    $\ell \equiv 14 \pmod{35}$, which is even.  No odd prime satisfies this.
     Contradiction.
-  \item $\ell \equiv 5 \pmod 7$: $p = 6\ell + 5 \equiv 35 \equiv 0 \pmod 7$.
-    Since $p$ is prime, $p = 7$, giving $6\ell + 5 = 7$, i.e.\ $\ell = 1/3$:
+  \item $\ell \equiv 1 \pmod 7$: $v \equiv (6\cdot 1+1)\cdot 3 = 21 \equiv 0
+    \pmod 7$ (using $5^{-1} \equiv 3 \pmod 7$), so $7 \mid v$.  Since $v$ is
+    prime and $v \ge 7$, we get $v = 7$, giving $6\ell + 1 = 35$,
+    i.e.\ $\ell = 34/6$: not an integer.  Contradiction.
+  \item $\ell \equiv 2 \pmod 7$: $r \equiv (6+1)\cdot 4 = 28 \equiv 0 \pmod 7$
+    (using $2^{-1} \equiv 4 \pmod 7$), so $7 \mid r$.  Since $r$ is prime and
+    $r \ge 7$, we get $r = 7$, giving $3\ell + 1 = 14$, i.e.\ $\ell = 13/3$:
     not an integer.  Contradiction.
-  \item $\ell \equiv 6 \pmod 7$: One verifies $\ell, s, r, q, p, v$ are all
-    $\equiv 6 \pmod 7$ (none zero), so this case requires further analysis.
+  \item $\ell \equiv 3 \pmod 7$: $s = 2\ell+1 \equiv 7 \equiv 0 \pmod 7$, so
+    $7 \mid s$.  Since $s$ is prime and $s \ge 11 > 7$, this is impossible.
+    Contradiction.
+  \item $\ell \equiv 4 \pmod 7$: $q = 3\ell+2 \equiv 14 \equiv 0 \pmod 7$, so
+    $7 \mid q$.  Since $q$ is prime and $q \ge 17 > 7$, this is impossible.
+    Contradiction.
+  \item $\ell \equiv 5 \pmod 7$: $p = 6\ell+5 \equiv 35 \equiv 0 \pmod 7$, so
+    $7 \mid p$.  Since $p$ is prime and $p \ge 35 > 7$, this is impossible.
+    Contradiction.
+  \item $\ell \equiv 6 \pmod 7$: One checks that $\ell, s, r, q, p, v$ are all
+    $\equiv 6 \pmod 7$ (none divisible by $7$), so no immediate contradiction
+    arises here.
 \end{itemize}
 
-Therefore $\ell \equiv 6 \pmod 7$.  Since $6 \equiv -1 \pmod 7$ and we already
-have $\ell \equiv -1 \pmod 3$ and $\ell \equiv -1 \pmod 5$, by CRT:
-$\ell \equiv -1 \pmod{105}$, i.e.\ $\ell \equiv 104 \pmod{105}$.
+Since every residue class $\ell \equiv 0, 1, 2, 3, 4, 5 \pmod 7$ has been
+eliminated, we are forced to conclude $\ell \equiv 6 \pmod 7$.
+Combined with $\ell \equiv 2 \pmod 3$ (established in Step~2b) and
+$\ell \equiv 4 \pmod 5$ (established in Step~2d), all three congruences hold
+simultaneously in this surviving branch.  Since $6 \equiv -1$, $2 \equiv -1$,
+$4 \equiv -1$ modulo $7$, $3$, $5$ respectively, CRT over $3 \times 5 \times 7
+= 105$ gives $\ell \equiv -1 \pmod{105}$, i.e.\ $\ell \equiv 104 \pmod{105}$.
 
 \smallskip
 \noindent\emph{Modulo $11$.}
