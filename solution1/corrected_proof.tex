@@ -277,17 +277,19 @@ We enumerate the possibilities $(c, \tau(v'))$:
         $q$ prime and $q\ge17>7$: impossible.  Contradiction.
       \item $\ell \equiv 5 \pmod 7$ ($k \equiv 1$): $p=6\ell+5\equiv35\equiv0\pmod7$;
         $p$ prime and $p\ge35>7$: impossible.  Contradiction.
-      \item $\ell \equiv 6 \pmod 7$ ($k \equiv 5$): None of $r,q,p,s$ is divisible
-        by $7$.  We have $\ell \equiv 2\pmod 3$, $\ell\equiv4\pmod5$, and
-        $\ell\equiv6\pmod7$; since $6\equiv-1$, $2\equiv-1$, $4\equiv-1$ modulo
-        $7,3,5$ respectively, CRT over $105$ gives $\ell\equiv104\pmod{105}$.
-        Since $\ell$ is an odd prime, $\ell = 105k+104$ is odd, which forces
-        $k$ to be odd (as $105k$ is odd iff $k$ is odd, so $105k+104$ is odd
-        iff $k$ is odd).  Writing $k = 2m+1$ gives $\ell = 210m+209$, i.e.\
-        $\ell \equiv 209 \pmod{210}$.  Since $210 = 19 \cdot 11 + 1 \equiv 1
-        \pmod{11}$, we get $\ell \equiv 209 \equiv 209 - 19 \cdot 11 = 0
-        \pmod{11}$.  So $11 \mid \ell$; since $\ell$ is prime, $\ell = 11$.
-        But $\ell \ge 209 > 11$.  Contradiction.
+      \item $\ell \equiv 6 \pmod 7$ ($k \equiv 5$): We verify explicitly.
+        Using $2^{-1}\equiv4$ and $5^{-1}\equiv3\pmod7$:
+        $r\equiv19\cdot4=76\equiv6$, $q\equiv20\equiv6$, $p\equiv41\equiv6$,
+        $s\equiv13\equiv6\pmod7$.  None of $r, q, p, s$ is divisible by $7$.
+        We have $\ell\equiv2\pmod3$, $\ell\equiv4\pmod5$, $\ell\equiv6\pmod7$;
+        since $6\equiv-1$, $2\equiv-1$, $4\equiv-1$ modulo $7,3,5$ respectively,
+        CRT over $105$ gives $\ell\equiv104\pmod{105}$.
+        Since $\ell$ is an odd prime, $\ell=105k+104$ is odd, which forces
+        $k$ to be odd.  Writing $k=2m+1$ gives $\ell=210m+209$, i.e.\
+        $\ell\equiv209\pmod{210}$.  Since $210\equiv1\pmod{11}$, we get
+        $\ell\equiv209\equiv0\pmod{11}$.  So $11\mid\ell$; since $\ell$ is
+        prime, $\ell=11$.  But $11\equiv1\pmod5$, while $\ell\equiv4\pmod5$.
+        Contradiction.
     \end{itemize}
     Every residue of $\ell \pmod 7$ yields a contradiction.
   \item $c = 2$, $\tau(v') = 1$ (so $v' = 1$, $v = 25$):
@@ -348,9 +350,20 @@ $v = (6\ell+1)/5 > 6$ so $v \ge 7$.
   \item $\ell \equiv 5 \pmod 7$: $p = 6\ell+5 \equiv 35 \equiv 0 \pmod 7$, so
     $7 \mid p$.  Since $p$ is prime and $p \ge 35 > 7$, this is impossible.
     Contradiction.
-  \item $\ell \equiv 6 \pmod 7$: One checks that $\ell, s, r, q, p, v$ are all
-    $\equiv 6 \pmod 7$ (none divisible by $7$), so no immediate contradiction
-    arises here.
+  \item $\ell \equiv 6 \pmod 7$: We verify that none of the six quantities is
+    divisible by $7$.  Using $2^{-1} \equiv 4$ and $5^{-1} \equiv 3 \pmod 7$:
+    \[
+      \ell \equiv 6,\quad
+      s = 2\ell+1 \equiv 13 \equiv 6,\quad
+      r = \tfrac{3\ell+1}{2} \equiv 19\cdot 4 = 76 \equiv 6,
+    \]
+    \[
+      q = 3\ell+2 \equiv 20 \equiv 6,\quad
+      p = 6\ell+5 \equiv 41 \equiv 6,\quad
+      v = \tfrac{6\ell+1}{5} \equiv 37\cdot 3 = 111 \equiv 6 \pmod 7.
+    \]
+    None is divisible by $7$, so mod-$7$ yields no contradiction in this
+    case.
 \end{itemize}
 
 Since every residue class $\ell \equiv 0, 1, 2, 3, 4, 5 \pmod 7$ has been
@@ -368,8 +381,8 @@ we need $105k + 104$ odd; since $105$ is odd, this requires $k$ to be odd.
 Setting $k = 2m + 1$ gives $\ell = 210m + 209$, i.e.\ $\ell \equiv 209
 \pmod{210}$.  Now $210 = 19 \cdot 11 + 1 \equiv 1 \pmod{11}$, so
 $\ell \equiv 209 \equiv 209 - 19 \cdot 11 = 0 \pmod{11}$.  Hence $11 \mid \ell$.
-Since $\ell$ is prime, $\ell = 11$.  But every $\ell \equiv 209 \pmod{210}$
-satisfies $\ell \ge 209 > 11$.  Contradiction.
+Since $\ell$ is prime, $\ell = 11$.  But $11 \equiv 1 \pmod 5$, while Step~2d
+established $\ell \equiv 4 \pmod 5$.  Contradiction.
 
 This eliminates the final case, so every branch leads to a contradiction.
 Therefore no $n > 24$ satisfies the inequality.
@@ -392,8 +405,8 @@ $\ell = 2u+1$ reduces the problem; (iv) $\ell \equiv 4 \pmod 5$ from a divisor
 count involving $n - 5$; (v) $\ell \equiv 6$ modulo each of $3, 5, 7$ gives
 $\ell \equiv 104 \pmod{105}$; (vi) since $\ell$ is an odd prime,
 $\ell \equiv 209 \pmod{210}$, but then $11 \mid \ell$ (as $209 \equiv 0
-\pmod{11}$ and $210 \equiv 1 \pmod{11}$), so $\ell = 11$, contradicting
-$\ell \ge 209$.
+\pmod{11}$ and $210 \equiv 1 \pmod{11}$), so $\ell = 11$; but $11 \equiv 1
+\pmod 5$ while $\ell \equiv 4 \pmod 5$ --- contradiction.
 The proof is thus fully elementary, using only divisor-count estimates,
 modular arithmetic, and the Chinese Remainder Theorem.
 \end{remark}
