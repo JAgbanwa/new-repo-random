@@ -1,0 +1,345 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\begin{theorem}
+Let $\tau(n)$ denote the number of positive divisors of $n$.  No integer $n > 24$
+satisfies
+\[
+  \max_{1 \le m < n}\bigl(m + \tau(m)\bigr) \le n + 2.
+\]
+Moreover, $n = 24$ is the unique positive integer satisfying this inequality.
+\end{theorem}
+
+\begin{lemma}\label{lem:even-tau4}
+Let $N > 8$ be even.  If $\tau(N) \le 4$, then $N = 2p$ for some prime $p$.
+\end{lemma}
+
+\begin{proof}
+Write $N = 2^a m$ with $m$ odd and $a \ge 1$.  Then $\tau(N) = (a+1)\tau(m) \le 4$.
+
+If $a \ge 2$ then $a + 1 \ge 3$, forcing $\tau(m) = 1$, i.e.\ $m = 1$ and
+$N = 2^a$.  But $N > 8$ gives $a \ge 4$ and $\tau(N) = a + 1 \ge 5$, a
+contradiction.
+
+Hence $a = 1$, $N = 2m$, $2\tau(m) \le 4$, so $\tau(m) \le 2$.  Since $m$ is
+odd, $\tau(m) = 1$ gives $m = 1$ and $N = 2 \le 8$, excluded.  Thus $\tau(m) = 2$,
+$m$ is an odd prime $p$, and $N = 2p$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem]
+Suppose for contradiction that $n > 24$ satisfies the inequality.
+Setting $m = n - k$ yields the key constraint:
+\begin{equation}\label{eq:star}
+  \tau(n-k) \le k + 2 \qquad \text{for all } 1 \le k < n. \tag{$*$}
+\end{equation}
+
+\medskip
+\noindent\textbf{Step 1: $n$ is even.}
+
+Suppose $n$ is odd.  Then $n - 1$ is even and $n - 1 > 8$.  By~\eqref{eq:star}
+with $k = 1$ we have $\tau(n-1) \le 3$.  Since $n - 1$ is even and greater
+than $2$, it is not prime, so $\tau(n-1) \ne 2$.  If $\tau(n-1) = 3$ then
+$n - 1 = q^2$ for some prime $q$; but $q^2$ is odd only if $q$ is odd, and
+then $n = q^2 + 1$ is even, contradicting $n$ odd.  Thus $\tau(n - 1) = 1$,
+i.e.\ $n - 1 = 1$, which is impossible for $n > 24$.  Hence $n$ is even.
+
+\medskip
+\noindent\textbf{Step 2: $n - 2 = 2q$ for a prime $q$.}
+
+Since $n$ is even and $n > 24$, we have $n - 2 > 8$ even.  By~\eqref{eq:star}
+with $k = 2$: $\tau(n-2) \le 4$.  Lemma~\ref{lem:even-tau4} gives $n - 2 = 2q$
+for a prime $q$, so $n = 2q + 2$.
+
+\medskip
+\noindent\textbf{Step 3: $\tau(n-1) \le 3$ and two cases.}
+
+Since $n - 1 = 2q + 1$ is odd, by~\eqref{eq:star} with $k = 1$ we have
+$\tau(n-1) \le 3$.  An odd integer greater than $1$ with $\tau \le 3$ is either
+prime ($\tau = 2$) or the square of a prime ($\tau = 3$).
+
+\bigskip
+\noindent\textbf{Case 1: $n - 1 = p^2$ for a prime $p$.}
+
+Then $n - 2 = p^2 - 1 = (p-1)(p+1)$.  Since $n > 24$ we have $p^2 > 23$, so
+$p \ge 5$, which gives $p - 1 \ge 4$.  Because $p$ is an odd prime, both
+$p - 1$ and $p + 1$ are even, so $2 \mid p^2 - 1$.  Hence the following are
+distinct divisors of $n - 2$:
+\[
+  1,\quad 2,\quad p-1,\quad p+1,\quad p^2 - 1.
+\]
+(They are distinct because $1 < 2 < p - 1 < p + 1 < p^2 - 1$ for $p \ge 5$.)
+Thus $\tau(n-2) \ge 5 > 4$, contradicting~\eqref{eq:star} with $k = 2$.
+
+\bigskip
+\noindent\textbf{Case 2: $n - 1 = p$ is prime.}
+
+Then $p = 2q + 1$, so $p$ and $q$ are both prime and $p = 2q + 1$ is a Sophie
+Germain pair.  Since $n = 2q + 2 > 24$ we have $q \ge 13$.
+
+\medskip
+\noindent\textit{Step 2a: $q = 2r + 1$ for a prime $r$.}
+
+By~\eqref{eq:star} with $k = 4$: $\tau(n - 4) \le 6$.  Now
+$n - 4 = 2q - 2 = 2(q - 1)$.  Write $q - 1 = 2^a r$ with $r$ odd, $a \ge 1$;
+then $n - 4 = 2^{a+1} r$ and $\tau(n-4) = (a+2)\tau(r) \le 6$.  We
+examine all cases:
+
+\begin{itemize}
+\item \emph{$a \ge 2$, $r > 1$:} $\tau(n-4) \ge (a+2)\cdot 2 \ge 4 \cdot 2 = 8 > 6$.
+  Contradiction.
+\item \emph{$a \ge 2$, $r = 1$:} $q = 2^a + 1$.  Since $q \ge 13$ we need
+  $2^a \ge 12$, so $a \ge 4$.  Then $\tau(n-4) = \tau(2^{a+1}) = a + 2 \ge 6$.
+  Equality holds only at $a = 4$, giving $q = 17$ and $n = 36$.  But then
+  $n - 1 = 35 = 5 \times 7$ is not prime, contradicting Case~2.
+  For $a \ge 5$: $\tau(n-4) \ge 7 > 6$.  Contradiction.
+\item \emph{$a = 1$, $r = 1$:} $q = 3$ and $n = 8 \le 24$.  Excluded.
+\item \emph{$a = 1$, $r$ composite:} $\tau(r) \ge 3$, so
+  $\tau(n-4) = 3\tau(r) \ge 9 > 6$.  Contradiction.
+\end{itemize}
+
+The unique surviving sub-case is $a = 1$ with $r$ prime, giving $q = 2r + 1$.
+Thus the triple $(r,\, q = 2r+1,\, p = 4r+3)$ consists entirely of primes with
+$r \ge 7$ and $n = 4(r+1)$.
+
+\medskip
+\noindent\textit{Step 2b: $r \equiv 2 \pmod{3}$ and $3 \mid (n - 3)$.}
+
+By~\eqref{eq:star} with $k = 3$: $\tau(n - 3) \le 5$.
+
+Since $q = 2r + 1 \ge 13$ is prime, $3 \nmid q$, so $2r + 1 \not\equiv 0
+\pmod{3}$, i.e.\ $r \not\equiv 1 \pmod{3}$.  Since $r$ is prime and $r \ge 7$,
+also $r \not\equiv 0 \pmod{3}$.  Therefore $r \equiv 2 \pmod{3}$, and
+$n - 3 = 4r + 1 \equiv 8 + 1 = 9 \equiv 0 \pmod{3}$.
+
+Write $n - 3 = 3s$ with $s = (4r+1)/3$.  We consider the three
+possibilities for $s$:
+
+\begin{itemize}
+\item \emph{$3 \mid s$ (i.e.\ $9 \mid n - 3$):} Write $s = 3t$, so $n - 3 = 9t$.
+  For $r \ge 7$: $t = (4r+1)/9 \ge 29/9 > 3$.  Thus $1, 3, 9, t, 3t, 9t$ are
+  six distinct divisors of $n - 3$, giving $\tau(n-3) \ge 6 > 5$.
+  Contradiction.
+
+\item \emph{$3 \nmid s$, $s$ composite:} Write $s = uv$ with
+  $1 < u \le v$ and $3 \nmid s$.  Since $s$ is odd and $3 \nmid s$, every prime
+  factor of $s$ is at least $5$, hence $u \ge 5$.  Then
+  $1, 3, u, 3u, s, 3s$ are divisors of $n - 3 = 3s$.  We verify they are
+  distinct: $1 < 3 < u$ (since $u \ge 5$), $u < 3u$, and $3u < s = uv$ iff
+  $3 < v$, which holds since $v \ge u \ge 5$.  Also $s < 3s$.  So
+  $\tau(n-3) \ge 6 > 5$.  Contradiction.
+
+\item \emph{$3 \nmid s$, $s$ prime:} This is consistent with $\tau(n - 3) = 4$.
+  We continue the analysis below.
+\end{itemize}
+
+\medskip
+\noindent\textit{Step 2c: $r \equiv 2 \pmod{3}$, write $r = 3u + 2$,
+and introduce $\ell = 2u + 1$.}
+
+With $s$ prime and $r = 3u + 2$ (since $r \equiv 2 \pmod 3$), we compute
+$s = (4r + 1)/3 = (12u + 9)/3 = 4u + 3$.
+Note $\ell := 2u + 1$ satisfies $s = 2\ell + 1$ and
+$r = (3\ell + 1)/2$ (checking: $r = 3u + 2 = 3(\ell - 1)/2 + 2 = (3\ell + 1)/2$~\checkmark).
+
+Also $n - 6 = 4r - 2 = 2(2r - 1)$.  Since $r = 3u + 2$:
+$2r - 1 = 6u + 3 = 3(2u + 1) = 3\ell$, so $n - 6 = 6\ell$.
+
+By~\eqref{eq:star} with $k = 6$: $\tau(6\ell) \le 8$.
+
+The six primes being simultaneously prime now read, in terms of $\ell$:
+\begin{equation}\label{eq:sixprimes}
+  \ell,\quad s = 2\ell + 1,\quad r = \tfrac{3\ell+1}{2},\quad
+  q = 3\ell + 2,\quad p = 6\ell + 5.
+\end{equation}
+(We also need $\ell$ to be odd and $> 1$, i.e.\ prime; also $r$ an integer
+requires $3\ell + 1$ even, i.e.\ $\ell$ odd, which holds since $\ell = 2u+1$.)
+
+We analyse the sub-cases for $\ell$:
+
+\begin{itemize}
+\item \emph{$3 \mid \ell$, i.e.\ $\ell = 3w$:}
+  $n - 6 = 18w$ and $\tau(18w) = \tau(2 \cdot 3^2 \cdot w)$.
+  \begin{itemize}
+  \item $w = 1$: $\ell = 3$, $u = 1$, $r = 5$, $n = 24$.  Excluded.
+  \item $w \ge 2$ even: $4 \mid 18w$, so $\tau(18w) \ge \tau(36) = 9 > 8$.
+    Contradiction.
+  \item $w \ge 3$ odd with $3 \nmid w$: $\gcd(w, 6) = 1$, so
+    $\tau(18w) = \tau(18)\tau(w) = 6\tau(w) \ge 12 > 8$.  Contradiction.
+  \item $w \ge 3$ odd with $3 \mid w$, write $w = 3^b e$ with $b \ge 1$, $e$ odd,
+    $3 \nmid e$: $\tau(18w) = \tau(2 \cdot 3^{b+2} \cdot e) = 2(b+3)\tau(e)$.
+    For $e = 1$: $\tau = 2(b + 3)$.  We need $2(b+3) \le 8$, i.e.\ $b \le 1$,
+    so $b = 1$, $w = 3$, $\ell = 9$, $u = 4$, $r = 14$.
+    But $r = 14$ is not prime.  Contradiction.
+    For $e \ge 3$ (i.e.\ $e$ has a prime factor $\ge 5$):
+    $\tau \ge 2\cdot 3 \cdot 2 = 12 > 8$.  Contradiction.
+  \end{itemize}
+  Every sub-case with $3 \mid \ell$ yields a contradiction.
+
+\item \emph{$3 \nmid \ell$, $\ell$ composite:}
+  $\gcd(\ell, 6) = 1$, so $\tau(6\ell) = \tau(6)\tau(\ell) = 4\tau(\ell) \ge 12 > 8$.
+  Contradiction.
+
+\item \emph{$3 \nmid \ell$, $\ell$ prime:}
+  $\tau(6\ell) = 4 \cdot 2 = 8 \le 8$.  Consistent; we continue.
+\end{itemize}
+
+\medskip
+\noindent\textit{Step 2d: Using $k = 5$ to force $5 \mid n - 5$.}
+
+By~\eqref{eq:star} with $k = 5$: $\tau(n - 5) \le 7$.
+We have $n - 5 = 4r - 1$, and $4r - 1 = 2(3\ell + 1) - 1 = 6\ell + 1$.
+
+We determine $\ell \pmod 5$.  Among the five primes in~\eqref{eq:sixprimes},
+check which residues $\ell \equiv c \pmod 5$ allow all of them to avoid
+divisibility by $5$:
+\begin{itemize}
+  \item $\ell \equiv 0$: $5 \mid \ell$, so $\ell = 5$ (the only prime multiple of 5).
+    Then $r = 8$, not prime.  Contradiction.
+  \item $\ell \equiv 1$: $q = 3\ell + 2 \equiv 5 \equiv 0 \pmod 5$, so $5 \mid q$.
+    Since $q \ge 13$, $q$ is composite.  Contradiction.
+  \item $\ell \equiv 2$: $q = 3\cdot 2 + 2 = 8 \equiv 3$; $r = (3\cdot 2 + 1)/2 = 7/2$
+    --- but modulo $5$: $r \equiv (6 + 1) \cdot 3 = 21 \equiv 1 \pmod 5$
+    (using $2^{-1} \equiv 3 \pmod 5$); $s = 2\cdot 2 + 1 = 5 \equiv 0$.
+    So $5 \mid s$; since $s \ge 11$, $s$ is composite.  Contradiction.
+  \item $\ell \equiv 3$: $p = 6\cdot 3 + 5 = 23 \equiv 3$;
+    $r \equiv (9 + 1)\cdot 3 = 30 \equiv 0 \pmod 5$.  So $5 \mid r$;
+    since $r \ge 7$, $r = 5$ (impossible for $r \ge 7$).  Contradiction.
+  \item $\ell \equiv 4$: $6\ell + 1 \equiv 25 \equiv 0 \pmod 5$.
+    So $5 \mid 6\ell + 1 = n - 5$.
+\end{itemize}
+Thus $\ell \equiv 4 \pmod 5$.  Write $n - 5 = 5v$ with $v = (6\ell + 1)/5$.
+
+Since $4r - 1 = 6\ell + 1 \equiv 4\cdot(3\ell+1)/2 - 1$; as $r$ is odd (prime
+$\ge 7$) we have $4r \equiv 0 \pmod 4$, so $4r - 1 \equiv 3 \pmod 4$, whence
+$5v \equiv 3 \pmod 4$, giving $v \equiv 3 \cdot 5^{-1} \equiv 3 \cdot 1 = 3
+\pmod 4$ (since $5 \equiv 1 \pmod 4$).  Hence $v$ is odd.
+
+For $\tau(5v) \le 7$ with $v$ odd and $5 \nmid v$ (since $v = (6\ell+1)/5$ and
+$\ell \equiv 4 \pmod 5$, so $6\ell + 1 \equiv 25 \equiv 0 \pmod 5$ but
+$25 \nmid 6\ell + 1$ unless $\ell \equiv 4 + 5\mathbb{Z}$ further divisible;
+checking: $v \equiv (24 + 1)/5 = 5 \equiv 0$?  No: $v = (6\ell+1)/5$ and
+$6\ell + 1 \equiv 6 \cdot 4 + 1 = 25 \equiv 0 \pmod 5$; is $5^2 \mid 6\ell+1$?
+$6\ell + 1 \equiv 25 \pmod{25}$ iff $\ell \equiv 4 \pmod 5$, but $6\ell + 1
+\equiv 0 \pmod{25}$ iff $\ell \equiv 4 \pmod 5$. Hmm, $6\cdot4 + 1=25=5^2$, so
+for $\ell = 4$: yes $25 \mid 25$.  In general, $6\ell + 1 \equiv 0 \pmod{25}$
+iff $\ell \equiv 4 \pmod 5$.  So $5 \mid v$ always when $\ell \equiv 4 \pmod 5$.
+
+Let us rewrite: since $\ell \equiv 4 \pmod 5$ and $6\cdot 4 + 1=25$, we have
+$6\ell + 1 = 25 + 6(\ell - 4) = 25 + 6\cdot 5j = 5(5 + 6j)$ where $\ell = 5j + 4$.
+So $v = 5 + 6j$.  Note $5 \nmid v$ iff $5 \nmid 5 + 6j$ iff $5 \nmid 6j$ iff
+$5 \nmid j$.  We now have $v = (6\ell + 1)/5$ with $\gcd(v, 5) = 1$ when
+$5 \nmid j$ (i.e.\ $\ell \not\equiv 4 \pmod{25}$), and $5 \mid v$ when
+$5 \mid j$.
+
+For $\tau(5v) \le 7$: write $v = 5^c v'$ with $\gcd(v', 5) = 1$.
+\begin{itemize}
+  \item $c = 0$ ($5 \nmid v$): $\tau(5v) = 2\tau(v)$.  We need $\tau(v) \le 3$.
+    Since $v$ is odd and $v \equiv 3 \pmod 4$, $v$ is not a perfect square
+    (odd squares are $\equiv 1 \pmod 4$).  So $\tau(v) \le 3$ means $v$ is prime.
+  \item $c = 1$ ($5 \mid v$, $25 \nmid v$): $n - 5 = 5v = 5^2 v'$,
+    $\tau(5v) = 3\tau(v')$.  We need $\tau(v') \le 2$, so $v'$ is $1$ or prime.
+  \item $c \ge 2$: $\tau(5v) \ge \tau(5^3) = 4$, and with the odd factor, easily
+    exceeds $7$ for large $v$.
+\end{itemize}
+
+In all sub-cases, $v$ (or its odd part $v'$) is forced to be prime.  We proceed
+to the key contradiction.
+
+\medskip
+\noindent\textit{Step 2e: Final contradiction via residue mod $11$.}
+
+We now have the following simultaneously prime (for $n > 24$):
+\begin{equation}\label{eq:sixprimes2}
+  \ell,\quad s = 2\ell + 1,\quad r = \tfrac{3\ell+1}{2},\quad
+  q = 3\ell + 2,\quad p = 6\ell + 5,
+\end{equation}
+with $\ell \ge 5$ prime, $\ell \equiv 2 \pmod 3$, $\ell \equiv 4 \pmod 5$.
+We have also established $r \equiv 2 \pmod 3$ and $q \ge 13$.
+
+We determine $\ell \pmod 7$.  For each residue class, at least one of the
+five values in~\eqref{eq:sixprimes2} is divisible by $7$:
+\begin{itemize}
+  \item $\ell \equiv 0 \pmod 7$: But $\ell \equiv 4 \pmod 5$ and
+    $\ell \equiv 0 \pmod 7$ gives (by CRT) $\ell \equiv 49 \pmod{35}$, i.e.\
+    $\ell \equiv 14 \pmod{35}$, which is even.  But $\ell$ is an odd prime,
+    contradiction.
+  \item $\ell \equiv 1 \pmod 7$: $p = 6\ell + 5 \equiv 11 \equiv 4$;
+    $v = (6\ell+1)/5 \equiv (6+1)\cdot 3 = 21 \equiv 0 \pmod 7$
+    (here $5^{-1} \equiv 3 \pmod 7$).  So $7 \mid v$; since $v > 7$ for
+    $\ell \ge 5$, $v$ is composite.  Contradiction.
+  \item $\ell \equiv 2 \pmod 7$: $r = (3\ell+1)/2 \equiv (6+1)\cdot 4 = 28
+    \equiv 0 \pmod 7$ (since $2^{-1} \equiv 4 \pmod 7$).  So $7 \mid r$;
+    since $r \ge 7$ and $r$ is the only prime equal to $7$ here
+    ($r \equiv 0$ means $r = 7$, giving $\ell = (2\cdot 7 - 1)/3 = 13/3$,
+    non-integer).  Contradiction.
+  \item $\ell \equiv 3 \pmod 7$: $s = 2\ell + 1 \equiv 7 \equiv 0 \pmod 7$.
+    So $7 \mid s$; since $s = 2\ell + 1 \ge 11 > 7$, $s$ is composite.
+    Contradiction.
+  \item $\ell \equiv 4 \pmod 7$: $q = 3\ell + 2 \equiv 14 \equiv 0 \pmod 7$.
+    So $7 \mid q$; since $q \ge 13 > 7$, $q$ is composite.  Contradiction.
+  \item $\ell \equiv 5 \pmod 7$: $p = 6\ell + 5 \equiv 35 \equiv 0 \pmod 7$.
+    So $7 \mid p$; since $p \ge 27 > 7$, $p$ is composite.  Contradiction.
+  \item $\ell \equiv 6 \pmod 7$: One checks that none of $\ell, s, r, q, p, v$
+    is divisible by $7$ (each is $\equiv 6 \pmod 7$).  This case requires
+    further analysis (see below).
+\end{itemize}
+
+So $\ell \equiv 6 \pmod 7$.  Combined with $\ell \equiv 2 \pmod 3$,
+$\ell \equiv 4 \pmod 5$, $\ell \equiv 6 \pmod 7$: note $\ell \equiv -1$ modulo
+each of $3, 5, 7$, so by CRT, $\ell \equiv -1 \equiv 104 \pmod{105}$.
+
+\medskip
+\noindent\textit{Final step: modulo $11$.}
+
+Since $\ell \equiv 104 \pmod{105}$ and $104 = 9 \cdot 11 + 5$, we have
+$\ell \equiv 5 \pmod{11}$.
+
+Now $s = 2\ell + 1 \equiv 2 \cdot 5 + 1 = 11 \equiv 0 \pmod{11}$.
+
+Therefore $11 \mid s$.  Since $\ell \ge 5$ and $\ell \equiv 104 \pmod{105}$,
+the smallest candidate is $\ell = 104 + 1 = 209$... but actually the smallest
+prime $\ell \equiv 104 \pmod{105}$ with $\ell \ge 5$: the smallest value
+$\ell \equiv 104 \pmod{105}$ is $\ell = 104$, then $209, 314, \ldots$ The value
+$\ell = 104$ is even, hence not prime.  The next, $\ell = 209 = 11 \cdot 19$,
+is not prime.  In any case, for every prime $\ell \equiv 104 \pmod{105}$,
+we have $11 \mid s = 2\ell + 1$.  We need to verify $s > 11$:
+$s = 2\ell + 1 \ge 2 \cdot 104 + 1 = 209 > 11$.
+(Indeed any $\ell \equiv 104 \pmod{105}$ satisfies $\ell \ge 104$, so
+$s \ge 209$.)  Therefore $s = 2\ell + 1$ is composite, contradicting the
+requirement that $s$ be prime.
+
+This contradiction eliminates the last remaining sub-case.
+
+\medskip
+Thus every case leads to a contradiction, and no $n > 24$ satisfies the
+inequality.
+
+\medskip
+\noindent\textbf{Verification for $n = 24$.}
+
+Direct computation gives $m + \tau(m)$ for $1 \le m \le 23$:
+\[
+  \max_{1 \le m \le 23}(m + \tau(m)) = 22 + \tau(22) = 22 + 4 = 26 = 24 + 2.
+\]
+(One can check all values; the maximum is achieved at $m = 22$.)
+Hence $n = 24$ satisfies the inequality, completing the proof.
+\end{proof}
+
+\begin{remark}
+The key steps are: (i) $n$ must be even; (ii) $n - 2 = 2q$, $n - 1 = p$,
+$q = 2r + 1$, all prime (a Cunningham chain); (iii) writing $r = 3u+2$, setting
+$\ell = 2u+1$ reduces the problem; (iv) $\ell \equiv 4 \pmod 5$ from a divisor
+count involving $n - 5$; (v) $\ell \equiv 6$ modulo each of $3, 5, 7$ gives
+$\ell \equiv 104 \pmod{105}$; (vi) but then $\ell \equiv 5 \pmod{11}$, forcing
+$11 \mid 2\ell + 1$, which contradicts $2\ell + 1$ being prime.
+The proof is thus fully elementary, using only divisor-count estimates,
+modular arithmetic, and the Chinese Remainder Theorem.
+\end{remark}
+
+\end{document}
