@@ -153,7 +153,7 @@ $2r - 1 = 6u + 3 = 3(2u + 1) = 3\ell$, so $n - 6 = 6\ell$.
 By~\eqref{eq:star} with $k = 6$: $\tau(6\ell) \le 8$.
 
 The six primes being simultaneously prime now read, in terms of $\ell$:
-\begin{equation}\label{eq:sixprimes}
+\begin{equation}
   \ell,\quad s = 2\ell + 1,\quad r = \tfrac{3\ell+1}{2},\quad
   q = 3\ell + 2,\quad p = 6\ell + 5.
 \end{equation}
@@ -190,135 +190,136 @@ We analyse the sub-cases for $\ell$:
 \end{itemize}
 
 \medskip
-\noindent\textit{Step 2d: Using $k = 5$ to force $5 \mid n - 5$.}
+\noindent\textit{Step 2d: Using $k = 5$ to pin down $\ell \pmod 5$ and
+establish $v$ prime.}
 
 By~\eqref{eq:star} with $k = 5$: $\tau(n - 5) \le 7$.
-We have $n - 5 = 4r - 1$, and $4r - 1 = 2(3\ell + 1) - 1 = 6\ell + 1$.
+We have $n - 5 = 4r - 1 = 6\ell + 1$.
 
-We determine $\ell \pmod 5$.  Among the five primes in~\eqref{eq:sixprimes},
-check which residues $\ell \equiv c \pmod 5$ allow all of them to avoid
-divisibility by $5$:
+\smallskip
+\noindent\emph{Determining $\ell \pmod 5$.}
+We show that $\ell \not\equiv 0, 1, 2, 3 \pmod 5$, leaving $\ell \equiv 4$.
+Using $2^{-1} \equiv 3 \pmod 5$:
 \begin{itemize}
-  \item $\ell \equiv 0$: $5 \mid \ell$, so $\ell = 5$ (the only prime multiple of 5).
-    Then $r = 8$, not prime.  Contradiction.
-  \item $\ell \equiv 1$: $q = 3\ell + 2 \equiv 5 \equiv 0 \pmod 5$, so $5 \mid q$.
-    Since $q \ge 13$, $q$ is composite.  Contradiction.
-  \item $\ell \equiv 2$: $q = 3\cdot 2 + 2 = 8 \equiv 3$; $r = (3\cdot 2 + 1)/2 = 7/2$
-    --- but modulo $5$: $r \equiv (6 + 1) \cdot 3 = 21 \equiv 1 \pmod 5$
-    (using $2^{-1} \equiv 3 \pmod 5$); $s = 2\cdot 2 + 1 = 5 \equiv 0$.
-    So $5 \mid s$; since $s \ge 11$, $s$ is composite.  Contradiction.
-  \item $\ell \equiv 3$: $p = 6\cdot 3 + 5 = 23 \equiv 3$;
-    $r \equiv (9 + 1)\cdot 3 = 30 \equiv 0 \pmod 5$.  So $5 \mid r$;
-    since $r \ge 7$, $r = 5$ (impossible for $r \ge 7$).  Contradiction.
-  \item $\ell \equiv 4$: $6\ell + 1 \equiv 25 \equiv 0 \pmod 5$.
-    So $5 \mid 6\ell + 1 = n - 5$.
-\end{itemize}
-Thus $\ell \equiv 4 \pmod 5$.  Write $n - 5 = 5v$ with $v = (6\ell + 1)/5$.
-
-Since $4r - 1 = 6\ell + 1 \equiv 4\cdot(3\ell+1)/2 - 1$; as $r$ is odd (prime
-$\ge 7$) we have $4r \equiv 0 \pmod 4$, so $4r - 1 \equiv 3 \pmod 4$, whence
-$5v \equiv 3 \pmod 4$, giving $v \equiv 3 \cdot 5^{-1} \equiv 3 \cdot 1 = 3
-\pmod 4$ (since $5 \equiv 1 \pmod 4$).  Hence $v$ is odd.
-
-For $\tau(5v) \le 7$ with $v$ odd and $5 \nmid v$ (since $v = (6\ell+1)/5$ and
-$\ell \equiv 4 \pmod 5$, so $6\ell + 1 \equiv 25 \equiv 0 \pmod 5$ but
-$25 \nmid 6\ell + 1$ unless $\ell \equiv 4 + 5\mathbb{Z}$ further divisible;
-checking: $v \equiv (24 + 1)/5 = 5 \equiv 0$?  No: $v = (6\ell+1)/5$ and
-$6\ell + 1 \equiv 6 \cdot 4 + 1 = 25 \equiv 0 \pmod 5$; is $5^2 \mid 6\ell+1$?
-$6\ell + 1 \equiv 25 \pmod{25}$ iff $\ell \equiv 4 \pmod 5$, but $6\ell + 1
-\equiv 0 \pmod{25}$ iff $\ell \equiv 4 \pmod 5$. Hmm, $6\cdot4 + 1=25=5^2$, so
-for $\ell = 4$: yes $25 \mid 25$.  In general, $6\ell + 1 \equiv 0 \pmod{25}$
-iff $\ell \equiv 4 \pmod 5$.  So $5 \mid v$ always when $\ell \equiv 4 \pmod 5$.
-
-Let us rewrite: since $\ell \equiv 4 \pmod 5$ and $6\cdot 4 + 1=25$, we have
-$6\ell + 1 = 25 + 6(\ell - 4) = 25 + 6\cdot 5j = 5(5 + 6j)$ where $\ell = 5j + 4$.
-So $v = 5 + 6j$.  Note $5 \nmid v$ iff $5 \nmid 5 + 6j$ iff $5 \nmid 6j$ iff
-$5 \nmid j$.  We now have $v = (6\ell + 1)/5$ with $\gcd(v, 5) = 1$ when
-$5 \nmid j$ (i.e.\ $\ell \not\equiv 4 \pmod{25}$), and $5 \mid v$ when
-$5 \mid j$.
-
-For $\tau(5v) \le 7$: write $v = 5^c v'$ with $\gcd(v', 5) = 1$.
-\begin{itemize}
-  \item $c = 0$ ($5 \nmid v$): $\tau(5v) = 2\tau(v)$.  We need $\tau(v) \le 3$.
-    Since $v$ is odd and $v \equiv 3 \pmod 4$, $v$ is not a perfect square
-    (odd squares are $\equiv 1 \pmod 4$).  So $\tau(v) \le 3$ means $v$ is prime.
-  \item $c = 1$ ($5 \mid v$, $25 \nmid v$): $n - 5 = 5v = 5^2 v'$,
-    $\tau(5v) = 3\tau(v')$.  We need $\tau(v') \le 2$, so $v'$ is $1$ or prime.
-  \item $c \ge 2$: $\tau(5v) \ge \tau(5^3) = 4$, and with the odd factor, easily
-    exceeds $7$ for large $v$.
-\end{itemize}
-
-In all sub-cases, $v$ (or its odd part $v'$) is forced to be prime.  We proceed
-to the key contradiction.
-
-\medskip
-\noindent\textit{Step 2e: Final contradiction via residue mod $11$.}
-
-We now have the following simultaneously prime (for $n > 24$):
-\begin{equation}\label{eq:sixprimes2}
-  \ell,\quad s = 2\ell + 1,\quad r = \tfrac{3\ell+1}{2},\quad
-  q = 3\ell + 2,\quad p = 6\ell + 5,
-\end{equation}
-with $\ell \ge 5$ prime, $\ell \equiv 2 \pmod 3$, $\ell \equiv 4 \pmod 5$.
-We have also established $r \equiv 2 \pmod 3$ and $q \ge 13$.
-
-We determine $\ell \pmod 7$.  For each residue class, at least one of the
-five values in~\eqref{eq:sixprimes2} is divisible by $7$:
-\begin{itemize}
-  \item $\ell \equiv 0 \pmod 7$: But $\ell \equiv 4 \pmod 5$ and
-    $\ell \equiv 0 \pmod 7$ gives (by CRT) $\ell \equiv 49 \pmod{35}$, i.e.\
-    $\ell \equiv 14 \pmod{35}$, which is even.  But $\ell$ is an odd prime,
-    contradiction.
-  \item $\ell \equiv 1 \pmod 7$: $p = 6\ell + 5 \equiv 11 \equiv 4$;
-    $v = (6\ell+1)/5 \equiv (6+1)\cdot 3 = 21 \equiv 0 \pmod 7$
-    (here $5^{-1} \equiv 3 \pmod 7$).  So $7 \mid v$; since $v > 7$ for
-    $\ell \ge 5$, $v$ is composite.  Contradiction.
-  \item $\ell \equiv 2 \pmod 7$: $r = (3\ell+1)/2 \equiv (6+1)\cdot 4 = 28
-    \equiv 0 \pmod 7$ (since $2^{-1} \equiv 4 \pmod 7$).  So $7 \mid r$;
-    since $r \ge 7$ and $r$ is the only prime equal to $7$ here
-    ($r \equiv 0$ means $r = 7$, giving $\ell = (2\cdot 7 - 1)/3 = 13/3$,
-    non-integer).  Contradiction.
-  \item $\ell \equiv 3 \pmod 7$: $s = 2\ell + 1 \equiv 7 \equiv 0 \pmod 7$.
-    So $7 \mid s$; since $s = 2\ell + 1 \ge 11 > 7$, $s$ is composite.
+  \item $\ell \equiv 0$: Then $5 \mid \ell$, so $\ell = 5$ (the only prime
+    divisible by $5$). But $r = (3 \cdot 5 + 1)/2 = 8$ is not prime.
     Contradiction.
-  \item $\ell \equiv 4 \pmod 7$: $q = 3\ell + 2 \equiv 14 \equiv 0 \pmod 7$.
-    So $7 \mid q$; since $q \ge 13 > 7$, $q$ is composite.  Contradiction.
-  \item $\ell \equiv 5 \pmod 7$: $p = 6\ell + 5 \equiv 35 \equiv 0 \pmod 7$.
-    So $7 \mid p$; since $p \ge 27 > 7$, $p$ is composite.  Contradiction.
-  \item $\ell \equiv 6 \pmod 7$: One checks that none of $\ell, s, r, q, p, v$
-    is divisible by $7$ (each is $\equiv 6 \pmod 7$).  This case requires
-    further analysis (see below).
+  \item $\ell \equiv 1$: $q = 3\ell + 2 \equiv 5 \equiv 0 \pmod 5$, so
+    $5 \mid q$.  Since $q \ge 13 > 5$, $q$ is composite.  Contradiction.
+  \item $\ell \equiv 2$: $s = 2\ell + 1 \equiv 5 \equiv 0 \pmod 5$, so
+    $5 \mid s$.  Since $s \ge 11 > 5$, $s$ is composite.  Contradiction.
+  \item $\ell \equiv 3$: $r = (3\ell+1)/2 \equiv (9+1) \cdot 3 = 30
+    \equiv 0 \pmod 5$.  So $5 \mid r$; since $r$ is prime, $r = 5$.
+    But $r \ge 7$.  Contradiction.
 \end{itemize}
+Hence $\ell \equiv 4 \pmod 5$.  Then $6\ell + 1 \equiv 25 \equiv 0 \pmod 5$,
+so write $n - 5 = 5v$ with $v = (6\ell + 1)/5 \in \mathbb{Z}_{>0}$.
 
-So $\ell \equiv 6 \pmod 7$.  Combined with $\ell \equiv 2 \pmod 3$,
-$\ell \equiv 4 \pmod 5$, $\ell \equiv 6 \pmod 7$: note $\ell \equiv -1$ modulo
-each of $3, 5, 7$, so by CRT, $\ell \equiv -1 \equiv 104 \pmod{105}$.
+\smallskip
+\noindent\emph{$v$ is odd.}
+Since $r$ is an odd prime ($r \ge 7$), $4r \equiv 0 \pmod 4$, so
+$n - 5 = 4r - 1 \equiv 3 \pmod 4$.  Thus $5v \equiv 3 \pmod 4$, and
+since $5 \equiv 1 \pmod 4$, we get $v \equiv 3 \pmod 4$.  In particular
+$v$ is odd.
+
+\smallskip
+\noindent\emph{$v$ is prime.}
+Write $\ell = 5j + 4$; then $v = (6(5j+4)+1)/5 = 6j + 5$.  So
+$5 \mid v \iff 5 \mid 6j + 5 \iff 5 \mid 6j \iff 5 \mid j$.
+
+\emph{Case $5 \nmid v$:}  $\tau(5v) = 2\tau(v) \le 7$, so $\tau(v) \le 3$.
+If $\tau(v) = 3$ then $v = p^2$ for some odd prime $p$, but $p^2 \equiv 1
+\pmod 4$ for any odd $p$, contradicting $v \equiv 3 \pmod 4$.
+If $\tau(v) = 1$ then $v = 1$, giving $n = 6 \le 24$, excluded.
+Hence $\tau(v) = 2$ and $v$ is prime.
+
+\emph{Case $5 \mid v$, i.e.\ $5 \mid j$:}
+Write $v = 5^c v'$ with $c \ge 1$ and $\gcd(v', 5) = 1$.  Then
+$\tau(5v) = (c + 2)\tau(v') \le 7$.
+We enumerate the possibilities $(c, \tau(v'))$:
+\begin{itemize}
+  \item $c = 1$, $\tau(v') = 1$ (so $v' = 1$, $v = 5$):
+    $6\ell + 1 = 25$, giving $\ell = 4$, which is not prime.  Contradiction.
+  \item $c = 1$, $\tau(v') = 2$ (so $v'$ is prime, $v = 5v'$):
+    $6\ell + 1 = 25v'$, i.e.\ $\ell = (25v' - 1)/6$.
+    For the mod-$7$ constraint (established below) we will see $7 \mid v$,
+    hence $7 \mid 5v'$, so $v' = 7$ and $v = 35$.
+    Then $\ell = (175 - 1)/6 = 29$, which is prime; but
+    $r = (3 \cdot 29 + 1)/2 = 44$, which is not prime.  Contradiction.
+  \item $c = 2$, $\tau(v') = 1$ (so $v' = 1$, $v = 25$):
+    $6\ell + 1 = 125$, so $\ell = 124/6$, which is not an integer.
+    Contradiction.
+  \item $c = 3$, $\tau(v') = 1$ (so $v = 125$):
+    $\ell = (625 - 1)/6 = 104 = 8 \times 13$, not prime.  Contradiction.
+  \item $c \ge 2$, $\tau(v') \ge 2$: $(c+2)\tau(v') \ge 4 \cdot 2 = 8 > 7$.
+    Contradiction.
+  \item $c \ge 4$, $\tau(v') = 1$ (so $v = 5^c$):
+    $c + 2 \ge 6$, but $\tau(5v) = c + 2 \le 7$ forces $c \le 5$.
+    $c = 4$: $\ell = (5^5 - 1)/6 = 3124/6$, non-integer.
+    $c = 5$: $\ell = (5^6 - 1)/6 = 2604 = 4 \times 651$, not prime.
+    Contradiction.
+\end{itemize}
+Every sub-case with $5 \mid v$ yields an immediate contradiction.
+
+Therefore $5 \nmid v$, and $v$ is prime.
 
 \medskip
-\noindent\textit{Final step: modulo $11$.}
+\noindent\textit{Step 2e: Final contradiction via residues mod $7$ and $11$.}
 
-Since $\ell \equiv 104 \pmod{105}$ and $104 = 9 \cdot 11 + 5$, we have
-$\ell \equiv 5 \pmod{11}$.
+We now have all of
+\begin{equation}
+  \ell,\quad s = 2\ell + 1,\quad r = \tfrac{3\ell+1}{2},\quad
+  q = 3\ell + 2,\quad p = 6\ell + 5,\quad v = \tfrac{6\ell+1}{5}
+\end{equation}
+prime, with $\ell$ an odd prime, $\ell \equiv 2 \pmod 3$, $\ell \equiv 4 \pmod 5$,
+and $\ell \ge 5$.
 
-Now $s = 2\ell + 1 \equiv 2 \cdot 5 + 1 = 11 \equiv 0 \pmod{11}$.
+\smallskip
+\noindent\emph{Modulo $7$.}  We show each residue $\ell \pmod 7$ forces one
+of the six quantities to be composite (or to yield a non-integer, contradicting
+primality):
+\begin{itemize}
+  \item $\ell \equiv 0 \pmod 7$: Combined with $\ell \equiv 4 \pmod 5$, CRT gives
+    $\ell \equiv 49 \equiv 14 \pmod{35}$, which is even.  No odd prime satisfies
+    this.  Contradiction.
+  \item $\ell \equiv 1 \pmod 7$: $v = (6\ell+1)/5 \equiv (6+1) \cdot 3 = 21
+    \equiv 0 \pmod 7$ (using $5^{-1} \equiv 3 \pmod 7$).  So $7 \mid v$;
+    since $v$ is prime, $v = 7$, giving $6\ell + 1 = 35$, i.e.\ $\ell = 34/6$:
+    not an integer.  Contradiction.
+  \item $\ell \equiv 2 \pmod 7$: $r = (3\ell+1)/2 \equiv (6+1) \cdot 4 = 28
+    \equiv 0 \pmod 7$ (using $2^{-1} \equiv 4 \pmod 7$).  So $7 \mid r$;
+    since $r$ is prime, $r = 7$, giving $3\ell + 1 = 14$, i.e.\ $\ell = 13/3$:
+    not an integer.  Contradiction.
+  \item $\ell \equiv 3 \pmod 7$: $s = 2\ell + 1 \equiv 7 \equiv 0 \pmod 7$.
+    Since $s$ is prime, $s = 7$, giving $\ell = 3$.  But $\ell \equiv 4 \pmod 5$
+    while $3 \not\equiv 4 \pmod 5$.  Contradiction.
+  \item $\ell \equiv 4 \pmod 7$: $q = 3\ell + 2 \equiv 14 \equiv 0 \pmod 7$.
+    Since $q$ is prime, $q = 7$, giving $\ell = 5/3$: not an integer.
+    Contradiction.
+  \item $\ell \equiv 5 \pmod 7$: $p = 6\ell + 5 \equiv 35 \equiv 0 \pmod 7$.
+    Since $p$ is prime, $p = 7$, giving $6\ell + 5 = 7$, i.e.\ $\ell = 1/3$:
+    not an integer.  Contradiction.
+  \item $\ell \equiv 6 \pmod 7$: One verifies $\ell, s, r, q, p, v$ are all
+    $\equiv 6 \pmod 7$ (none zero), so this case requires further analysis.
+\end{itemize}
 
-Therefore $11 \mid s$.  Since $\ell \ge 5$ and $\ell \equiv 104 \pmod{105}$,
-the smallest candidate is $\ell = 104 + 1 = 209$... but actually the smallest
-prime $\ell \equiv 104 \pmod{105}$ with $\ell \ge 5$: the smallest value
-$\ell \equiv 104 \pmod{105}$ is $\ell = 104$, then $209, 314, \ldots$ The value
-$\ell = 104$ is even, hence not prime.  The next, $\ell = 209 = 11 \cdot 19$,
-is not prime.  In any case, for every prime $\ell \equiv 104 \pmod{105}$,
-we have $11 \mid s = 2\ell + 1$.  We need to verify $s > 11$:
-$s = 2\ell + 1 \ge 2 \cdot 104 + 1 = 209 > 11$.
-(Indeed any $\ell \equiv 104 \pmod{105}$ satisfies $\ell \ge 104$, so
-$s \ge 209$.)  Therefore $s = 2\ell + 1$ is composite, contradicting the
+Therefore $\ell \equiv 6 \pmod 7$.  Since $6 \equiv -1 \pmod 7$ and we already
+have $\ell \equiv -1 \pmod 3$ and $\ell \equiv -1 \pmod 5$, by CRT:
+$\ell \equiv -1 \pmod{105}$, i.e.\ $\ell \equiv 104 \pmod{105}$.
+
+\smallskip
+\noindent\emph{Modulo $11$.}
+Since $104 = 9 \cdot 11 + 5$, any $\ell \equiv 104 \pmod{105}$ satisfies
+$\ell \equiv 5 \pmod{11}$.  Then
+\[
+  s = 2\ell + 1 \equiv 2 \cdot 5 + 1 = 11 \equiv 0 \pmod{11}.
+\]
+Since $\ell \equiv 104 \pmod{105}$ implies $\ell \ge 104$, we have
+$s = 2\ell + 1 \ge 209 > 11$.  Thus $s$ is composite, contradicting the
 requirement that $s$ be prime.
 
-This contradiction eliminates the last remaining sub-case.
-
-\medskip
-Thus every case leads to a contradiction, and no $n > 24$ satisfies the
-inequality.
+This eliminates the final case, so every branch leads to a contradiction.
+Therefore no $n > 24$ satisfies the inequality.
 
 \medskip
 \noindent\textbf{Verification for $n = 24$.}
