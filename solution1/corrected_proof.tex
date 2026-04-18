@@ -281,8 +281,13 @@ We enumerate the possibilities $(c, \tau(v'))$:
         by $7$.  We have $\ell \equiv 2\pmod 3$, $\ell\equiv4\pmod5$, and
         $\ell\equiv6\pmod7$; since $6\equiv-1$, $2\equiv-1$, $4\equiv-1$ modulo
         $7,3,5$ respectively, CRT over $105$ gives $\ell\equiv104\pmod{105}$.
-        But $104$ is even and $105$ is odd, so $\ell$ is even.
-        Since $\ell$ is an odd prime, this is a contradiction.
+        Since $\ell$ is an odd prime, $\ell = 105k+104$ is odd, which forces
+        $k$ to be odd (as $105k$ is odd iff $k$ is odd, so $105k+104$ is odd
+        iff $k$ is odd).  Writing $k = 2m+1$ gives $\ell = 210m+209$, i.e.\
+        $\ell \equiv 209 \pmod{210}$.  Since $210 = 19 \cdot 11 + 1 \equiv 1
+        \pmod{11}$, we get $\ell \equiv 209 \equiv 209 - 19 \cdot 11 = 0
+        \pmod{11}$.  So $11 \mid \ell$; since $\ell$ is prime, $\ell = 11$.
+        But $\ell \ge 209 > 11$.  Contradiction.
     \end{itemize}
     Every residue of $\ell \pmod 7$ yields a contradiction.
   \item $c = 2$, $\tau(v') = 1$ (so $v' = 1$, $v = 25$):
@@ -357,10 +362,14 @@ $4 \equiv -1$ modulo $7$, $3$, $5$ respectively, CRT over $3 \times 5 \times 7
 = 105$ gives $\ell \equiv -1 \pmod{105}$, i.e.\ $\ell \equiv 104 \pmod{105}$.
 
 \smallskip
-\noindent\emph{Parity contradiction.}
-Since $104$ is even and $105$ is odd, every integer $\ell \equiv 104 \pmod{105}$
-is even.  But $\ell$ is an odd prime (established in Step~2c).  This is a
-contradiction.
+\noindent\emph{Final contradiction via mod~$11$.}
+Since $\ell$ is an odd prime, write $\ell = 105k + 104$.  For $\ell$ to be odd,
+we need $105k + 104$ odd; since $105$ is odd, this requires $k$ to be odd.
+Setting $k = 2m + 1$ gives $\ell = 210m + 209$, i.e.\ $\ell \equiv 209
+\pmod{210}$.  Now $210 = 19 \cdot 11 + 1 \equiv 1 \pmod{11}$, so
+$\ell \equiv 209 \equiv 209 - 19 \cdot 11 = 0 \pmod{11}$.  Hence $11 \mid \ell$.
+Since $\ell$ is prime, $\ell = 11$.  But every $\ell \equiv 209 \pmod{210}$
+satisfies $\ell \ge 209 > 11$.  Contradiction.
 
 This eliminates the final case, so every branch leads to a contradiction.
 Therefore no $n > 24$ satisfies the inequality.
@@ -381,8 +390,10 @@ The key steps are: (i) $n$ must be even; (ii) $n - 2 = 2q$, $n - 1 = p$,
 $q = 2r + 1$, all prime (a Cunningham chain); (iii) writing $r = 3u+2$, setting
 $\ell = 2u+1$ reduces the problem; (iv) $\ell \equiv 4 \pmod 5$ from a divisor
 count involving $n - 5$; (v) $\ell \equiv 6$ modulo each of $3, 5, 7$ gives
-$\ell \equiv 104 \pmod{105}$; (vi) but $104$ is even and $\ell$ is an odd prime
---- contradiction.
+$\ell \equiv 104 \pmod{105}$; (vi) since $\ell$ is an odd prime,
+$\ell \equiv 209 \pmod{210}$, but then $11 \mid \ell$ (as $209 \equiv 0
+\pmod{11}$ and $210 \equiv 1 \pmod{11}$), so $\ell = 11$, contradicting
+$\ell \ge 209$.
 The proof is thus fully elementary, using only divisor-count estimates,
 modular arithmetic, and the Chinese Remainder Theorem.
 \end{remark}
