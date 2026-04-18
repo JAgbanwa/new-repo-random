@@ -13,7 +13,7 @@ satisfies
 \[
   \max_{1 \le m < n}\bigl(m + \tau(m)\bigr) \le n + 2.
 \]
-Moreover, $n = 24$ is the unique positive integer satisfying this inequality.
+Moreover, $n = 24$ is the largest positive integer satisfying this inequality.
 \end{theorem}
 
 \begin{lemma}\label{lem:even-tau4}
@@ -278,16 +278,11 @@ We enumerate the possibilities $(c, \tau(v'))$:
       \item $\ell \equiv 5 \pmod 7$ ($k \equiv 1$): $p=6\ell+5\equiv35\equiv0\pmod7$;
         $p$ prime and $p\ge35>7$: impossible.  Contradiction.
       \item $\ell \equiv 6 \pmod 7$ ($k \equiv 5$): None of $r,q,p,s$ is divisible
-        by $7$.  We use mod $11$.  With $\ell = 75k+29$ and $k \equiv 5 \pmod 7$,
-        write $k = 7m+5$; then $\ell = 75(7m+5)+29 = 525m+404$.
-        Now $525 \equiv 8 \pmod{11}$ and $404 \equiv 8 \pmod{11}$
-        (since $404 = 36\cdot11+8$), so $\ell \equiv 8m+8 \equiv 8(m+1)\pmod{11}$.
-        Also $\ell \equiv 2\pmod 3$, $\ell\equiv4\pmod5$, and $\ell\equiv6\pmod7$,
-        which by CRT give $\ell\equiv104\pmod{105}$.  Since $104\equiv5\pmod{11}$
-        and $105\equiv7\pmod{11}$, any $\ell\equiv104\pmod{105}$ satisfies
-        $\ell\equiv5\pmod{11}$, so $s=2\ell+1\equiv11\equiv0\pmod{11}$.
-        Since $\ell\ge104$ implies $s=2\ell+1\ge209>11$, $s$ is composite.
-        Contradiction.
+        by $7$.  We have $\ell \equiv 2\pmod 3$, $\ell\equiv4\pmod5$, and
+        $\ell\equiv6\pmod7$; since $6\equiv-1$, $2\equiv-1$, $4\equiv-1$ modulo
+        $7,3,5$ respectively, CRT over $105$ gives $\ell\equiv104\pmod{105}$.
+        But $104$ is even and $105$ is odd, so $\ell$ is even.
+        Since $\ell$ is an odd prime, this is a contradiction.
     \end{itemize}
     Every residue of $\ell \pmod 7$ yields a contradiction.
   \item $c = 2$, $\tau(v') = 1$ (so $v' = 1$, $v = 25$):
@@ -362,15 +357,10 @@ $4 \equiv -1$ modulo $7$, $3$, $5$ respectively, CRT over $3 \times 5 \times 7
 = 105$ gives $\ell \equiv -1 \pmod{105}$, i.e.\ $\ell \equiv 104 \pmod{105}$.
 
 \smallskip
-\noindent\emph{Modulo $11$.}
-Since $104 = 9 \cdot 11 + 5$, any $\ell \equiv 104 \pmod{105}$ satisfies
-$\ell \equiv 5 \pmod{11}$.  Then
-\[
-  s = 2\ell + 1 \equiv 2 \cdot 5 + 1 = 11 \equiv 0 \pmod{11}.
-\]
-Since $\ell \equiv 104 \pmod{105}$ implies $\ell \ge 104$, we have
-$s = 2\ell + 1 \ge 209 > 11$.  Thus $s$ is composite, contradicting the
-requirement that $s$ be prime.
+\noindent\emph{Parity contradiction.}
+Since $104$ is even and $105$ is odd, every integer $\ell \equiv 104 \pmod{105}$
+is even.  But $\ell$ is an odd prime (established in Step~2c).  This is a
+contradiction.
 
 This eliminates the final case, so every branch leads to a contradiction.
 Therefore no $n > 24$ satisfies the inequality.
@@ -391,8 +381,8 @@ The key steps are: (i) $n$ must be even; (ii) $n - 2 = 2q$, $n - 1 = p$,
 $q = 2r + 1$, all prime (a Cunningham chain); (iii) writing $r = 3u+2$, setting
 $\ell = 2u+1$ reduces the problem; (iv) $\ell \equiv 4 \pmod 5$ from a divisor
 count involving $n - 5$; (v) $\ell \equiv 6$ modulo each of $3, 5, 7$ gives
-$\ell \equiv 104 \pmod{105}$; (vi) but then $\ell \equiv 5 \pmod{11}$, forcing
-$11 \mid 2\ell + 1$, which contradicts $2\ell + 1$ being prime.
+$\ell \equiv 104 \pmod{105}$; (vi) but $104$ is even and $\ell$ is an odd prime
+--- contradiction.
 The proof is thus fully elementary, using only divisor-count estimates,
 modular arithmetic, and the Chinese Remainder Theorem.
 \end{remark}
