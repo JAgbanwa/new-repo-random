@@ -213,6 +213,9 @@ Write $p = 420j - 1$ for a positive integer $j$.   Since $p+1 = 420j$,
 \[
   n = 6(p+1) = 2520j.
 \]
+Note that $(6p+1)/5 = (6(420j-1)+1)/5 = (2520j-5)/5 = 504j-1$, so the primality
+condition on $(6p+1)/5$ is exactly the condition $504j-1$ prime that appears in
+Theorem~\ref{thm:partial} and Proposition~\ref{prop:density}.
 For any $k$ with $k \mid 2520$, set $A_k = \tfrac{2520}{k} j - 1$, so that
 \[
   n - k = k \, A_k.
@@ -332,27 +335,46 @@ directly that no $n > 24$ in that range satisfies the inequality.
 \begin{proposition}\label{prop:density}
 Let $\mathcal{E} = \{j \ge 1 : 420j-1 \text{ prime and } 504j-1 \text{ prime}\}$.
 Then $|\mathcal{E} \cap \{1,\ldots,N\}| = O\bigl(N/(\log N)^2\bigr)$.
-In particular, the exceptional $n$-values have natural density zero in the positive
-integers, and the open cases constitute an asymptotically negligible proportion of $n$.
+In particular, the exceptional $n$-values have natural density zero.
 \end{proposition}
 
 \begin{proof}
-Neither form $420j-1$ nor $504j-1$ has a fixed prime divisor: for $p \mid 420$
-(i.e.~$p \in \{2,3,5,7\}$), one checks that $420j-1 \equiv -1 \pmod{p}$ for all
-$j$, so $p \nmid (420j-1)$ identically; similarly for $504j-1$ and $p \mid 504$.
-The pair therefore satisfies the Dickson admissibility condition.  By the
-upper-bound Selberg sieve applied to pairs of linear forms (see Halberstam and
-Richert, \emph{Sieve Methods}, Ch.~5),
-$|\mathcal{E} \cap \{1,\ldots,N\}| = O(N/(\log N)^2)$.
+For a prime $p$ and a linear form $L(j)$, write $\omega_L(p)$ for the number of
+residues $j \pmod{p}$ with $p \mid L(j)$.  Set $L_1(j) = 420j-1$ and
+$L_2(j) = 504j-1$.
+
+\emph{Admissibility.}  For $p \in \{2,3,5,7\}$: since $\gcd(420,p)=p$ for each,
+$L_1(j) \equiv -1 \pmod{p}$ for all $j$, so $\omega_{L_1}(p) = 0$.  Similarly
+$\gcd(504,p)=p$ for $p \in \{2,3,7\}$, giving $\omega_{L_2}(p) = 0$;
+and $504 \equiv 4 \pmod{5}$, so $L_2(j) = 504j-1 \equiv 4j-1$, which is
+$0 \pmod{5}$ only for $j \equiv 4 \pmod{5}$, but $5/p$ is not $1$ so
+$\omega_{L_1}(5)=0$ and $\omega_{L_2}(5) = 1$.  In every case the total
+number of blocked residues $\omega(p) := \omega_{L_1}(p) + \omega_{L_2}(p)
+- \mathbf{1}[p \mid L_1(j)L_2(j) \text{ for some } j]$ satisfies $\omega(p) < p$,
+so the pair is sieve-admissible.  For $p > 7$: $\gcd(420,p)=\gcd(504,p)=1$,
+so each form has exactly one zero modulo $p$, giving $\omega(p) \le 2 < p$.
+
+\emph{Upper bound.}  The standard upper-bound Selberg sieve for $k = 2$ linear
+forms (Halberstam and Richert, \emph{Sieve Methods} (1974),
+Theorem~5.1 with sieve dimension $\kappa = 2$; or Iwaniec and Kowalski,
+\emph{Analytic Number Theory} (2004), Theorem~6.4)
+yields, for any $z \le N$:
+\[
+  \bigl|\{j \le N : L_1(j)\text{ and }L_2(j)\text{ both prime}\}\bigr|
+  \ll \frac{N}{(\log z)^2}\prod_{p\le z}\Bigl(1-\frac{\omega(p)}{p}\Bigr)
+  \Bigl(1-\frac1p\Bigr)^{-2}.
+\]
+Taking $z = N^{1/2}$ and using the standard estimate on the Euler product
+(bounded away from $0$ and $\infty$) gives
+$|\mathcal{E} \cap \{1,\ldots,N\}| \ll N/(\log N)^2$.
 \end{proof}
 
 \begin{remark}\label{rem:gap}
-The only unresolved cases are $n = 2520j$ where $p = 420j-1$ is prime,
-$(6p+1)/5$ is prime, $j \equiv 0$ or $7 \pmod{11}$, and $j > 10^7$
-(i.e.~$n > 2.52 \times 10^{10}$).  In every such case up to $j = 10^7$
-a witness was found.  A purely algebraic argument for these classes for all $j$
-would require handling all residues of $j$ modulo every prime simultaneously,
-which is not achieved by the present method.
+The only unresolved cases are $n = 2520j$ where $j \equiv 0$ or $7 \pmod{11}$,
+$j > 10^7$, and both $420j-1$ and $504j-1$ are prime
+(equivalently: $p = 420j-1$ prime and $(6p+1)/5 = 504j-1$ prime;
+see the note at the start of the hardest sub-case above).
+In every such case up to $j = 10^7$ a witness was found.
 Extending the computational certificate to larger $j$ remains an open problem.
 \end{remark}
 
