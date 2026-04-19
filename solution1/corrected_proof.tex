@@ -188,8 +188,21 @@ $n - 5 = 6p+1 = 5s$ with $s = (6p+1)/5$.
   \item $p \equiv 4 \pmod 7$: $7 \mid (3p+2)$, $\tau(n-2) \ge 8$.
   \item $p \equiv 5 \pmod 7$: $7 \mid (6p+5) = n-1$, so $n-1$ is composite and
         $\tau(n-1) \ge 4$, giving $f(n-1) > n+2$.
-  \item $p \equiv 2 \pmod 7$: $7 \mid (3p+1)$, and since $p \equiv 3 \pmod 4$
-        we have $4 \mid (3p+1)$, hence $28 \mid (3p+1)$, $\tau(n-4) = \tau(2(3p+1)) \ge \tau(56) = 8$.
+  \item $p \equiv 2 \pmod 7$: $7 \mid (3p+1)$ (since $3\cdot 2+1=7\equiv 0\pmod 7$).
+        We split on $p \bmod 4$:
+        \begin{itemize}
+          \item $p \equiv 1 \pmod 4$: $3p+1 \equiv 3+1=4\equiv 0\pmod 4$, so
+                $28 \mid (3p+1)$ and $56 \mid n-4 = 2(3p+1)$.
+                Hence $\tau(n-4) \ge \tau(56) = 8 > 6$.
+          \item $p \equiv 3 \pmod 4$: $3p+1 \equiv 9+1=10\equiv 2\pmod 4$, so
+                $v_2(3p+1)=1$.  Write $n-4 = 4u$ with $u=(3p+1)/2$ odd
+                and $7\mid u$ (since $7\mid 3p+1$ and $\gcd(7,2)=1$).
+                The combined residue class is $p\equiv 359\pmod{420}$, so
+                $p \ge 359$ and $u = (3p+1)/2 \ge 539$; write $u = 7v$
+                with $v \ge 77$.  Since $v > 1$, $\tau(7v) \ge 4$
+                (as $7v$ is composite with both $7$ and $v$ as factors),
+                so $\tau(n-4) = \tau(4u) = 3\tau(7v) \ge 12 > 6$.
+        \end{itemize}
   \item $p \equiv 1 \pmod 7$: $7 \mid (6p+1) = 5s$, and $\gcd(7,5)=1$ so $7 \mid s$;
         then $s$ is composite, contradiction.  So this sub-sub-case cannot arise
         when $s$ is prime.
