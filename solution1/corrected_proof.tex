@@ -256,9 +256,9 @@ We enumerate the possibilities $(c, \tau(v'))$:
     we have $\ell \equiv 5k + 1 \pmod 7$ (since $75 \equiv 5 \pmod 7$).
     The six residues $\ell \pmod 7$ arise as $k$ ranges over residues mod $7$:
     \begin{itemize}
-      \item $\ell \equiv 0 \pmod 7$ ($k \equiv 4$): same as Step~2e;
-        $\ell \equiv 0 \pmod 7$ and $\ell \equiv 4 \pmod 5$ gives by CRT
-        $\ell \equiv 14 \pmod{35}$, which is even, impossible for an odd prime.
+      \item $\ell \equiv 0 \pmod 7$ ($k \equiv 4$): Then $7 \mid \ell$;
+        since $\ell$ is prime, $\ell = 7$.  But $\ell \equiv 2 \pmod 3$
+        (Step~2b) and $7 \equiv 1 \pmod 3 \ne 2$.  Contradiction.
       \item $\ell \equiv 1 \pmod 7$ ($k \equiv 0$): $k = 7k'$, so $\ell = 525k' + 29$.
         The smallest case is $k'=0$, $\ell = 29$.  Then $r = (3\cdot29+1)/2 = 44$,
         not prime — contradiction for $k'=0$.  For general $k'$:
@@ -330,9 +330,9 @@ requires $\ell$ to be non-integer (impossible).  Recall: $\ell \ge 5$,
 $s = 2\ell+1 \ge 11$, $r \ge 7$, $q \ge 17$, $p \ge 35$, and
 $v = (6\ell+1)/5 > 6$ so $v \ge 7$.
 \begin{itemize}
-  \item $\ell \equiv 0 \pmod 7$: Combined with $\ell \equiv 4 \pmod 5$, CRT gives
-    $\ell \equiv 14 \pmod{35}$, which is even.  No odd prime satisfies this.
-    Contradiction.
+  \item $\ell \equiv 0 \pmod 7$: Then $7 \mid \ell$.  Since $\ell$ is prime,
+    $\ell = 7$.  But Step~2b established $\ell \equiv 2 \pmod 3$, and
+    $7 \equiv 1 \pmod 3 \ne 2$.  Contradiction.
   \item $\ell \equiv 1 \pmod 7$: $v \equiv (6\cdot 1+1)\cdot 3 = 21 \equiv 0
     \pmod 7$ (using $5^{-1} \equiv 3 \pmod 7$), so $7 \mid v$.  Since $v$ is
     prime and $v \ge 7$, we get $v = 7$, giving $6\ell + 1 = 35$,
@@ -390,11 +390,22 @@ Therefore no $n > 24$ satisfies the inequality.
 \medskip
 \noindent\textbf{Verification for $n = 24$.}
 
-Direct computation gives $m + \tau(m)$ for $1 \le m \le 23$:
+The complete table of $m + \tau(m)$ for $1 \le m \le 23$ is:
 \[
-  \max_{1 \le m \le 23}(m + \tau(m)) = 22 + \tau(22) = 22 + 4 = 26 = 24 + 2.
+\begin{array}{r|r|r||r|r|r||r|r|r}
+m & \tau(m) & m{+}\tau & m & \tau(m) & m{+}\tau & m & \tau(m) & m{+}\tau\\\hline
+1 & 1 & 2  & 9  & 3 & 12 & 17 & 2 & 19\\
+2 & 2 & 4  & 10 & 4 & 14 & 18 & 6 & 24\\
+3 & 2 & 5  & 11 & 2 & 13 & 19 & 2 & 21\\
+4 & 3 & 7  & 12 & 6 & 18 & 20 & 6 & 26\\
+5 & 2 & 7  & 13 & 2 & 15 & 21 & 4 & 25\\
+6 & 4 & 10 & 14 & 4 & 18 & 22 & 4 & 26\\
+7 & 2 & 9  & 15 & 4 & 19 & 23 & 2 & 25\\
+8 & 4 & 12 & 16 & 5 & 21 & & &
+\end{array}
 \]
-(One can check all values; the maximum is achieved at $m = 22$.)
+The maximum value is $26$, achieved at $m = 20$ and $m = 22$, giving
+$\max_{1 \le m \le 23}(m + \tau(m)) = 26 = 24 + 2$.
 Hence $n = 24$ satisfies the inequality, completing the proof.
 \end{proof}
 
