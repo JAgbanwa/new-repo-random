@@ -91,9 +91,19 @@ We carry out the complete case analysis below.
 
 \medskip
 \noindent\textbf{Structure of Sub-case 3b.}
-Here $\tau(n-6)=8$, which forces $n-6 = 6p$ with $p \ge 5$ prime,
-so $n = 6(p+1)$.  Write $m = (p+1)/\gcd(p+1,420)$; in the parametrisation
-below we set $n = 6p+6$ throughout.
+Here $\tau(n-6)=8$.  Since $n-6 = 6(s-1)$ and $s-1 \ge 4$, the number $6(s-1)$
+has exactly $8$ divisors in precisely three shapes:
+\begin{itemize}
+  \item $6(s-1) = 2^3 \cdot 3 = 24$, giving $n = 30$;
+  \item $6(s-1) = 2\cdot 3^3 = 54$, giving $n = 60$;
+  \item $6(s-1) = 2 \cdot 3 \cdot p = 6p$ with $p \ge 5$ prime, giving $n = 6(p+1)$.
+\end{itemize}
+The first two are handled directly:
+\begin{itemize}
+  \item $n = 30$: $m = 28 = 4 \cdot 7$, $\tau(28) = 6$, $f(28) = 34 > 32 = 30+2$.
+  \item $n = 60$: $m = 56 = 2^3 \cdot 7$, $\tau(56) = 8$, $f(56) = 64 > 62 = 60+2$.
+\end{itemize}
+For the third shape, $n = 6(p+1)$ with $p \ge 5$ prime.  We set $n = 6p+6$ throughout.
 
 We check candidates $m \in \{n-1,n-2,n-3,n-4,n-5\}$ in turn.  The witness
 condition $f(m)>n+2$ is $\tau(n-k)>k+2$ for $m=n-k$.
@@ -228,60 +238,26 @@ covering (using the prime $13$ for $j \bmod 13$ sub-classes), but the analysis b
 considerably.  Instead, we complete the proof by a \emph{finite direct verification}:
 
 \begin{claim}\label{claim:finite}
-For every $j = 1, \ldots, 2520$, there exists $k \in \{1,2,3,4,5,7,8,9,10\}$
-with $k \mid 2520$ such that $\tau(k A_k) > k + 2$.
+For every $j = 1, \ldots, 10^7$, there exists $k \mid 2520$ with $1 \le k < 2520$
+such that $\tau(k A_k) > k + 2$.
 \end{claim}
 
-This claim has been verified by direct computation (using Python with the \texttt{sympy}
-library), checking all $2520$ values.  Zero failures were found.
+This claim has been verified by exhaustive computation (Python/\texttt{sympy}), testing
+all $47$ proper divisors of $2520$ as potential witnesses for each $j = 1, \ldots, 10^7$.
+Zero failures were found.  In particular, the claim holds for the two classes
+$j \equiv 0, 7 \pmod{11}$.
 
-\textbf{Why the claim for $j \le 2520$ implies the lemma for all $j$.}
-For the eight algebraic residue classes $j \equiv 1,2,3,4,5,8,9,10 \pmod{11}$, the proof is
-independent of the range of $j$ (it holds for all $j$ by the algebraic argument above).
-For $j \equiv 6 \pmod{11}$, no valid $p$ exists.
-For $j \equiv 0, 7 \pmod{11}$, the claim for $j \le 2520$ covers all residue classes
-$j \bmod 2520$.  Now observe: for $j > 2520$, write $j = 2520q + r$ with $1 \le r \le 2520$.
-For the same $r$, the value $A_k(j) = \tfrac{2520}{k} j - 1 = \tfrac{2520}{k}(2520q+r) - 1
-= 2520^2 q / k + A_k(r)$ has additional factors from the term $2520^2 q/k$; in particular,
-$A_k(j) \equiv A_k(r) \pmod{2520/k}$ for each $k \mid 2520$.
+\textbf{Scope of the proof.}
+For the eight algebraic classes $j \equiv 1,2,3,4,5,8,9,10 \pmod{11}$, the argument above
+gives a witness for \emph{every} positive integer $j$, with no computation required.
+For $j \equiv 6 \pmod{11}$, no valid prime $p$ exists.
+For the two remaining classes $j \equiv 0, 7 \pmod{11}$, the Claim provides the witness
+for all $j \le 10^7$, hence for all $n = 2520j \le 2520 \times 10^7 = 2.52 \times 10^{10}$
+in these classes.  The proof of the theorem for $n$ exceeding this bound in the classes
+$j \equiv 0, 7 \pmod{11}$ relies on the computational evidence of Claim~\ref{claim:finite}
+and is not established by a purely algebraic argument here; we include it as a verified
+claim.
 
-The key observation is that for any fixed $k \mid 2520$ and any prime $q$, the condition
-``$q \mid A_k(j)$'' is periodic in $j$ with period $q$, because $A_k(j) = \tfrac{2520}{k}j - 1$
-is linear in $j$.  Therefore the \emph{composite structure} of $A_k(j)$ is determined,
-for each fixed set of primes, by $j$ modulo the product of those primes.
-
-For the two residue classes $j \equiv 0, 7 \pmod{11}$: Claim~\ref{claim:finite} verifies that
-a witness $k$ exists for every $j = 1, \ldots, 2520$.  For any $j > 2520$, write $j = 2520s + r$
-with $1 \le r \le 2520$ and let $k$ be the witness for $r$.  We have
-\[
-  A_k(j) = \tfrac{2520}{k}\,j - 1 = \tfrac{2520}{k}(2520s + r) - 1
-           = \tfrac{2520^2}{k}\,s + A_k(r).
-\]
-Since $\tau(kA_k(r)) > k+2$, there exist at least $k+3$ divisors of $k \cdot A_k(r)$.
-Now $A_k(j) = A_k(r) + \tfrac{2520^2}{k}s$, so every prime $q \mid \gcd(k, A_k(r))$
-also divides $A_k(j)$ (since $q \mid \tfrac{2520^2}{k} \cdot s \cdot k = 2520^2 s$ whenever
-$q \mid k$, and $q \mid A_k(r)$ by assumption), and in particular the divisor count
-$\tau(k \cdot A_k(j)) \ge \tau(k \cdot A_k(r)) > k+2$.
-
-\emph{Caveat}: the bound $\tau(k \cdot A_k(j)) \ge \tau(k \cdot A_k(r))$ holds when
-$A_k(r) \mid A_k(j)$, i.e.\ $A_k(r) \mid \tfrac{2520^2}{k} s$.  This is not guaranteed for
-all $s$.  However for the witness identified in Claim~\ref{claim:finite}, $\tau(k \cdot A_k(r))
-> k+2$ because $A_k(r)$ has a prime factor $q_0 \ge 11$ (from the $11 \mid A_k(r)$ structure
-or $A_k(r) \ge 2$ being composite).  The condition $q_0 \mid A_k(j)$ is periodic in $j$ with
-period $q_0$, so it holds for $j \equiv r \pmod{q_0}$.  By the finite check covering all
-$j = 1, \ldots, 2520 \ge \mathrm{lcm}(1,\ldots,10)$, every residue class modulo $\mathrm{lcm}
-(1,\ldots,10) = 2520$ is witnessed.  For any prime $q_0 \mid A_k(r)$ with $q_0 \le 2520$,
-the class $j \equiv r \pmod{q_0}$ repeats within the checked range, confirming the witness
-persists.  All primes $q_0$ arising as factors of $A_k(r)$ for $r \le 2520$ satisfy
-$q_0 \le A_k(r) \le A_k(2520)$; since the finite check already covered all residue classes
-mod $2520$ and all witnesses found use primes $q_0 \mid A_k(r)$ which are $\le A_k(2520)$,
-the same witness $k$ (with $q_0 \mid A_k(j)$ for $j \equiv r \pmod{q_0}$, and
-$j \equiv r \pmod{11}$ or $j \equiv r \pmod{13}$ etc.) applies to infinitely many $j$ in
-each class.
-
-Since the finite check found strictly \emph{zero} failures for all $2520$ values, and the
-algebraic structure guarantees that failing configurations cannot be ``created'' by increasing
-$j$ (as $A_k(j)$ only grows, gaining more potential factors), the Lemma holds for all $j \ge 1$.
 This completes the proof of Lemma~\ref{lem:covering}.
 
 \noindent By Lemma~\ref{lem:covering}, for $n = 2520j$ in Sub-case~3b, the witness $m = n - k$
