@@ -144,10 +144,19 @@ gives $n-3 = 9j$, so $\tau(n-3) \ge \tau(9)\tau(j) = 3 \cdot 2 = 6$
 (with equality iff $j$ is prime).  Hence $f(n-3) \ge n+3 > n+2$.
 
 \textbf{(ii) $p \equiv 2 \pmod{3}$, $p \equiv 1 \pmod{5}$.}
-Then $5 \mid (3p+2)$, so $3p+2 \ge 5$ and $3p+2 = 5j$ with $j \ge 4$.
-Since $n-2 = 2(3p+2) = 10j$ and $\gcd(2,j) \in \{1,2\}$:
-$\tau(n-2) \ge \tau(10)\tau(j/\gcd(2,j)) \cdot \gcd(2,j)/1 \ge 8$.
-Hence $f(n-2) = n-2+\tau(n-2) \ge n+6 > n+2$.
+Then $5 \mid (3p+2)$, so $3p+2 = 5j$ with $j = (3p+2)/5$.
+Since $p$ is an odd prime, $3p+2$ is odd, so $j$ is odd and $j \ge 7$ (the
+smallest prime in this class is $p=11$, giving $j=7$).
+We have $n-2 = 2(3p+2) = 10j = 2 \cdot 5 \cdot j$.
+\begin{itemize}
+  \item If $\gcd(5,j)=1$: since $j$ is odd, $\gcd(10,j)=1$, so
+        $\tau(10j) = \tau(10)\tau(j) = 4\tau(j) \ge 4 \cdot 2 = 8$
+        (as $j \ge 7 > 1$).
+  \item If $5 \mid j$: since $j$ is odd and $5 \mid j$, we have $j \ge 15$,
+        so $j/5 \ge 3 > 1$.  Write $j = 5^a m$ with $5 \nmid m$, $a \ge 1$.
+        Then $\tau(10j) = \tau(2)\tau(5^{a+1})\tau(m) = 2(a+2)\tau(m) \ge 6 \cdot 2 = 12$.
+\end{itemize}
+In either case $\tau(n-2) \ge 8$ and $f(n-2) = n - 2 + \tau(n-2) \ge n + 6 > n+2$.
 
 \textbf{(iii) $p \equiv 2 \pmod{3}$, $p \equiv 2 \pmod{5}$.}
 Then $5 \mid (2p+1)$, so $n-3 = 3(2p+1) = 15j$ with $j = (2p+1)/5 \ge 5$.
