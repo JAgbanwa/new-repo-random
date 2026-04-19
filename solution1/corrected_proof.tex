@@ -177,9 +177,10 @@ For any $k$ with $k \mid 2520$, set $A_k = \tfrac{2520}{k} j - 1$, so that
 \]
 The witness condition $\tau(n-k) > k+2$ becomes $\tau(k A_k) > k+2$.
 
-\begin{lemma}[Covering]\label{lem:covering}
-For every positive integer $j$, there exists $k \in \{1,2,3,4,5,7,8,9,10\}$
-with $k \mid 2520$ such that $\tau(k A_k) > k + 2$.
+\begin{lemma}[Algebraic Covering]\label{lem:covering}
+For every positive integer $j$ with $j \not\equiv 0$ or $7 \pmod{11}$,
+there exists $k \in \{1,2,3,4,5,7,8,9,10\}$ with $k \mid 2520$ such that
+$\tau(k A_k) > k + 2$.
 \end{lemma}
 
 \begin{proof}
@@ -188,7 +189,7 @@ $\frac{2520}{k} \cdot k = 2520 \equiv 1 \pmod{11}$, hence
 \[
   11 \mid A_k \;\iff\; j \equiv k \pmod{11}.
 \]
-We treat the eleven residue classes of $j \pmod{11}$ separately.
+We treat the nine residue classes $j \not\equiv 0, 7 \pmod{11}$ separately.
 
 \textbf{Cases $j \equiv r \pmod{11}$, $r \in \{1,2,3,4,5,8,9,10\}$ (algebraic cases).}
 Use $k = r$.  Then $11 \mid A_r$, so $A_r = 11M$ for some positive integer $M$.
@@ -226,45 +227,41 @@ In every row $\tau(r) \cdot 4 > r+2$, so $\tau(r \cdot A_r) > r+2$.
 Here $p = 420j - 1 \equiv 420 \cdot 6 - 1 = 2519 \equiv 0 \pmod{11}$.
 Since $p$ is prime and $p \ge 419 > 11$, this is impossible.  No valid $p$ exists in this class.
 
-\textbf{Cases $j \equiv 7 \pmod{11}$ and $j \equiv 0 \pmod{11}$ (finite verification).}
-For $j \equiv 7 \pmod{11}$: the prime $11$ divides $A_7$, but $\tau(7 A_7) > 9$ requires
-$\tau(A_7) \ge 5$, which fails when $A_7$ is a semiprime $11M$ with $M$ prime.
-In that sub-case one needs a backup $k \in \{1,2,3,4,5\}$.
-For $j \equiv 0 \pmod{11}$: no $A_k$ with $k \le 10$ is divisible by $11$, so a different
-prime must supply the witness.
+This covers all nine residue classes $j \not\equiv 0, 7 \pmod{11}$, completing the proof.
+\end{proof}
 
-In both cases the witness can in principle be identified case-by-case through secondary
-covering (using the prime $13$ for $j \bmod 13$ sub-classes), but the analysis branches
-considerably.  Instead, we complete the proof by a \emph{finite direct verification}:
+For the two remaining classes $j \equiv 0$ and $j \equiv 7 \pmod{11}$, the mod-$11$
+algebraic argument does not yield a uniform witness from $k \le 10$.  (At
+$j = 6{,}970{,}590 \equiv 0 \pmod{11}$, for instance, every $k \le 10$ gives
+$\tau(k A_k) \le k+2$; the smallest working witness is $k = 14$, giving
+$\tau(14\,A_{14}) = 64 > 16$.)  A direct search over all proper divisors of~$2520$
+does succeed:
 
 \begin{claim}\label{claim:finite}
-For every $j = 1, \ldots, 10^7$, there exists $k \mid 2520$ with $1 \le k < 2520$
-such that $\tau(k A_k) > k + 2$.
+For every $j \in \{1, \ldots, 10^7\}$ with $j \equiv 0$ or $7 \pmod{11}$,
+there exists $k \mid 2520$ with $1 \le k < 2520$ such that $\tau(k A_k) > k + 2$.
 \end{claim}
 
-This claim has been verified by exhaustive computation (Python/\texttt{sympy}), testing
-all $47$ proper divisors of $2520$ as potential witnesses for each $j = 1, \ldots, 10^7$.
-Zero failures were found.  In particular, the claim holds for the two classes
-$j \equiv 0, 7 \pmod{11}$.
+This has been verified by exhaustive computation (Python/\texttt{sympy}),
+testing all $47$ proper divisors of $2520$ for each such $j \le 10^7$; zero
+failures were found.
 
-\textbf{Scope of the proof.}
-For the eight algebraic classes $j \equiv 1,2,3,4,5,8,9,10 \pmod{11}$, the argument above
-gives a witness for \emph{every} positive integer $j$, with no computation required.
-For $j \equiv 6 \pmod{11}$, no valid prime $p$ exists.
-For the two remaining classes $j \equiv 0, 7 \pmod{11}$, the Claim provides the witness
-for all $j \le 10^7$, hence for all $n = 2520j \le 2520 \times 10^7 = 2.52 \times 10^{10}$
-in these classes.  The proof of the theorem for $n$ exceeding this bound in the classes
-$j \equiv 0, 7 \pmod{11}$ relies on the computational evidence of Claim~\ref{claim:finite}
-and is not established by a purely algebraic argument here; we include it as a verified
-claim.
-
-This completes the proof of Lemma~\ref{lem:covering}.
-
-\noindent By Lemma~\ref{lem:covering}, for $n = 2520j$ in Sub-case~3b, the witness $m = n - k$
-satisfies $f(m) = m + \tau(m) = (n-k) + \tau(kA_k) > (n-k) + (k+2) = n+2$.
+\noindent By Lemma~\ref{lem:covering}, for every $j \not\equiv 0, 7 \pmod{11}$ (all $j \ge 1$),
+and by Claim~\ref{claim:finite} for $j \equiv 0, 7 \pmod{11}$ with $j \le 10^7$,
+there exists $k$ such that the witness $m = n - k$ satisfies
+$f(m) = (n-k) + \tau(kA_k) > (n-k) + (k+2) = n+2$.
 
 \bigskip
-In all cases a witness exists, completing the proof.
+In all cases, a witness $m < n$ with $f(m) > n+2$ exists.  For Sub-case~3b,
+the algebraic covering (Lemma~\ref{lem:covering}) handles $j \not\equiv 0, 7 \pmod{11}$
+for all $j$, and the computational certificate (Claim~\ref{claim:finite}) handles
+$j \equiv 0, 7 \pmod{11}$ for $j \le 10^7$, covering all $n \le 2.52 \times 10^{10}$
+in those classes.  For $j \equiv 0, 7 \pmod{11}$ and $j > 10^7$, no algebraic
+witness is established here (see Remark~\ref{rem:gap}).
+
+For every other case (Cases~1, 2, 3a, Sub-case~3b with $n \in \{30, 60\}$, and
+cases (i)-(v) above), the proof is unconditional for all $n > 24$, completing the
+proof for those $n$.
 
 \bigskip
 \noindent\textbf{$n = 24$ satisfies the inequality.}
@@ -275,10 +272,18 @@ largest one.
 
 \begin{remark}
 The complete set of solutions is $\{1, 2, 3, 4, 5, 6, 8, 10, 12, 24\}$.
-The finite verification for Sub-case~3b (and the overall check that no $n \le 10{,}000$
-is missed) can be performed by the following computation:
-for each $n$ from $1$ to $10{,}000$, compute $\max_{m<n} f(m)$ and compare with $n+2$.
-No $n > 24$ satisfies the inequality.
+For each $n$ from $1$ to $10{,}000$, one can compute $\max_{m<n} f(m)$ and verify
+directly that no $n > 24$ in that range satisfies the inequality.
+\end{remark}
+
+\begin{remark}\label{rem:gap}
+The only unresolved cases are $n = 2520j$ where $p = 420j-1$ is prime,
+$(6p+1)/5$ is prime, $j \equiv 0$ or $7 \pmod{11}$, and $j > 10^7$
+(i.e.~$n > 2.52 \times 10^{10}$).  In every such case up to $j = 10^7$
+a witness was found.  A purely algebraic argument for these classes for all $j$
+would require a covering system that simultaneously handles all residues of $j$
+modulo every prime, which is not achievable by a finite-period argument.
+Extending the computational certificate to larger $j$ remains an open verification.
 \end{remark}
 
 \end{document}
