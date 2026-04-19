@@ -352,23 +352,30 @@ In particular, the exceptional $n$-values have natural density zero.
 \end{proposition}
 
 \begin{proof}
-For a prime $p$ and a linear form $L(j)$, write $\omega_L(p)$ for the number of
-residues $j \pmod{p}$ with $p \mid L(j)$.  Set $L_1(j) = 420j-1$ and
-$L_2(j) = 504j-1$.
+Set $L_1(j) = 420j-1$ and $L_2(j) = 504j-1$.  For each prime $p$, let
+\[
+  \omega(p) = \#\bigl\{j \bmod p : p \mid L_1(j)L_2(j)\bigr\}
+\]
+be the number of residue classes modulo $p$ blocked by $L_1L_2$.
 
-\emph{Admissibility.}  For $p \in \{2,3,5,7\}$: since $\gcd(420,p)=p$ for each,
-$L_1(j) \equiv -1 \pmod{p}$ for all $j$, so $\omega_{L_1}(p) = 0$.  Similarly
-$\gcd(504,p)=p$ for $p \in \{2,3,7\}$, giving $\omega_{L_2}(p) = 0$;
-and $504 \equiv 4 \pmod{5}$, so $L_2(j) = 504j-1 \equiv 4j-1$, which is
-$0 \pmod{5}$ only for $j \equiv 4 \pmod{5}$, but $5/p$ is not $1$ so
-$\omega_{L_1}(5)=0$ and $\omega_{L_2}(5) = 1$.  In every case the total
-number of blocked residues $\omega(p) := \omega_{L_1}(p) + \omega_{L_2}(p)
-- \mathbf{1}[p \mid L_1(j)L_2(j) \text{ for some } j]$ satisfies $\omega(p) < p$,
-so the pair is sieve-admissible.  For $p > 7$: $\gcd(420,p)=\gcd(504,p)=1$,
-so each form has exactly one zero modulo $p$, giving $\omega(p) \le 2 < p$.
+\emph{Admissibility.}  We must show $\omega(p) < p$ for all primes $p$.
+For the small primes:
+\begin{itemize}
+  \item $p \in \{2,3,7\}$: $p \mid 420$ and $p \mid 504$, so $L_1(j) \equiv -1$
+        and $L_2(j) \equiv -1 \pmod{p}$ for all $j$.  Hence $\omega(p)=0<p$.
+  \item $p=5$: $5\mid 420$ so $L_1(j)\equiv -1\pmod 5$ for all $j$; no $j$ blocks
+        via $L_1$.  For $L_2$: $504\equiv 4\pmod 5$, so $L_2(j)\equiv 4j-1$,
+        which is $0\pmod 5$ only for $j\equiv 4\pmod 5$.  Thus $\omega(5)=1<5$.
+\end{itemize}
+For $p > 7$: $\gcd(420,p)=\gcd(504,p)=1$, so $L_1$ and $L_2$ each have exactly
+one zero modulo $p$.  If these zeros coincide, $\omega(p)=1$; otherwise
+$\omega(p)=2$.  In either case $\omega(p)\le 2<p$.
 
-\emph{Upper bound.}  The standard upper-bound Selberg sieve for $k = 2$ linear
-forms (Halberstam and Richert, \emph{Sieve Methods} (1974),
+\emph{Upper bound.}  Since $\omega(p)\le 2$ for all $p$, the Euler product
+$\prod_p(1-\omega(p)/p)(1-1/p)^{-2}$ converges to a finite nonzero constant
+(by comparison with the standard twin-prime product).
+The upper-bound Selberg sieve for two linear forms
+(Halberstam and Richert, \emph{Sieve Methods} (1974),
 Theorem~5.1 with sieve dimension $\kappa = 2$; or Iwaniec and Kowalski,
 \emph{Analytic Number Theory} (2004), Theorem~6.4)
 yields, for any $z \le N$:
@@ -377,9 +384,7 @@ yields, for any $z \le N$:
   \ll \frac{N}{(\log z)^2}\prod_{p\le z}\Bigl(1-\frac{\omega(p)}{p}\Bigr)
   \Bigl(1-\frac1p\Bigr)^{-2}.
 \]
-Taking $z = N^{1/2}$ and using the standard estimate on the Euler product
-(bounded away from $0$ and $\infty$) gives
-$|\mathcal{E} \cap \{1,\ldots,N\}| \ll N/(\log N)^2$.
+Taking $z = N^{1/2}$ gives $|\mathcal{E}\cap\{1,\ldots,N\}|\ll N/(\log N)^2$.
 \end{proof}
 
 \begin{remark}\label{rem:gap}
