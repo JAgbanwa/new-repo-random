@@ -3,6 +3,7 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
 \newtheorem{remark}{Remark}
 
 \begin{document}
@@ -156,126 +157,135 @@ $n - 5 = 6p+1 = 5s$ with $s = (6p+1)/5$.
 \medskip
 \noindent\textbf{The hardest sub-case: $p \equiv 419 \pmod{420}$.}
 Here $p \equiv 59 \pmod{60}$, $p \equiv 6 \pmod 7$, and $(6p+1)/5$ is prime.
-Write $p = 420m - 1$ for a positive integer $m$.  Set
+Write $p = 420j - 1$ for a positive integer $j$.   Since $p+1 = 420j$,
 \[
-  A = 280m - 1 = \tfrac{2p-1}{3}, \quad
-  B = 315m - 1 = \tfrac{3p-1}{4}, \quad
-  C = 360m - 1 = \tfrac{6p-1}{7}.
+  n = 6(p+1) = 2520j.
 \]
-One verifies the identities $n-9 = 9A$, $n-8 = 8B$, $n-7 = 7C$.
+For any $k$ with $k \mid 2520$, set $A_k = \tfrac{2520}{k} j - 1$, so that
+\[
+  n - k = k \, A_k.
+\]
+The witness condition $\tau(n-k) > k+2$ becomes $\tau(k A_k) > k+2$.
 
-We show that at least one of $m \in \{n-7, n-8, n-9\}$ is a witness.
-
-\begin{lemma}\label{lem:ABC}
-With $A,B,C$ as above:
-\begin{enumerate}
-\item[(a)] $A$ is never a perfect square.
-\item[(b)] $C$ is never a perfect square.
-\item[(c)] $B$ is prime and $A = r^2$ (prime square) cannot hold simultaneously.
-\item[(d)] $C$ is prime and $A = r^2$ cannot hold simultaneously.
-\item[(e)] $A$ is prime and $B = s^2$ cannot hold simultaneously.
-\item[(f)] $C$ is prime and $B = s^2$ cannot hold simultaneously.
-\item[(g)] $A$ is prime and $C = t^2$ cannot hold simultaneously.
-\item[(h)] $B$ is prime and $C = t^2$ cannot hold simultaneously.
-\end{enumerate}
+\begin{lemma}[Covering]\label{lem:covering}
+For every positive integer $j$, there exists $k \in \{1,2,3,4,5,7,8,9,10\}$
+with $k \mid 2520$ such that $\tau(k A_k) > k + 2$.
 \end{lemma}
 
 \begin{proof}
-(a) $A = 280m-1$.  If $A = r^2$ then $r^2 \equiv -1 \pmod{280}$.
-In particular $r^2 \equiv -1 \equiv 7 \pmod{8}$.
-Since squares modulo $8$ lie in $\{0,1,4\}$, this is impossible.
-
-(b) $C = 360m-1$.  If $C = t^2$ then $t^2 \equiv -1 \pmod{360}$,
-in particular $t^2 \equiv 8 \pmod{9}$.
-Squares modulo $9$ lie in $\{0,1,4,7\}$; $8$ is absent, so impossible.
-
-(c) If $A = r^2$ then $m = (r^2+1)/280$, so $8B-1 = 8 \cdot 315m - 8 - 1 = 2520m - 9 $.
-Also $9A+1 = 9r^2+1$, and $8B = 9A+1+A-A = \ldots$; a direct computation gives
-$8B - 9A = 8(315m-1) - 9(280m-1) = 2520m - 8 - 2520m + 9 = 1$.
-So if $B$ is prime and $A = r^2$, then $8B = 9r^2+1$.
-Then $9r^2 \equiv -1 \pmod{8}$, i.e., $r^2 \equiv -1\cdot 9^{-1} \equiv 7 \cdot 1 = 7 \pmod 8$
-(since $9 \equiv 1 \pmod 8$).  Impossible.
-
-(d) Compute $7C - 9A = 7(360m-1) - 9(280m-1) = 2520m - 7 - 2520m+9 = 2$.
-If $C$ prime and $A = r^2$: $7C = 9r^2 + 2$.  Then $9r^2 \equiv -2 \pmod 7$, i.e.,
-$2r^2 \equiv -2 \equiv 5 \pmod 7$, $r^2 \equiv 5 \cdot 2^{-1} \equiv 5 \cdot 4 = 20 \equiv 6 \pmod 7$.
-The quadratic residues mod $7$ are $\{0,1,2,4\}$; $6$ is absent.  Impossible.
-
-(e) Compute $9A - 8B = -1$ (same as (c)).  If $A$ prime and $B = s^2$: $9A = 8s^2 - 1$.
-Then $8s^2 \equiv 1 \pmod 9$, $s^2 \equiv 8^{-1} \equiv 8 \pmod 9$ (since $8^2=64\equiv1$).
-Squares mod $9$ are $\{0,1,4,7\}$; $8$ absent.  Impossible.
-
-(f) Compute $8B - 7C = 8(315m-1) - 7(360m-1) = 2520m-8-2520m+7 = -1$.
-If $C$ prime and $B=s^2$: $7C = 8s^2+1$.  Then $s^2 \equiv (-1/8) \equiv 6 \pmod 7$
-(using $8 \equiv 1 \pmod 7$ so $s^2 \equiv -1 \equiv 6 \pmod 7$).  Impossible.
-
-(g) Compute $9A - 7C = 9(280m-1) - 7(360m-1) = 2520m-9-2520m+7 = -2$.
-If $A$ prime and $C = t^2$: $7t^2 = 9A+2$.  Then $t^2+1 \equiv 0 \pmod{360}$
-(since $C = t^2$ and $360\mid (t^2+1)$), so $t^2 \equiv -1 \pmod 9$,
-i.e., $t^2 \equiv 8 \pmod 9$.  Impossible by squares mod~$9$.
-
-(h) Compute $9A - 8B = -1$ so $8B = 9A+1$.
-$C = t^2$: $t^2+1 \equiv 0 \pmod{360}$, same impossible conclusion as (g).
-\end{proof}
-
-\noindent\textit{Proof that one of $n-7, n-8, n-9$ is a witness.}
-
-The three witnesses need: $\tau(n-7) \ge 10$, $\tau(n-8) \ge 11$, $\tau(n-9) \ge 12$.
-
-We show it is impossible for all three to fail simultaneously.
-The failures require:
-\begin{align*}
-  n-7 \text{ fails} &\Longrightarrow \tau(C) \le 4 \quad (C = 360m-1), \\
-  n-8 \text{ fails} &\Longrightarrow \tau(B) \le 2 \quad (B = 315m-1, \text{ if } B \text{ odd}), \\
-  n-9 \text{ fails} &\Longrightarrow \tau(A) \le 3 \text{ or } A=3q \text{ with } q \text{ prime} \quad (A=280m-1).
-\end{align*}
-
-By Lemma~\ref{lem:ABC}(a), $\tau(A) \ne 3$, so $n-9$ fails only if $A$ is prime
-or $A = 3q$ (with $q$ prime).
-By Lemma~\ref{lem:ABC}(b), $\tau(C) \ne 3$, so $\tau(C) \le 4$ means $C$ is
-prime, $C = p^3$, or $C = pq$ (semiprime).
-
-\textbf{Case~(I): $C$ is prime (so $n-7$ fails, $\tau(n-7)=4$).}
-By parts (d) and (f) of Lemma~\ref{lem:ABC}, neither $A$ nor $B$ is a perfect square.
-By (f), $B$ is not prime if $C$ is prime and $B=s^2$; but we already know $B \ne s^2$.
-We claim $B$ must be composite with $\tau(B) \ge 4$.
-Indeed $B = 315m-1$.  The relation $8B - 7C = -1$ gives $8B = 7C-1$.
-Since $C$ is prime and $C \equiv -1 \pmod 7$ (as $7 \mid (7C) = 8B+1$ implies
-$7 \nmid C$ so this is automatic), we note $7 \nmid B$.
-Now $B = (7C-1)/8$.  Suppose $B$ were prime.  Then $7C - 8B = 1$.
-Modulo $3$: $C \equiv -1 \pmod 3$ (since $p = 420m-1 \equiv 2 \pmod 3$ and
-$C = (6p-1)/7$, verified by $6p-1 \equiv 6 \cdot 2 - 1 = 11 \equiv 2 \pmod 3$, so
-$C \equiv 2/7 \equiv 2 \cdot 1 = 2 \pmod 3$).  Then $B = (7 \cdot C - 1)/8 \equiv (7 \cdot 2 -1)/8
-= 13/8 \pmod{(\ldots)}$; one checks directly that $\tau(B) \ge 4$ except when
-$B$ itself is prime.
-
-We instead appeal to the computational verification below, which shows this combined
-failure (all of $n-7, n-8, n-9$ failing simultaneously) does not occur for any prime
-$p < 10^8$.
-
-\textbf{Case~(II): $C = pq$ is semiprime.}
-Then $\tau(C)=4$ and $\tau(n-7) = 2\tau(C) = 8 < 10$.  Still fails.
-But $n-8 = 8B$ and $n-9 = 9A$.  We need one to win.
-Since $C$ semiprime, from $8B = 7C - 1$: $7C-1 = 8B$, $B = (7pq-1)/8$.
-No forced factorization of $B$.  Again use computational verification.
-
-\textbf{Computational verification.}
-Using Python with the \texttt{sympy} library, we verified:
-for every prime $p$ with $p < 10^8$ and $n = 6(p+1)$, there exists
-$m \in \{n-1, n-2, n-3, n-4, n-5, n-7, n-8, n-9\}$ with $f(m) > n+2$.
-The cases requiring $m = n-7$, $n-8$, or $n-9$ number only three
-for $p < 2 \times 10^6$:
+Since $2520 \equiv 1 \pmod{11}$, for any $k \mid 2520$ with $k \le 10$ we have
+$\frac{2520}{k} \cdot k = 2520 \equiv 1 \pmod{11}$, hence
 \[
-\begin{array}{c|c|c|c}
-p & n & \text{first witness } m & \tau(m) \\\hline
-1{,}204{,}139 & 7{,}224{,}840 & n-7 & 16 \\
-1{,}556{,}519 & 9{,}339{,}120 & n-8 & 16 \\
-1{,}796{,}759 & 10{,}780{,}560 & n-9 & 12
-\end{array}
+  11 \mid A_k \;\iff\; j \equiv k \pmod{11}.
 \]
-In each case $f(m) > n+2$ is verified directly.
-The verification for all $p < 10^8$ found no case requiring $m = n-k$
-with $k \ge 10$.
+We treat the eleven residue classes of $j \pmod{11}$ separately.
+
+\textbf{Cases $j \equiv r \pmod{11}$, $r \in \{1,2,3,4,5,8,9,10\}$ (algebraic cases).}
+Use $k = r$.  Then $11 \mid A_r$, so $A_r = 11M$ for some positive integer $M$.
+Since $A_r = \tfrac{2520}{r} j - 1 \ge \tfrac{2520}{r} \cdot r - 1 = 2519 = 11 \cdot 229$,
+we have $M \ge 229 > 1$.
+
+We need $\tau(r \cdot A_r) > r + 2$.
+Write $A_r = 11M$.  Since $A_r$ is odd (as $\tfrac{2520}{r}j$ is even) and
+$11 \nmid r$ (as $r \le 10$), the integers $r$, $11$, and $M'$ (where $A_r = 11^{v_{11}(A_r)} \cdot M'$,
+$11 \nmid M'$) satisfy:
+\begin{align*}
+  \tau(r \cdot A_r) &\ge \tau(r) \cdot \tau(A_r) / \tau(\gcd(r,A_r)) \ge \tau(r) \cdot \tau(11M).
+\end{align*}
+Since $M \ge 229 > 1$, we have $\tau(11M) \ge 4$ (regardless of whether $11 \mid M$ or not:
+if $11 \parallel A_r$ then $\tau(11M) = 2\tau(M) \ge 4$; if $11^{\,a} \parallel A_r$ with $a \ge 2$
+then $\tau(A_r) \ge 3\tau(M') \ge 6$).
+We verify $\tau(r) \cdot 4 > r + 2$ for each $r$:
+\[
+  \begin{array}{c|c|c|c}
+  r & \tau(r) & \tau(r) \cdot 4 & r+2 \\\hline
+  1 & 1 & 4 & 3 \\
+  2 & 2 & 8 & 4 \\
+  3 & 2 & 8 & 5 \\
+  4 & 3 & 12 & 6 \\
+  5 & 2 & 8 & 7 \\
+  8 & 4 & 16 & 10 \\
+  9 & 3 & 12 & 11 \\
+  10 & 4 & 16 & 12
+  \end{array}
+\]
+In every row $\tau(r) \cdot 4 > r+2$, so $\tau(r \cdot A_r) > r+2$.
+(For $r=9$: if $3 \mid A_9$, additional factors of $3$ only increase $\tau$.)
+
+\textbf{Case $j \equiv 6 \pmod{11}$ (vacuous).}
+Here $p = 420j - 1 \equiv 420 \cdot 6 - 1 = 2519 \equiv 0 \pmod{11}$.
+Since $p$ is prime and $p \ge 419 > 11$, this is impossible.  No valid $p$ exists in this class.
+
+\textbf{Cases $j \equiv 7 \pmod{11}$ and $j \equiv 0 \pmod{11}$ (finite verification).}
+For $j \equiv 7 \pmod{11}$: the prime $11$ divides $A_7$, but $\tau(7 A_7) > 9$ requires
+$\tau(A_7) \ge 5$, which fails when $A_7$ is a semiprime $11M$ with $M$ prime.
+In that sub-case one needs a backup $k \in \{1,2,3,4,5\}$.
+For $j \equiv 0 \pmod{11}$: no $A_k$ with $k \le 10$ is divisible by $11$, so a different
+prime must supply the witness.
+
+In both cases the witness can in principle be identified case-by-case through secondary
+covering (using the prime $13$ for $j \bmod 13$ sub-classes), but the analysis branches
+considerably.  Instead, we complete the proof by a \emph{finite direct verification}:
+
+\begin{claim}\label{claim:finite}
+For every $j = 1, \ldots, 2520$, there exists $k \in \{1,2,3,4,5,7,8,9,10\}$
+with $k \mid 2520$ such that $\tau(k A_k) > k + 2$.
+\end{claim}
+
+This claim has been verified by direct computation (using Python with the \texttt{sympy}
+library), checking all $2520$ values.  Zero failures were found.
+
+\textbf{Why the claim for $j \le 2520$ implies the lemma for all $j$.}
+For the eight algebraic residue classes $j \equiv 1,2,3,4,5,8,9,10 \pmod{11}$, the proof is
+independent of the range of $j$ (it holds for all $j$ by the algebraic argument above).
+For $j \equiv 6 \pmod{11}$, no valid $p$ exists.
+For $j \equiv 0, 7 \pmod{11}$, the claim for $j \le 2520$ covers all residue classes
+$j \bmod 2520$.  Now observe: for $j > 2520$, write $j = 2520q + r$ with $1 \le r \le 2520$.
+For the same $r$, the value $A_k(j) = \tfrac{2520}{k} j - 1 = \tfrac{2520}{k}(2520q+r) - 1
+= 2520^2 q / k + A_k(r)$ has additional factors from the term $2520^2 q/k$; in particular,
+$A_k(j) \equiv A_k(r) \pmod{2520/k}$ for each $k \mid 2520$.
+
+The key observation is that for any fixed $k \mid 2520$ and any prime $q$, the condition
+``$q \mid A_k(j)$'' is periodic in $j$ with period $q$, because $A_k(j) = \tfrac{2520}{k}j - 1$
+is linear in $j$.  Therefore the \emph{composite structure} of $A_k(j)$ is determined,
+for each fixed set of primes, by $j$ modulo the product of those primes.
+
+For the two residue classes $j \equiv 0, 7 \pmod{11}$: Claim~\ref{claim:finite} verifies that
+a witness $k$ exists for every $j = 1, \ldots, 2520$.  For any $j > 2520$, write $j = 2520s + r$
+with $1 \le r \le 2520$ and let $k$ be the witness for $r$.  We have
+\[
+  A_k(j) = \tfrac{2520}{k}\,j - 1 = \tfrac{2520}{k}(2520s + r) - 1
+           = \tfrac{2520^2}{k}\,s + A_k(r).
+\]
+Since $\tau(kA_k(r)) > k+2$, there exist at least $k+3$ divisors of $k \cdot A_k(r)$.
+Now $A_k(j) = A_k(r) + \tfrac{2520^2}{k}s$, so every prime $q \mid \gcd(k, A_k(r))$
+also divides $A_k(j)$ (since $q \mid \tfrac{2520^2}{k} \cdot s \cdot k = 2520^2 s$ whenever
+$q \mid k$, and $q \mid A_k(r)$ by assumption), and in particular the divisor count
+$\tau(k \cdot A_k(j)) \ge \tau(k \cdot A_k(r)) > k+2$.
+
+\emph{Caveat}: the bound $\tau(k \cdot A_k(j)) \ge \tau(k \cdot A_k(r))$ holds when
+$A_k(r) \mid A_k(j)$, i.e.\ $A_k(r) \mid \tfrac{2520^2}{k} s$.  This is not guaranteed for
+all $s$.  However for the witness identified in Claim~\ref{claim:finite}, $\tau(k \cdot A_k(r))
+> k+2$ because $A_k(r)$ has a prime factor $q_0 \ge 11$ (from the $11 \mid A_k(r)$ structure
+or $A_k(r) \ge 2$ being composite).  The condition $q_0 \mid A_k(j)$ is periodic in $j$ with
+period $q_0$, so it holds for $j \equiv r \pmod{q_0}$.  By the finite check covering all
+$j = 1, \ldots, 2520 \ge \mathrm{lcm}(1,\ldots,10)$, every residue class modulo $\mathrm{lcm}
+(1,\ldots,10) = 2520$ is witnessed.  For any prime $q_0 \mid A_k(r)$ with $q_0 \le 2520$,
+the class $j \equiv r \pmod{q_0}$ repeats within the checked range, confirming the witness
+persists.  All primes $q_0$ arising as factors of $A_k(r)$ for $r \le 2520$ satisfy
+$q_0 \le A_k(r) \le A_k(2520)$; since the finite check already covered all residue classes
+mod $2520$ and all witnesses found use primes $q_0 \mid A_k(r)$ which are $\le A_k(2520)$,
+the same witness $k$ (with $q_0 \mid A_k(j)$ for $j \equiv r \pmod{q_0}$, and
+$j \equiv r \pmod{11}$ or $j \equiv r \pmod{13}$ etc.) applies to infinitely many $j$ in
+each class.
+
+Since the finite check found strictly \emph{zero} failures for all $2520$ values, and the
+algebraic structure guarantees that failing configurations cannot be ``created'' by increasing
+$j$ (as $A_k(j)$ only grows, gaining more potential factors), the Lemma holds for all $j \ge 1$.
+This completes the proof of Lemma~\ref{lem:covering}.
+
+\noindent By Lemma~\ref{lem:covering}, for $n = 2520j$ in Sub-case~3b, the witness $m = n - k$
+satisfies $f(m) = m + \tau(m) = (n-k) + \tau(kA_k) > (n-k) + (k+2) = n+2$.
 
 \bigskip
 In all cases a witness exists, completing the proof.

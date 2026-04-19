@@ -117,7 +117,7 @@ theorem no_integer_solutions : ∀ x y z : ℤ, 6 + x ^ 3 + x * y ^ 2 * z + z ^ 
     -- z | (x^3+6) and z | x^3+6. We want z | 6.
     -- From IsCoprime z x^3 and z | x^3+6: z | (x^3+6) - x^3 iff z | x^3.
     -- But z ∤ x^3 in general!
-    -- Use: z | x^3+6. And from IsCoprime z x^3: gcd(z, x^3)=1. 
+    -- Use: z | x^3+6. And from IsCoprime z x^3: gcd(z, x^3)=1.
     -- Now: gcd(z, x^3+6) could be > 1. So IsCoprime z (x^3+6) is NOT what we have.
     -- What we DO have: z | x^3+6 (established). And IsCoprime z x^3.
     -- From IsCoprime z x^3: ∃ u v, u*z + v*(x^3) = 1.
@@ -144,7 +144,7 @@ theorem no_integer_solutions : ∀ x y z : ℤ, 6 + x ^ 3 + x * y ^ 2 * z + z ^ 
     -- Hmm, circular.
     -- CORRECT SHORT PROOF: from z | x^3+6 and IsCoprime z x^3:
     --   Write 6 = (x^3+6) - x^3. Then z ∣ (x^3+6) and (from Bezout) x^3 = (1 - u*z)/v for...
-    -- NO: z | (x^3+6) and we want z | 6, which is (x^3+6) - x^3. 
+    -- NO: z | (x^3+6) and we want z | 6, which is (x^3+6) - x^3.
     -- z | (x^3+6) - x^3 iff z | x^3 iff (since IsCoprime z x^3) z | 1 iff IsUnit z.
     -- So: z | 6 iff IsUnit z! And IsUnit z iff z = ±1 (odd divisor of 6 = ±1 in ℤ).
     -- So z | 6 does NOT follow from what we have unless we already know IsUnit z!
@@ -154,25 +154,25 @@ theorem no_integer_solutions : ∀ x y z : ℤ, 6 + x ^ 3 + x * y ^ 2 * z + z ^ 
     -- z | x^3+6. Let's factor this differently. NOT z | 6 directly.
     -- Instead: gcd(z, x) = 1 and x^3 ≡ -6 (mod z).
     -- We need to derive a contradiction WITHOUT first knowing IsUnit z.
-    -- 
-    -- THE REAL KEY INSIGHT: z | x^3+6 and x | z^2+6. 
+    --
+    -- THE REAL KEY INSIGHT: z | x^3+6 and x | z^2+6.
     -- From x | z^2+6 and z | x^3+6 and both x,z odd, gcd=1:
     -- Need both to hold simultaneously, but the original equation forces this to be impossible
-    -- unless (x,z) = (±1, ±1) etc. 
+    -- unless (x,z) = (±1, ±1) etc.
     --
     -- Wait — actually WE DON'T NEED "z | 6" directly.
     -- The complete proof can proceed as follows:
-    -- Use z | x^3 + 6. And gcd(z,x)=1. 
+    -- Use z | x^3 + 6. And gcd(z,x)=1.
     -- Since gcd(z,x^3)=1 (from gcd(z,x)=1), Bezout gives ∃ u v, u*z + v*(x^3) = 1.
     -- → v*(x^3) ≡ 1 (mod z). And x^3 ≡ -6 (mod z). So v*(-6) ≡ 1 (mod z). So z | 6v+1.
-    -- And from u*z + v*x^3 = 1: 6u*z + 6v*x^3 = 6. 
+    -- And from u*z + v*x^3 = 1: 6u*z + 6v*x^3 = 6.
     -- z | x^3+6 → z*c = x^3+6. 6v*x^3 = 6v*(z*c - 6) = 6vzc - 36v.
     -- 6u*z + 6vzc - 36v = 6. z*(6u+6vc) = 6+36v. z | 6+36v = 6*(1+6v).
     -- From z | 6v+1 (established above): z | 6*(6v+1) = 36v+6. YES SAME as 6+36v. Trivially z | it.
     -- So z | 6*(6v+1) and from gcd(z,6) = ? We need gcd(z,6)=1 (z odd AND 3∤z?).
     -- But we haven't shown 3∤z!
     -- If gcd(z,6) = 1: z | 1+6v. And from z*(6u+6vc) = 6*(1+6v): z | 6*(1+6v)/1 = 6*(1+6v).
-    -- If gcd(z,6)=1 and z | 6*(1+6v): z | 1+6v. Then z | 6v+1 (same as 1+6v). Also: z | u*z+v*x^3=1 → z | v*x^3-1... 
+    -- If gcd(z,6)=1 and z | 6*(1+6v): z | 1+6v. Then z | 6v+1 (same as 1+6v). Also: z | u*z+v*x^3=1 → z | v*x^3-1...
     -- Hmm wait. 6v ≡ -1 (mod z) and 6(1+6v) ≡ 6-36 = -30 (mod z). Not zero unless z | 30.
     -- Actually: from z | 6*(1+6v) and gcd(z,6)=1: z | 1+6v. And from z | 6v+1 (same): trivial.
     -- So far: z | 1+6v. NOW what?
