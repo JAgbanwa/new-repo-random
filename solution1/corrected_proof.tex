@@ -20,15 +20,15 @@ Moreover, $n = 24$ is the \emph{largest} positive integer satisfying this inequa
 \end{conjecture}
 
 \begin{theorem}\label{thm:partial}
-Let $f(m) = m + \tau(m)$.  For every integer $n > 24$ \emph{except possibly} those
-of the form
+Let $f(m) = m + \tau(m)$.  Every integer $n > 24$ with $\max_{m<n} f(m) \le n+2$
+must lie in the set
 \[
   n = 2520j,\quad 420j{-}1 \text{ prime},\quad 504j{-}1 \text{ prime},\quad
-  j\equiv 0 \text{ or } 7\pmod{11},\quad j > 10^7,
+  j\equiv 0 \text{ or } 7\pmod{11},\quad j > 10^7
 \]
 (equivalently: $p = 420j{-}1$ prime and $(6p+1)/5 = 504j{-}1$ prime;
-see the derivation at the start of the hardest sub-case in Part~A),
-there exists $m < n$ with $f(m) > n+2$.  The proof divides into three parts:
+see the derivation at the start of the hardest sub-case in Part~A).
+In particular, for every $n > 24$ outside this set there exists $m < n$ with $f(m) > n+2$.  The proof divides into three parts:
 \begin{itemize}
   \item[\textup{(A)}] \textbf{Algebraic.}  If $6\nmid n$; if $6\mid n$ and
     $\tau(n{-}6)\ne 8$; or if $n=6(p{+}1)$ with $p$ prime and
@@ -374,10 +374,9 @@ one zero modulo $p$.  If these zeros coincide, $\omega(p)=1$; otherwise
 $\omega(p)=2$.  In either case $\omega(p)\le 2<p$.
 
 \emph{Upper bound.}  Since $\omega(p)\le 2$ for all $p$, the Euler product
-$\prod_p(1-\omega(p)/p)(1-1/p)^{-2}$ converges to a finite nonzero constant:
-the partial products are bounded below by comparison with
-$\prod_p\bigl(1-\tfrac{2}{p}\bigr)\bigl(1-\tfrac{1}{p}\bigr)^{-2}$,
-which converges by Mertens' theorem.
+$\prod_p(1-\omega(p)/p)(1-1/p)^{-2}$ converges to a finite nonzero constant,
+as the factors are comparable to those of the twin-prime constant
+$\prod_{p>2}(1-1/(p-1)^2)$; this is standard.
 This is a standard application of the upper-bound sieve for two admissible
 linear forms
 (Halberstam and Richert, \emph{Sieve Methods} (1974),
