@@ -26,6 +26,8 @@ of the form
   n = 2520j,\quad 420j{-}1 \text{ prime},\quad 504j{-}1 \text{ prime},\quad
   j\equiv 0 \text{ or } 7\pmod{11},\quad j > 10^7,
 \]
+(equivalently: $p = 420j{-}1$ prime and $(6p+1)/5 = 504j{-}1$ prime;
+see the derivation at the start of the hardest sub-case in Part~A),
 there exists $m < n$ with $f(m) > n+2$.  The proof divides into three parts:
 \begin{itemize}
   \item[\textup{(A)}] \textbf{Algebraic.}  If $6\nmid n$; if $6\mid n$ and
@@ -372,13 +374,16 @@ one zero modulo $p$.  If these zeros coincide, $\omega(p)=1$; otherwise
 $\omega(p)=2$.  In either case $\omega(p)\le 2<p$.
 
 \emph{Upper bound.}  Since $\omega(p)\le 2$ for all $p$, the Euler product
-$\prod_p(1-\omega(p)/p)(1-1/p)^{-2}$ converges to a finite nonzero constant
-(by comparison with the standard twin-prime product).
-The upper-bound Selberg sieve for two linear forms
+$\prod_p(1-\omega(p)/p)(1-1/p)^{-2}$ converges to a finite nonzero constant:
+the partial products are bounded below by comparison with
+$\prod_p\bigl(1-\tfrac{2}{p}\bigr)\bigl(1-\tfrac{1}{p}\bigr)^{-2}$,
+which converges by Mertens' theorem.
+This is a standard application of the upper-bound sieve for two admissible
+linear forms
 (Halberstam and Richert, \emph{Sieve Methods} (1974),
 Theorem~5.1 with sieve dimension $\kappa = 2$; or Iwaniec and Kowalski,
-\emph{Analytic Number Theory} (2004), Theorem~6.4)
-yields, for any $z \le N$:
+\emph{Analytic Number Theory} (2004), Theorem~6.4).
+Applying that theorem yields, for any $z \le N$:
 \[
   \bigl|\{j \le N : L_1(j)\text{ and }L_2(j)\text{ both prime}\}\bigr|
   \ll \frac{N}{(\log z)^2}\prod_{p\le z}\Bigl(1-\frac{\omega(p)}{p}\Bigr)
