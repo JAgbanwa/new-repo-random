@@ -217,9 +217,8 @@ $n - 5 = 6p+1 = 5s$ with $s = (6p+1)/5$.
 
 \medskip\noindent\textbf{Part~B\,(mod-$11$ covering).}
 The sub-cases above handle all primes $p$ except $p\equiv 419\pmod{420}$.
-The argument here combines direct congruence analysis (to produce $A_k$ divisible by $11$)
-with a divisor-count lower bound; the method is not a single unified technique but an
-exhaustive case split that happens to close under one prime-modulus argument.
+The argument proceeds by a finite case analysis, combining congruence considerations
+modulo $11$ with a divisor-count lower bound.
 
 \medskip
 \noindent\textbf{The hardest sub-case: $p \equiv 419 \pmod{420}$.}
@@ -261,7 +260,8 @@ Write $A_r = 11M$.  Since $A_r$ is odd (as $\tfrac{2520}{r}j$ is even) and
 $11 \nmid r$ (as $r \le 10$), the integers $r$, $11$, and $M'$ (where $A_r = 11^{v_{11}(A_r)} \cdot M'$,
 $11 \nmid M'$) satisfy:
 \begin{align*}
-  \tau(r \cdot A_r) &\ge \tau(r) \cdot \tau(A_r) / \tau(\gcd(r,A_r)) \ge \tau(r) \cdot \tau(11M).
+  \tau(r \cdot A_r) &\ge \tau(r) \cdot \tau(A_r) / \tau(\gcd(r,A_r)) \ge \tau(r) \cdot \tau(11M)
+  \qquad\text{(multiplicativity: $\tau(ab)\ge\tau(a)\tau(b)/\tau(\gcd(a,b))$)}.
 \end{align*}
 Since $M \ge 229 > 1$, we have $\tau(11M) \ge 4$ (regardless of whether $11 \mid M$ or not:
 if $11 \parallel A_r$ then $\tau(11M) = 2\tau(M) \ge 4$; if $11^{\,a} \parallel A_r$ with $a \ge 2$
@@ -317,9 +317,11 @@ first occurring at $j = 6{,}970{,}590$ (where every $k \le 10$ fails).
 
 The numbers factored satisfy $kA_k < 2520j \le 2520 \times 10^7 = 2.52 \times 10^{10}$.
 Since $\lfloor\sqrt{2.52 \times 10^{10}}\rfloor = 158{,}745$, complete factorisation
-of any such number requires only trial division up to $158{,}745$; no probabilistic
-primality test is invoked.  The computation is therefore deterministic and
-independently reproducible from the description above.
+can be achieved deterministically by trial division up to $158{,}745$; no probabilistic
+primality test is invoked.  The implementation uses the exact integer factorisation
+routines in \texttt{sympy}, which perform this trial division internally.
+The computation is therefore deterministic and independently reproducible from
+the description above.
 
 \noindent By Lemma~\ref{lem:covering}, for every $j \not\equiv 0, 7 \pmod{11}$ (all $j \ge 1$),
 and by Claim~\ref{claim:finite} for $j \equiv 0, 7 \pmod{11}$ with $j \le 10^7$,
