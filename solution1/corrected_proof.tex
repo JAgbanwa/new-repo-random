@@ -2,24 +2,35 @@
 \usepackage{amsmath,amssymb,amsthm}
 
 \newtheorem{theorem}{Theorem}
+\newtheorem{conjecture}{Conjecture}
 \newtheorem{lemma}{Lemma}
 \newtheorem{claim}{Claim}
 \newtheorem{remark}{Remark}
 
 \begin{document}
 
-\begin{theorem}
+\begin{conjecture}\label{conj:main}
 Let $\tau(n)$ denote the number of positive divisors of $n$.  No integer $n > 24$
 satisfies
 \[
   \max_{1 \le m < n}\bigl(m + \tau(m)\bigr) \le n + 2.
 \]
 Moreover, $n = 24$ is the \emph{largest} positive integer satisfying this inequality.
+\end{conjecture}
+
+\begin{theorem}\label{thm:partial}
+Conjecture~\ref{conj:main} holds for all $n$ not of the exceptional form described
+in Remark~\ref{rem:gap}.  In particular, it holds unconditionally for all $n$ with
+$6 \nmid n$, for all $n$ with $6 \mid n$ and $\tau(n-6) \ne 8$, and for all
+$n = 6(p+1)$ with $p \ge 5$ prime and $p \not\equiv 419 \pmod{420}$.
+For the remaining case $p \equiv 419 \pmod{420}$ (i.e.~$n = 2520j$), the conjecture
+holds for all $j \not\equiv 0, 7 \pmod{11}$ unconditionally, and for all
+$j \le 10^7$ by exhaustive verification.
 \end{theorem}
 
 We write $f(m) = m + \tau(m)$ throughout, so the condition states
-$f(m) \le n+2$ for all $m < n$.  We exhibit a witness $m < n$ with
-$f(m) > n + 2$ for every $n > 24$.
+$f(m) \le n+2$ for all $m < n$.  We prove Theorem~\ref{thm:partial} by
+exhibiting a witness $m < n$ with $f(m) > n + 2$.
 
 \begin{lemma}\label{lem:tau6t}
 For every integer $t \ge 4$, $\tau(6t) \ge 8$.
@@ -252,16 +263,12 @@ there exists $k$ such that the witness $m = n - k$ satisfies
 $f(m) = (n-k) + \tau(kA_k) > (n-k) + (k+2) = n+2$.
 
 \bigskip
-In all cases, a witness $m < n$ with $f(m) > n+2$ exists.  For Sub-case~3b,
-the algebraic covering (Lemma~\ref{lem:covering}) handles $j \not\equiv 0, 7 \pmod{11}$
-for all $j$, and the computational certificate (Claim~\ref{claim:finite}) handles
-$j \equiv 0, 7 \pmod{11}$ for $j \le 10^7$, covering all $n \le 2.52 \times 10^{10}$
-in those classes.  For $j \equiv 0, 7 \pmod{11}$ and $j > 10^7$, no algebraic
-witness is established here (see Remark~\ref{rem:gap}).
-
-For every other case (Cases~1, 2, 3a, Sub-case~3b with $n \in \{30, 60\}$, and
-cases (i)-(v) above), the proof is unconditional for all $n > 24$, completing the
-proof for those $n$.
+The algebraic cases (Cases 1, 2, 3a, Sub-case~3b with $n \in \{30, 60\}$, and
+cases (i)--(v) with $p \not\equiv 419 \pmod{420}$) together with
+Lemma~\ref{lem:covering} and Claim~\ref{claim:finite} establish
+Theorem~\ref{thm:partial}.  The remaining infinite family
+($j \equiv 0,7 \pmod{11}$, $j > 10^7$) constitutes Conjecture~\ref{conj:main}'s
+open part; see Remark~\ref{rem:gap}.
 
 \bigskip
 \noindent\textbf{$n = 24$ satisfies the inequality.}

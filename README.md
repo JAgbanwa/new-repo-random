@@ -6,13 +6,15 @@ Let $\tau(n)$ count the number of positive divisors of $n$. Is there some $n > 2
 
 $$\max_{m < n}(m + \tau(m)) \leq n + 2 \,?$$
 
-## Answer
+## Conjecture
 
-**No.** $n = 24$ is the largest integer satisfying the inequality, and the complete solution set is $\{1, 2, 3, 4, 5, 6, 8, 10, 12, 24\}$.
+**Conjecture:** $n = 24$ is the largest integer satisfying the inequality, and the complete solution set is $\{1, 2, 3, 4, 5, 6, 8, 10, 12, 24\}$.
+
+The conjecture is supported by exhaustive computation for all $n \leq 10{,}000$ and by the partial proof below. The full conjecture remains **open**.
 
 ## Status
 
-This repository contains a **strong partial proof** of the result. The answer is unconditionally "No" for all but an extremely sparse, precisely-characterised set of large $n$.
+This repository contains a **strong partial proof** establishing the conjecture for all but an infinite, precisely-characterised, negligibly-sparse family of $n$.
 
 ### What is fully proved (unconditional for all $n > 24$):
 
