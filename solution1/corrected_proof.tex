@@ -3,6 +3,7 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{conjecture}{Conjecture}
+\newtheorem{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}
 \newtheorem{claim}{Claim}
 \newtheorem{remark}{Remark}
@@ -152,17 +153,26 @@ $\tau(n-3) \ge \tau(15)\tau(j) \ge 4 \cdot 2 = 8$.
 Hence $f(n-3) \ge n+5 > n+2$.
 
 \textbf{(iv) $p \equiv 2 \pmod{3}$, $p \equiv 3 \pmod{5}$.}
-Then $5 \mid (3p+1)$ and $p \equiv 3 \pmod{4}$ (since $p \equiv 3 \pmod{4}$
-when $p \equiv 59 \pmod{60}$ or $p \equiv 3 \pmod{20}$; every prime $p \equiv 3
-\pmod{5}$ and $p \equiv 2 \pmod{3}$ satisfies $p \equiv 2$ or $3 \pmod 4$,
-and if $p \equiv 3 \pmod 4$ then $4 \mid (3p+1)$, giving $20 \mid (3p+1)$).
-If $20 \mid (3p+1)$: $n-4 = 2(3p+1)$ and $3p+1 = 20j$, so $\tau(n-4)
-= \tau(40j) \ge \tau(40) = 8$.  Hence $f(n-4) \ge n+4 > n+2$.
-If $p \equiv 1 \pmod 4$: then $8 \mid (3p+1)$ (since $3 \cdot 1 + 1 = 4$
-and $4 \mid n-4=2(3p+1)$ already; specifically $3p+1 \equiv 4 \pmod 8$
-gives $v_2(3p+1) = 2$, so $v_2(n-4)=3$) and $5 \mid (3p+1)$, giving
-$n-4 = 2^3 \cdot \frac{3p+1}{4}$ with $5 \mid \frac{3p+1}{4}$, so
-$\tau(n-4) \ge 4 \cdot 2 \cdot 2 = 16 > 7$.
+By CRT, $p \equiv 23$ or $53 \pmod{60}$.
+Since $p \equiv 3 \pmod{5}$: $5 \mid (3p+1)$.  Since $p$ is odd: $2 \mid (3p+1)$.
+We split on $p \pmod{4}$:
+\begin{itemize}
+  \item $p \equiv 1 \pmod{4}$ (so $p \equiv 53 \pmod{60}$, smallest case $p=53$):
+        $3p \equiv 3 \pmod{4}$, so $4 \mid (3p+1)$.  Combined with $5 \mid (3p+1)$:
+        $20 \mid (3p+1)$.  Write $3p+1 = 20w$; since $p \ge 53$, $w \ge 8$.
+        Then $n-4 = 40w$.  Since $40 \mid 40w$, every divisor of $40$ is a divisor
+        of $40w$, so $\tau(n-4) \ge \tau(40) = 8$ and $f(n-4) \ge n+4 > n+2$.
+  \item $p \equiv 3 \pmod{4}$ (so $p \equiv 23 \pmod{60}$, smallest case $p=23$):
+        $3p \equiv 9 \equiv 1 \pmod{4}$, so $v_2(3p+1) = 1$.
+        Combined with $5 \mid (3p+1)$, write $3p+1 = 10t$ with $t$ odd;
+        since $p \ge 23$, $t = (3p+1)/10 \ge 7$.
+        Then $n-4 = 20t$ with $t \ge 7$ odd.
+        If $\gcd(t,5)=1$: since $t$ is odd, $\gcd(t,20)=1$, so
+        $\tau(20t) = \tau(4)\tau(5)\tau(t) = 6\tau(t) \ge 12$.
+        If $5 \mid t$: write $t = 5^a s$ with $5 \nmid s$, $a \ge 1$;
+        then $\tau(20t) = \tau(4)\tau(5^{a+1})\tau(s) = 3(a+2)\tau(s) \ge 9$.
+        In either case $\tau(n-4) \ge 9$ and $f(n-4) \ge n+5 > n+2$.
+\end{itemize}
 
 \textbf{(v) $p \equiv 2 \pmod{3}$, $p \equiv 4 \pmod{5}$.}
 Then $5 \mid (6p+1)$ (since $6p+1 \equiv 24+1=25 \equiv 0 \pmod 5$), so
@@ -287,6 +297,12 @@ via integer factorisation.  Every tested $j$ produced a witness;
 no failures were found.  The largest witness index required was $k = 14$,
 first occurring at $j = 6{,}970{,}590$ (where every $k \le 10$ fails).
 
+The numbers factored satisfy $kA_k < 2520j \le 2520 \times 10^7 = 2.52 \times 10^{10}$.
+Since $\lfloor\sqrt{2.52 \times 10^{10}}\rfloor = 158{,}745$, complete factorisation
+of any such number requires only trial division up to $158{,}745$; no probabilistic
+primality test is invoked.  The computation is therefore deterministic and
+independently reproducible from the description above.
+
 \noindent By Lemma~\ref{lem:covering}, for every $j \not\equiv 0, 7 \pmod{11}$ (all $j \ge 1$),
 and by Claim~\ref{claim:finite} for $j \equiv 0, 7 \pmod{11}$ with $j \le 10^7$,
 there exists $k$ such that the witness $m = n - k$ satisfies
@@ -312,6 +328,23 @@ The complete set of solutions is $\{1, 2, 3, 4, 5, 6, 8, 10, 12, 24\}$.
 For each $n$ from $1$ to $10{,}000$, one can compute $\max_{m<n} f(m)$ and verify
 directly that no $n > 24$ in that range satisfies the inequality.
 \end{remark}
+
+\begin{proposition}\label{prop:density}
+Let $\mathcal{E} = \{j \ge 1 : 420j-1 \text{ prime and } 504j-1 \text{ prime}\}$.
+Then $|\mathcal{E} \cap \{1,\ldots,N\}| = O\bigl(N/(\log N)^2\bigr)$.
+In particular, the exceptional $n$-values have natural density zero in the positive
+integers, and the open cases constitute an asymptotically negligible proportion of $n$.
+\end{proposition}
+
+\begin{proof}
+Neither form $420j-1$ nor $504j-1$ has a fixed prime divisor: for $p \mid 420$
+(i.e.~$p \in \{2,3,5,7\}$), one checks that $420j-1 \equiv -1 \pmod{p}$ for all
+$j$, so $p \nmid (420j-1)$ identically; similarly for $504j-1$ and $p \mid 504$.
+The pair therefore satisfies the Dickson admissibility condition.  By the
+upper-bound Selberg sieve applied to pairs of linear forms (see Halberstam and
+Richert, \emph{Sieve Methods}, Ch.~5),
+$|\mathcal{E} \cap \{1,\ldots,N\}| = O(N/(\log N)^2)$.
+\end{proof}
 
 \begin{remark}\label{rem:gap}
 The only unresolved cases are $n = 2520j$ where $p = 420j-1$ is prime,
