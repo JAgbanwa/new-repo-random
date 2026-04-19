@@ -19,13 +19,26 @@ Moreover, $n = 24$ is the \emph{largest} positive integer satisfying this inequa
 \end{conjecture}
 
 \begin{theorem}\label{thm:partial}
-Conjecture~\ref{conj:main} holds for all $n$ not of the exceptional form described
-in Remark~\ref{rem:gap}.  In particular, it holds unconditionally for all $n$ with
-$6 \nmid n$, for all $n$ with $6 \mid n$ and $\tau(n-6) \ne 8$, and for all
-$n = 6(p+1)$ with $p \ge 5$ prime and $p \not\equiv 419 \pmod{420}$.
-For the remaining case $p \equiv 419 \pmod{420}$ (i.e.~$n = 2520j$), the conjecture
-holds for all $j \not\equiv 0, 7 \pmod{11}$ unconditionally, and for all
-$j \le 10^7$ by exhaustive verification.
+Let $f(m) = m + \tau(m)$.  For every integer $n > 24$ \emph{except possibly} those
+of the form
+\[
+  n = 2520j,\quad 420j{-}1 \text{ prime},\quad 504j{-}1 \text{ prime},\quad
+  j\equiv 0 \text{ or } 7\pmod{11},\quad j > 10^7,
+\]
+there exists $m < n$ with $f(m) > n+2$.  The proof divides into three parts:
+\begin{itemize}
+  \item[\textup{(A)}] \textbf{Algebraic.}  If $6\nmid n$; if $6\mid n$ and
+    $\tau(n{-}6)\ne 8$; or if $n=6(p{+}1)$ with $p$ prime and
+    $p\not\equiv 419\pmod{420}$: a witness exists unconditionally for every
+    such $n > 24$.
+  \item[\textup{(B)}] \textbf{Covering.}  If $n=2520j$ with $420j{-}1$ prime
+    and $j\not\equiv 0,7\pmod{11}$: a witness exists for every $j\ge 1$
+    via the mod-$11$ covering argument (Lemma~\ref{lem:covering}).
+  \item[\textup{(C)}] \textbf{Computational.}  If $n=2520j$ with $420j{-}1$
+    and $504j{-}1$ both prime and $j\equiv 0$ or $7\pmod{11}$: a witness
+    exists for all $j\le 10^7$ by exhaustive search
+    (Claim~\ref{claim:finite}).
+\end{itemize}
 \end{theorem}
 
 We write $f(m) = m + \tau(m)$ throughout, so the condition states
@@ -53,7 +66,9 @@ correspond to $t \in \{1,3,2\}$, all less than $4$.
 In every remaining case $\tau(6t) \ge 8$.
 \end{proof}
 
-\begin{proof}[Proof of Theorem]
+\begin{proof}[Proof of Theorem~\ref{thm:partial}]
+
+\medskip\noindent\textbf{Part~A\,(algebraic cases).}
 Let $n > 24$.  We split into three cases according to the residue of $n$ modulo $6$.
 
 \bigskip
@@ -175,6 +190,12 @@ $n - 5 = 6p+1 = 5s$ with $s = (6p+1)/5$.
   \end{itemize}
 \end{itemize}
 
+\medskip\noindent\textbf{Part~B\,(mod-$11$ covering).}
+The sub-cases above handle all primes $p$ except $p\equiv 419\pmod{420}$.
+The argument here combines direct congruence analysis (to produce $A_k$ divisible by $11$)
+with a divisor-count lower bound; the method is not a single unified technique but an
+exhaustive case split that happens to close under one prime-modulus argument.
+
 \medskip
 \noindent\textbf{The hardest sub-case: $p \equiv 419 \pmod{420}$.}
 Here $p \equiv 59 \pmod{60}$, $p \equiv 6 \pmod 7$, and $(6p+1)/5$ is prime.
@@ -241,6 +262,7 @@ Since $p$ is prime and $p \ge 419 > 11$, this is impossible.  No valid $p$ exist
 This covers all nine residue classes $j \not\equiv 0, 7 \pmod{11}$, completing the proof.
 \end{proof}
 
+\medskip\noindent\textbf{Part~C\,(computational verification).}
 For the two remaining classes $j \equiv 0$ and $j \equiv 7 \pmod{11}$, the mod-$11$
 algebraic argument does not yield a uniform witness from $k \le 10$.  (At
 $j = 6{,}970{,}590 \equiv 0 \pmod{11}$, for instance, every $k \le 10$ gives
@@ -253,9 +275,17 @@ For every $j \in \{1, \ldots, 10^7\}$ with $j \equiv 0$ or $7 \pmod{11}$,
 there exists $k \mid 2520$ with $1 \le k < 2520$ such that $\tau(k A_k) > k + 2$.
 \end{claim}
 
-This has been verified by exhaustive computation (Python/\texttt{sympy}),
-testing all $47$ proper divisors of $2520$ for each such $j \le 10^7$; zero
-failures were found.
+\noindent\textit{Verification procedure.}
+Let $D$ be the set of $47$ proper divisors of $2520$.
+For each $j$ with $1 \le j \le 10^7$ and $j \equiv 0$ or $7 \pmod{11}$
+(approximately $1.82 \times 10^6$ values), the following was executed:
+compute $A_k = (2520/k)\,j - 1$ and $\tau(k A_k)$ for each $k \in D$
+in increasing order, halting at the first $k$ with $\tau(k A_k) > k + 2$.
+The implementation used Python with the \texttt{sympy} library's
+\texttt{divisor\_count} function, which computes the exact divisor count
+via integer factorisation.  Every tested $j$ produced a witness;
+no failures were found.  The largest witness index required was $k = 14$,
+first occurring at $j = 6{,}970{,}590$ (where every $k \le 10$ fails).
 
 \noindent By Lemma~\ref{lem:covering}, for every $j \not\equiv 0, 7 \pmod{11}$ (all $j \ge 1$),
 and by Claim~\ref{claim:finite} for $j \equiv 0, 7 \pmod{11}$ with $j \le 10^7$,
@@ -288,9 +318,9 @@ The only unresolved cases are $n = 2520j$ where $p = 420j-1$ is prime,
 $(6p+1)/5$ is prime, $j \equiv 0$ or $7 \pmod{11}$, and $j > 10^7$
 (i.e.~$n > 2.52 \times 10^{10}$).  In every such case up to $j = 10^7$
 a witness was found.  A purely algebraic argument for these classes for all $j$
-would require a covering system that simultaneously handles all residues of $j$
-modulo every prime, which is not achievable by a finite-period argument.
-Extending the computational certificate to larger $j$ remains an open verification.
+would require handling all residues of $j$ modulo every prime simultaneously,
+which is not achieved by the present method.
+Extending the computational certificate to larger $j$ remains an open problem.
 \end{remark}
 
 \end{document}
