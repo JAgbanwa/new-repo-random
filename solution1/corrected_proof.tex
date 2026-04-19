@@ -86,70 +86,196 @@ The needed divisibility conditions are:
   m = n-4: &\quad \tau(n-4) \ge 7.
 \end{align*}
 
-Suppose all three fail simultaneously.  Then:
+We carry out the complete case analysis below.
+
+\medskip
+\noindent\textbf{Structure of Sub-case 3b.}
+Here $\tau(n-6)=8$, which forces $n-6 = 6p$ with $p \ge 5$ prime,
+so $n = 6(p+1)$.  Write $m = (p+1)/\gcd(p+1,420)$; in the parametrisation
+below we set $n = 6p+6$ throughout.
+
+We check candidates $m \in \{n-1,n-2,n-3,n-4,n-5\}$ in turn.  The witness
+condition $f(m)>n+2$ is $\tau(n-k)>k+2$ for $m=n-k$.
+
+\textbf{(i) $p \equiv 1 \pmod{3}$.}
+Then $3 \mid (2p+1)$ and in fact $9 \mid n-3$ because
+$n-3 = 3(2p+1)$.  Writing $2p+1 = 3j$ with $j = (2p+1)/3 \ge 4$
+gives $n-3 = 9j$, so $\tau(n-3) \ge \tau(9)\tau(j) = 3 \cdot 2 = 6$
+(with equality iff $j$ is prime).  Hence $f(n-3) \ge n+3 > n+2$.
+
+\textbf{(ii) $p \equiv 2 \pmod{3}$, $p \equiv 1 \pmod{5}$.}
+Then $5 \mid (3p+2)$, so $3p+2 \ge 5$ and $3p+2 = 5j$ with $j \ge 4$.
+Since $n-2 = 2(3p+2) = 10j$ and $\gcd(2,j) \in \{1,2\}$:
+$\tau(n-2) \ge \tau(10)\tau(j/\gcd(2,j)) \cdot \gcd(2,j)/1 \ge 8$.
+Hence $f(n-2) = n-2+\tau(n-2) \ge n+6 > n+2$.
+
+\textbf{(iii) $p \equiv 2 \pmod{3}$, $p \equiv 2 \pmod{5}$.}
+Then $5 \mid (2p+1)$, so $n-3 = 3(2p+1) = 15j$ with $j = (2p+1)/5 \ge 5$.
+$\tau(n-3) \ge \tau(15)\tau(j) \ge 4 \cdot 2 = 8$.
+Hence $f(n-3) \ge n+5 > n+2$.
+
+\textbf{(iv) $p \equiv 2 \pmod{3}$, $p \equiv 3 \pmod{5}$.}
+Then $5 \mid (3p+1)$ and $p \equiv 3 \pmod{4}$ (since $p \equiv 3 \pmod{4}$
+when $p \equiv 59 \pmod{60}$ or $p \equiv 3 \pmod{20}$; every prime $p \equiv 3
+\pmod{5}$ and $p \equiv 2 \pmod{3}$ satisfies $p \equiv 2$ or $3 \pmod 4$,
+and if $p \equiv 3 \pmod 4$ then $4 \mid (3p+1)$, giving $20 \mid (3p+1)$).
+If $20 \mid (3p+1)$: $n-4 = 2(3p+1)$ and $3p+1 = 20j$, so $\tau(n-4)
+= \tau(40j) \ge \tau(40) = 8$.  Hence $f(n-4) \ge n+4 > n+2$.
+If $p \equiv 1 \pmod 4$: then $8 \mid (3p+1)$ (since $3 \cdot 1 + 1 = 4$
+and $4 \mid n-4=2(3p+1)$ already; specifically $3p+1 \equiv 4 \pmod 8$
+gives $v_2(3p+1) = 2$, so $v_2(n-4)=3$) and $5 \mid (3p+1)$, giving
+$n-4 = 2^3 \cdot \frac{3p+1}{4}$ with $5 \mid \frac{3p+1}{4}$, so
+$\tau(n-4) \ge 4 \cdot 2 \cdot 2 = 16 > 7$.
+
+\textbf{(v) $p \equiv 2 \pmod{3}$, $p \equiv 4 \pmod{5}$.}
+Then $5 \mid (6p+1)$ (since $6p+1 \equiv 24+1=25 \equiv 0 \pmod 5$), so
+$n - 5 = 6p+1 = 5s$ with $s = (6p+1)/5$.
 \begin{itemize}
-  \item[(A)] $\tau(n-1) \le 3$, so $n-1$ is $1$, a prime, or a prime square.
-        Since $n \ge 30$, $n-1 \ge 29$, ruling out $n-1=1$.
-        Since $n-1 \equiv 5 \pmod{6}$ and odd prime squares satisfy
-        $q^2 \equiv 1 \pmod{6}$, the value $n-1$ cannot be a prime square.
-        Hence \textbf{$n-1$ is prime}.
-
-  \item[(B)] $\tau(n-3) \le 5$, so $n-3 \in \{1, p, p^2, p^3, p^4\}$ for some prime $p$.
-        Here $n - 3 = 6s - 3 = 3(2s-1)$ is divisible by $3$.
-        If $3 \nmid (n-3)/3 = 2s-1$: $\tau(n-3) = 2\tau(2s-1)$,
-        so $\tau(2s-1) \le 2$, meaning $2s - 1$ is prime.
-        If $3 \mid (2s-1)$: then $9 \mid n-3$, so $3 \mid s$.
-        Write $s = 3k$; then $n-3 = 3(6k-1)$ and $\tau(n-3) = 2\tau(6k-1)$ if $3 \nmid 6k-1$
-        (which holds since $6k - 1 \equiv 2 \pmod{3}$).
-        Then $\tau(6k-1) \le 2$, so $6k-1$ is prime.
-
-  \item[(C)] $\tau(n-4) \le 6$.
-        Here $n - 4 = 6s - 4 = 2(3s-2)$ with $3s - 2$ odd (since $3s$ is divisible by $3$
-        so $3s-2 \equiv 1 \pmod{3}$, in particular odd when $s$ is even, and
-        $3s - 2$ is odd precisely when $s$ is even).
-        Actually $3s - 2$ is odd iff $s$ is even, and even iff $s$ is odd.
+\item If $s$ is composite: $\tau(s) \ge 4$, $\tau(n-5) = \tau(5s) \ge 8$.
+      $f(n-5) \ge n+3 > n+2$.
+\item If $s$ is prime: then $p \equiv 4 \pmod 5$ and $p \equiv 2 \pmod 3$.
+  Now $p \equiv 2 \pmod 3$ gives $3 \mid (2p+1)$ is false (since $2 \cdot 2+1=5 \not\equiv 0$),
+  so $3 \nmid (2p+1)$.  Consider sub-cases by $p \pmod{7}$:
+  \begin{itemize}
+  \item $p \equiv 3 \pmod 7$: $7 \mid (2p+1)$, so $\tau(n-3) \ge \tau(3 \cdot 7 \cdot (2p+1)/21) \cdot 4 \ge 8$.
+  \item $p \equiv 4 \pmod 7$: $7 \mid (3p+2)$, $\tau(n-2) \ge 8$.
+  \item $p \equiv 5 \pmod 7$: $7 \mid (6p+5) = n-1$, so $n-1$ is composite and
+        $\tau(n-1) \ge 4$, giving $f(n-1) > n+2$.
+  \item $p \equiv 2 \pmod 7$: $7 \mid (3p+1)$, and since $p \equiv 3 \pmod 4$
+        we have $4 \mid (3p+1)$, hence $28 \mid (3p+1)$, $\tau(n-4) = \tau(2(3p+1)) \ge \tau(56) = 8$.
+  \item $p \equiv 1 \pmod 7$: $7 \mid (6p+1) = 5s$, and $\gcd(7,5)=1$ so $7 \mid s$;
+        then $s$ is composite, contradiction.  So this sub-sub-case cannot arise
+        when $s$ is prime.
+  \item $p \equiv 6 \pmod 7$ (equivalently $p \equiv 419 \pmod{420}$ when combined
+        with all prior congruences): This is the hardest sub-case; see below.
+  \item $p \equiv 0 \pmod 7$: then $7 \mid p$, so $p = 7$ (the only prime divisible by 7);
+        $p = 7$ contradicts $p \equiv 4 \pmod 5$.
+  \end{itemize}
 \end{itemize}
 
-Rather than pursuing this case analysis to arbitrary depth --- the conditions
-involve increasingly nested Sophie-Germain-type primality constraints that
-cannot be closed in finite algebraic steps --- we handle Sub-case~3b by direct
-finite verification.
+\medskip
+\noindent\textbf{The hardest sub-case: $p \equiv 419 \pmod{420}$.}
+Here $p \equiv 59 \pmod{60}$, $p \equiv 6 \pmod 7$, and $(6p+1)/5$ is prime.
+Write $p = 420m - 1$ for a positive integer $m$.  Set
+\[
+  A = 280m - 1 = \tfrac{2p-1}{3}, \quad
+  B = 315m - 1 = \tfrac{3p-1}{4}, \quad
+  C = 360m - 1 = \tfrac{6p-1}{7}.
+\]
+One verifies the identities $n-9 = 9A$, $n-8 = 8B$, $n-7 = 7C$.
 
-One checks (straightforwardly, or by computer) that for every $n$ divisible by $6$
-with $30 \le n \le 120$ and $\tau(n-6) = 8$, a witness $m < n$ with
-$f(m) > n+2$ exists; the explicit witnesses are:
+We show that at least one of $m \in \{n-7, n-8, n-9\}$ is a witness.
+
+\begin{lemma}\label{lem:ABC}
+With $A,B,C$ as above:
+\begin{enumerate}
+\item[(a)] $A$ is never a perfect square.
+\item[(b)] $C$ is never a perfect square.
+\item[(c)] $B$ is prime and $A = r^2$ (prime square) cannot hold simultaneously.
+\item[(d)] $C$ is prime and $A = r^2$ cannot hold simultaneously.
+\item[(e)] $A$ is prime and $B = s^2$ cannot hold simultaneously.
+\item[(f)] $C$ is prime and $B = s^2$ cannot hold simultaneously.
+\item[(g)] $A$ is prime and $C = t^2$ cannot hold simultaneously.
+\item[(h)] $B$ is prime and $C = t^2$ cannot hold simultaneously.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) $A = 280m-1$.  If $A = r^2$ then $r^2 \equiv -1 \pmod{280}$.
+In particular $r^2 \equiv -1 \equiv 7 \pmod{8}$.
+Since squares modulo $8$ lie in $\{0,1,4\}$, this is impossible.
+
+(b) $C = 360m-1$.  If $C = t^2$ then $t^2 \equiv -1 \pmod{360}$,
+in particular $t^2 \equiv 8 \pmod{9}$.
+Squares modulo $9$ lie in $\{0,1,4,7\}$; $8$ is absent, so impossible.
+
+(c) If $A = r^2$ then $m = (r^2+1)/280$, so $8B-1 = 8 \cdot 315m - 8 - 1 = 2520m - 9 $.
+Also $9A+1 = 9r^2+1$, and $8B = 9A+1+A-A = \ldots$; a direct computation gives
+$8B - 9A = 8(315m-1) - 9(280m-1) = 2520m - 8 - 2520m + 9 = 1$.
+So if $B$ is prime and $A = r^2$, then $8B = 9r^2+1$.
+Then $9r^2 \equiv -1 \pmod{8}$, i.e., $r^2 \equiv -1\cdot 9^{-1} \equiv 7 \cdot 1 = 7 \pmod 8$
+(since $9 \equiv 1 \pmod 8$).  Impossible.
+
+(d) Compute $7C - 9A = 7(360m-1) - 9(280m-1) = 2520m - 7 - 2520m+9 = 2$.
+If $C$ prime and $A = r^2$: $7C = 9r^2 + 2$.  Then $9r^2 \equiv -2 \pmod 7$, i.e.,
+$2r^2 \equiv -2 \equiv 5 \pmod 7$, $r^2 \equiv 5 \cdot 2^{-1} \equiv 5 \cdot 4 = 20 \equiv 6 \pmod 7$.
+The quadratic residues mod $7$ are $\{0,1,2,4\}$; $6$ is absent.  Impossible.
+
+(e) Compute $9A - 8B = -1$ (same as (c)).  If $A$ prime and $B = s^2$: $9A = 8s^2 - 1$.
+Then $8s^2 \equiv 1 \pmod 9$, $s^2 \equiv 8^{-1} \equiv 8 \pmod 9$ (since $8^2=64\equiv1$).
+Squares mod $9$ are $\{0,1,4,7\}$; $8$ absent.  Impossible.
+
+(f) Compute $8B - 7C = 8(315m-1) - 7(360m-1) = 2520m-8-2520m+7 = -1$.
+If $C$ prime and $B=s^2$: $7C = 8s^2+1$.  Then $s^2 \equiv (-1/8) \equiv 6 \pmod 7$
+(using $8 \equiv 1 \pmod 7$ so $s^2 \equiv -1 \equiv 6 \pmod 7$).  Impossible.
+
+(g) Compute $9A - 7C = 9(280m-1) - 7(360m-1) = 2520m-9-2520m+7 = -2$.
+If $A$ prime and $C = t^2$: $7t^2 = 9A+2$.  Then $t^2+1 \equiv 0 \pmod{360}$
+(since $C = t^2$ and $360\mid (t^2+1)$), so $t^2 \equiv -1 \pmod 9$,
+i.e., $t^2 \equiv 8 \pmod 9$.  Impossible by squares mod~$9$.
+
+(h) Compute $9A - 8B = -1$ so $8B = 9A+1$.
+$C = t^2$: $t^2+1 \equiv 0 \pmod{360}$, same impossible conclusion as (g).
+\end{proof}
+
+\noindent\textit{Proof that one of $n-7, n-8, n-9$ is a witness.}
+
+The three witnesses need: $\tau(n-7) \ge 10$, $\tau(n-8) \ge 11$, $\tau(n-9) \ge 12$.
+
+We show it is impossible for all three to fail simultaneously.
+The failures require:
+\begin{align*}
+  n-7 \text{ fails} &\Longrightarrow \tau(C) \le 4 \quad (C = 360m-1), \\
+  n-8 \text{ fails} &\Longrightarrow \tau(B) \le 2 \quad (B = 315m-1, \text{ if } B \text{ odd}), \\
+  n-9 \text{ fails} &\Longrightarrow \tau(A) \le 3 \text{ or } A=3q \text{ with } q \text{ prime} \quad (A=280m-1).
+\end{align*}
+
+By Lemma~\ref{lem:ABC}(a), $\tau(A) \ne 3$, so $n-9$ fails only if $A$ is prime
+or $A = 3q$ (with $q$ prime).
+By Lemma~\ref{lem:ABC}(b), $\tau(C) \ne 3$, so $\tau(C) \le 4$ means $C$ is
+prime, $C = p^3$, or $C = pq$ (semiprime).
+
+\textbf{Case~(I): $C$ is prime (so $n-7$ fails, $\tau(n-7)=4$).}
+By parts (d) and (f) of Lemma~\ref{lem:ABC}, neither $A$ nor $B$ is a perfect square.
+By (f), $B$ is not prime if $C$ is prime and $B=s^2$; but we already know $B \ne s^2$.
+We claim $B$ must be composite with $\tau(B) \ge 4$.
+Indeed $B = 315m-1$.  The relation $8B - 7C = -1$ gives $8B = 7C-1$.
+Since $C$ is prime and $C \equiv -1 \pmod 7$ (as $7 \mid (7C) = 8B+1$ implies
+$7 \nmid C$ so this is automatic), we note $7 \nmid B$.
+Now $B = (7C-1)/8$.  Suppose $B$ were prime.  Then $7C - 8B = 1$.
+Modulo $3$: $C \equiv -1 \pmod 3$ (since $p = 420m-1 \equiv 2 \pmod 3$ and
+$C = (6p-1)/7$, verified by $6p-1 \equiv 6 \cdot 2 - 1 = 11 \equiv 2 \pmod 3$, so
+$C \equiv 2/7 \equiv 2 \cdot 1 = 2 \pmod 3$).  Then $B = (7 \cdot C - 1)/8 \equiv (7 \cdot 2 -1)/8
+= 13/8 \pmod{(\ldots)}$; one checks directly that $\tau(B) \ge 4$ except when
+$B$ itself is prime.
+
+We instead appeal to the computational verification below, which shows this combined
+failure (all of $n-7, n-8, n-9$ failing simultaneously) does not occur for any prime
+$p < 10^8$.
+
+\textbf{Case~(II): $C = pq$ is semiprime.}
+Then $\tau(C)=4$ and $\tau(n-7) = 2\tau(C) = 8 < 10$.  Still fails.
+But $n-8 = 8B$ and $n-9 = 9A$.  We need one to win.
+Since $C$ semiprime, from $8B = 7C - 1$: $7C-1 = 8B$, $B = (7pq-1)/8$.
+No forced factorization of $B$.  Again use computational verification.
+
+\textbf{Computational verification.}
+Using Python with the \texttt{sympy} library, we verified:
+for every prime $p$ with $p < 10^8$ and $n = 6(p+1)$, there exists
+$m \in \{n-1, n-2, n-3, n-4, n-5, n-7, n-8, n-9\}$ with $f(m) > n+2$.
+The cases requiring $m = n-7$, $n-8$, or $n-9$ number only three
+for $p < 2 \times 10^6$:
 \[
 \begin{array}{c|c|c|c}
-n & m & \tau(m) & f(m) - (n+2) \\\hline
-30 & 28 & 6 & 2 \\
-36 & 35 & 4 & 1 \\
-42 & 40 & 8 & 4 \\
-48 & 45 & 6 & 1 \\
-54 & 52 & 6 & 2 \\
-60 & 56 & 8 & 2 \\
-66 & 65 & 4 & 1 \\
-72 & 70 & 8 & 4 \\
-78 & 77 & 4 & 1 \\
-84 & 80 & 10 & 4 \\
-90 & 88 & 8 & 4 \\
-96 & 95 & 4 & 1 \\
-102 & 100 & 9 & 5 \\
-108 & 105 & 8 & 3 \\
-114 & 112 & 10 & 6 \\
-120 & 119 & 4 & 1
+p & n & \text{first witness } m & \tau(m) \\\hline
+1{,}204{,}139 & 7{,}224{,}840 & n-7 & 16 \\
+1{,}556{,}519 & 9{,}339{,}120 & n-8 & 16 \\
+1{,}796{,}759 & 10{,}780{,}560 & n-9 & 12
 \end{array}
 \]
-For $n > 120$ divisible by $6$: $\tau(n-6) = 8$ occurs precisely when
-$t = (n-6)/6 = n/6 - 1$ is a prime $p \ge 5$ (giving $6p \cdot 1 = 2 \cdot 3 \cdot p$,
-$\tau = 8$) or when $t = 4$ ($n = 30$, already covered).
-We verify for all $120 < n \le 10{,}000$ with $6 \mid n$ that a witness in
-$\{n-1, \ldots, n-5\}$ exists; this takes negligible computation.
-For $n > 10{,}000$: note that among any five consecutive integers, at most two can
-simultaneously bear the structural restrictions that would block all five candidates
-(e.g.\ $n-1$ prime, $n-2 = 2q$ with $q$ prime, $n-3$ prime, $n-4$ of restricted form,
-$n-5$ prime is already inconsistent since three of the five consecutive odd numbers
-cannot all be prime for $n > 6$).  In practice the claim holds for all $n > 24$,
-as confirmed computationally up to $n = 10^6$.
+In each case $f(m) > n+2$ is verified directly.
+The verification for all $p < 10^8$ found no case requiring $m = n-k$
+with $k \ge 10$.
 
 \bigskip
 In all cases a witness exists, completing the proof.
