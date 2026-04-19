@@ -217,8 +217,8 @@ $n - 5 = 6p+1 = 5s$ with $s = (6p+1)/5$.
 
 \medskip\noindent\textbf{Part~B\,(mod-$11$ covering).}
 The sub-cases above handle all primes $p$ except $p\equiv 419\pmod{420}$.
-The argument proceeds by a finite case analysis, combining congruence considerations
-modulo $11$ with a divisor-count lower bound.
+The argument reduces the problem to a finite collection of congruence classes modulo $11$,
+each resolved explicitly.
 
 \medskip
 \noindent\textbf{The hardest sub-case: $p \equiv 419 \pmod{420}$.}
@@ -243,10 +243,11 @@ $\tau(k A_k) > k + 2$.
 \end{lemma}
 
 \begin{proof}
-Since $2520 \equiv 1 \pmod{11}$, for any $k \mid 2520$ with $k \le 10$ we have
-$\frac{2520}{k} \cdot k = 2520 \equiv 1 \pmod{11}$, hence
+Since $2520 \equiv 1 \pmod{11}$, we have $\tfrac{2520}{k} \equiv k^{-1} \pmod{11}$
+(as $k \cdot k^{-1} \equiv 1$), so $A_k = \tfrac{2520}{k}j - 1 \equiv k^{-1}j - 1 \pmod{11}$.
+Thus:
 \[
-  11 \mid A_k \;\iff\; j \equiv k \pmod{11}.
+  11 \mid A_k \;\iff\; k^{-1}j \equiv 1 \pmod{11} \;\iff\; j \equiv k \pmod{11}.
 \]
 We treat the nine residue classes $j \not\equiv 0, 7 \pmod{11}$ separately.
 
@@ -256,8 +257,9 @@ Since $A_r = \tfrac{2520}{r} j - 1 \ge \tfrac{2520}{r} \cdot r - 1 = 2519 = 11 \
 we have $M \ge 229 > 1$.
 
 We need $\tau(r \cdot A_r) > r + 2$.
-Write $A_r = 11M$.  Since $A_r$ is odd (as $\tfrac{2520}{r}j$ is even) and
-$11 \nmid r$ (as $r \le 10$), the integers $r$, $11$, and $M'$ (where $A_r = 11^{v_{11}(A_r)} \cdot M'$,
+Write $A_r = 11M$.  Since $A_r \equiv -1 \pmod{r}$ (as $A_r = \tfrac{2520}{r}j - 1
+\equiv 0\cdot j - 1 \equiv -1 \pmod{r}$), we have $\gcd(r, A_r) = 1$.
+Combined with $11 \nmid r$ (as $r \le 10$), the integers $r$, $11$, and $M'$ (where $A_r = 11^{v_{11}(A_r)} \cdot M'$,
 $11 \nmid M'$) satisfy:
 \begin{align*}
   \tau(r \cdot A_r) &\ge \tau(r) \cdot \tau(A_r) / \tau(\gcd(r,A_r)) \ge \tau(r) \cdot \tau(11M)
