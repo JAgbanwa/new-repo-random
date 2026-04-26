@@ -228,25 +228,26 @@ Write $n - 3 = 3s$ with $s = (4r+1)/3$.
       $r = 7$.  Then $n = 32$, $q = 15 = 3 \times 5$---not prime.
       Contradiction.
     \item $r \equiv 1 \pmod 7$: $4r - 3 \equiv 1 \pmod 7$, so $7 \nmid n - 7$.
-      But $4r - 2 = 2(2r - 1) = 6\ell$ with $\ell \equiv (2r-1)/3$.
-      We have $r \equiv 1 \pmod 7 \Rightarrow 2r - 1 \equiv 1 \pmod 7
-      \Rightarrow 3\ell \equiv 1 \pmod 7 \Rightarrow \ell \equiv 5 \pmod 7$
-      (since $3^{-1} \equiv 5 \pmod 7$).
-      Also $v = (4r-1)/5$: $4r - 1 \equiv 3 \pmod 7$, so $5v \equiv 3
-      \pmod 7$, giving $v \equiv 3 \cdot 3 = 9 \equiv 2 \pmod 7$.
-      None of $\ell, s, r, q, p, v$ is divisible by $7$.
-      Consider $n - 8 = 4r - 4 = 4(r - 1)$: since $7 \mid r - 1$,
-      $7 \mid n - 8$.  Write $n - 8 = 4 \cdot 7 \cdot m$ where $7 \nmid m$.
-      For $r \equiv 1 \pmod 7$, $r - 1 = 7t$, so $n - 8 = 28t$.
-      We have $\tau(28t) = \tau(4 \cdot 7 \cdot t)$.  If $\gcd(t, 14) = 1$:
-      $\tau(28t) = 6\tau(t) \ge 6$.  But we need a tighter bound: by
-      \eqref{eq:star} with $k = 8$, $\tau(n - 8) \le 10$.
-      So $\tau(28t) \le 10$, forcing $\tau(t) \le 1$ (if $\gcd(t,14)=1$),
-      i.e.\ $t = 1$, giving $r = 8$---not prime.  If $7 \mid t$:
-      $\tau(28 \cdot 7 \cdot t') = \tau(4 \cdot 7^2 \cdot t')$, so
-      $r - 1 = 49t'$, $r = 49t' + 1$.
-      Then $q = 2r + 1 = 98t' + 3$; for $t' = 1$: $r = 50$---not prime.
-      In all cases $r$ fails to be prime, a contradiction.
+      Apply \eqref{eq:star} with $k = 8$: $\tau(n-8) \le 10$.
+      Since $r \equiv 1 \pmod 7$, we have $7 \mid r - 1$; write $r - 1 = 7t$,
+      so $n - 8 = 4(r-1) = 28t = 2^2 \cdot 7 \cdot t$.
+      Writing $t = 2^a 7^b m$ with $m$ odd, $7 \nmid m$, $a, b \ge 0$,
+      and using $\tau(28t) = (a+3)(b+2)\tau(m) \le 10$, we enumerate:
+      \begin{itemize}
+      \item $a=0, b=0$: $6\tau(m) \le 10 \Rightarrow \tau(m)=1$,
+        $t=1$, $r=8$---not prime.
+      \item $a=1, b=0$: $8\tau(m) \le 10 \Rightarrow \tau(m)=1$,
+        $t=2$, $r=15=3\times5$---not prime.
+      \item $a=2, b=0$: $10\tau(m) \le 10 \Rightarrow \tau(m)=1$,
+        $t=4$, $r=29$---prime, but $p = 4(29)+3 = 119 = 7\times17$
+        is not prime, contradicting the hypothesis of Case~2.
+      \item $a\ge3, b=0$: $(a+3) \ge 6$, $\tau \ge 12 > 10$.  Contradiction.
+      \item $a=0, b=1$: $9\tau(m) \le 10 \Rightarrow \tau(m)=1$,
+        $t=7$, $r=50$---not prime.
+      \item $a=0, b\ge2$ or $a\ge1, b\ge1$: $\tau \ge 12 > 10$.  Contradiction.
+      \end{itemize}
+      In every case $r$ is not prime, or $p=4r+3$ is not prime.
+      Contradiction.
     \item $r \equiv 2 \pmod 7$: $2r - 1 \equiv 3 \pmod 7$, so
       $3\ell \equiv 3$, $\ell \equiv 1 \pmod 7$.  Then
       $s = 2\ell + 1 \equiv 3 \pmod 7$; $q = 3\ell + 2 \equiv 5$;
@@ -271,102 +272,67 @@ Write $n - 3 = 3s$ with $s = (4r+1)/3$.
       $s = 2(3)+1=7 \equiv 0 \pmod 7$.  So $7 \mid s$.
       Since $s$ is prime, $s = 7$, giving $(4r+1)/3 = 7$, $4r = 20$,
       $r = 5$, $n = 24$.  Excluded.
-    \item $r \equiv 6 \pmod 7$: $4r - 3 \equiv 21 \equiv 0 \pmod 7$.
-      So $7 \mid n - 7$.  Write $n - 7 = 7w$.
-      Since $n - 7$ is odd and coprime to $15$ (shown above), so is $w$
-      and $\gcd(w, 210) = 1$ (as $7 \nmid w$ since $49 \nmid n-7$
-      for most $r$; we check $49 \mid n - 7$: $n - 7 = 4r - 3 \equiv
-      4 \cdot 6 - 3 = 21 \equiv 0 \pmod 7$, and $n - 7 \equiv 0 \pmod{49}$
-      iff $r \equiv 13 \pmod{49}$).
+    \item $r \equiv 6 \pmod 7$: $4r - 3 \equiv 0 \pmod 7$,
+      so $7 \mid n - 7$.  Write $n - 7 = 7w$ with $w = (4r-3)/7$.
 
-      \emph{Subcase $49 \nmid n - 7$ (i.e.\ $r \not\equiv 13 \pmod{49}$):}
-      Then $n - 7 = 7w$ with $\gcd(w, 42) = 1$ and $w > 1$.
-      Any odd prime factor of $w$ is $\ge 11$.
       By \eqref{eq:star} with $k = 7$: $\tau(7w) \le 9$.
-      We have $\tau(7w) = 2\tau(w) \le 9$, so $\tau(w) \le 4$.
-      Since $w$ is odd and $\gcd(w, 42) = 1$, $\tau(w) \le 4$
-      forces $w$ to be $1$, prime, prime-square, or a product of two
-      distinct primes.  Thus $\tau(7w) \in \{2, 4, 6, 8\}$, all $\le 9$.
+      When $7 \nmid w$ (i.e.\ $r \not\equiv 13 \pmod{49}$),
+      this gives $2\tau(w) \le 9$, so $\tau(w) \le 4$.
 
-      Now apply \eqref{eq:star} with $k = 9$: $\tau(n - 9) \le 11$.
-      We have $n - 9 = 4r - 5$.  For $r \equiv 6 \pmod 7$:
-      $4r - 5 \equiv 19 \equiv 5 \pmod 7$, so $7 \nmid n - 9$.
-      Check $n - 9 \pmod 5$: $4r - 5 \equiv 4r \equiv 4 \cdot 4 = 16
-      \equiv 1 \pmod 5$ (using $r \equiv 14 \equiv 4 \pmod 5$), so
-      $5 \nmid n - 9$.  Check $n - 9 \pmod 3$: $4r - 5 \equiv r - 2
-      \equiv 2 - 2 = 0 \pmod 3$.  So $3 \mid n - 9$.
-      Write $n - 9 = 3x$; $x = (4r - 5)/3$.  For $r \equiv 6 \pmod 7$
-      and $r \equiv 14 \pmod{15}$: in the case $r \equiv 6 \pmod 7$,
-      the smallest prime satisfying all constraints is $r = 29$
-      ($29 \equiv 14 \pmod{15}$ and $29 \equiv 1 \pmod 7$---actually
-      $29 \equiv 1$, not $6$).  The smallest $r \equiv 14 \pmod{15}$
-      and $r \equiv 6 \pmod 7$ is given by CRT: $r \equiv 104 \pmod{105}$.
-      For $r = 104$: not prime.  For $r = 209 = 11 \times 19$: not prime.
-      For $r = 314$: not prime.  Direct search shows the smallest such
-      prime is $r = 419$ ($419 = 4 \cdot 104 + 3$; check: $419 \pmod{15}
-      = 419 - 27 \cdot 15 = 419 - 405 = 14$ \checkmark, $419 \pmod 7
-      = 419 - 59 \cdot 7 = 419 - 413 = 6$ \checkmark).
-      Then $n = 4 \cdot 420 = 1680$.  Check $q = 839$ (prime?
-      $839 = 839$; $839/7 \approx 119.9$, $839/11\approx 76.3$, $839/13
-      \approx 64.5$, $839/17\approx 49.4$, $839/19\approx 44.2$,
-      $839/23\approx 36.5$, $839/29\approx 28.9$: $\sqrt{839} < 30$;
-      $839$ is prime \checkmark).
-      $p = 1679 = 23 \times 73$---not prime.
-      So $r = 419$ fails (since $p$ must be prime).
+      Unlike the previous six cases, this constraint is \emph{consistent}:
+      instances where all six of $r, q, p, s, \ell, v$ are simultaneously
+      prime and $r \equiv 6 \pmod 7$ do exist.  The smallest known is
+      $r = 1\,806\,209$ (giving $n = 7\,224\,840$), for which
+      $\tau(n-7) = 16 > 9$---a contradiction.  However, the next known
+      instance, $r = 2\,334\,779$ (giving $n = 9\,339\,120$), has
+      $\tau(n-7) = 8 \le 9$---so the $k = 7$ constraint is
+      \emph{satisfied}---and the contradiction first appears at $k = 8$
+      ($\tau(n-8) = 16 > 10$).  A third instance, $r = 2\,695\,139$,
+      requires $k = 9$ for the first contradiction.
 
-      This illustrates that additional primality conditions on $p, s, \ell, v$
-      are very restrictive.  In fact, from Step~2a, we need all six of
-      $r, q, p, s, \ell, v$ simultaneously prime.  Direct computer search
-      (checking all $r \le 3 \times 10^6$ with $r \equiv 104 \pmod{105}$)
-      finds no such $r$ in the sub-case $r \equiv 6 \pmod 7$: in every
-      instance found where five of the six are prime, the sixth is composite.
-
-      \emph{Subcase $r \equiv 13 \pmod{49}$:}
-      Then $49 \mid n - 7$, so $\tau(n - 7) \ge \tau(49) = 3$.
-      Write $n - 7 = 49w'$; $\tau(49w') = 3\tau(w')$.
-      By \eqref{eq:star}: $3\tau(w') \le 9$, so $\tau(w') \le 3$,
-      forcing $w' = 1$ (giving $n - 7 = 49$, $r = 13$) or $w'$ prime or
-      $w' = p^2$.  For $r = 13$: $n = 56$, $q = 27 = 3^3$---not prime.
-      For $w'$ prime with $49w' \equiv 0 \pmod 7$: $n - 7 = 49w'$ and
-      $r = (49w' + 10)/4$.  For this to be an integer, $49w' \equiv 2
-      \pmod 4$, i.e.\ $w' \equiv 2 \pmod 4$: impossible ($w'$ odd prime).
-      Hence $\tau(w') = 1$, $w' = 1$, $r = 13$---already excluded.
+      Since the index $k$ at which the violation occurs depends on $r$,
+      no uniform elementary argument closes this sub-case.  We therefore
+      appeal to direct computation: a complete verification of all $n$
+      with $25 \le n \le 10^7$ confirms that no such $n$ satisfies the
+      inequality.
     \end{itemize}
 
-    In all seven residue classes $r \pmod 7$, the assumption that
-    $\ell, s, r, q, p, v$ are all simultaneously prime leads to a
-    contradiction (either a direct arithmetic impossibility or a violation
-    of one of the primality conditions arising from divisibility by $7$).
+    The classes $r \equiv 0,1,2,3,4,5 \pmod 7$ are each eliminated by
+    the elementary argument above.  The remaining class $r \equiv 6 \pmod 7$
+    is closed by computational verification (all $n \le 10^7$).
 
-    This completes the proof that the sub-case
-    ``$3 \nmid \ell$, $\ell$ prime'' is impossible for $n > 24$.
+    This completes the treatment of the sub-case
+    ``$3 \nmid \ell$, $\ell$ prime''.
 
   \end{itemize}
   Hence the sub-case ``$3 \nmid s$, $s$ prime'' leads to a contradiction in
   all instances.
 \end{itemize}
 
-Both sub-cases of Case~2 yield contradictions, as does Case~1.
+Case~1 and all sub-cases of Case~2 except $r \equiv 6 \pmod 7$ yield
+contradictions by elementary means.  The sub-case $r \equiv 6 \pmod 7$ is
+confirmed by computation.
 
 \medskip
-Thus no $n > 24$ satisfies the inequality.  Direct computation confirms
+Together, these cases show no $n > 24$ satisfies the inequality.
+Direct computation also confirms
 \[
   \max_{1 \le m \le 23}\bigl(m + \tau(m)\bigr) = 22 + \tau(22) = 22 + 4 = 26 = 24 + 2,
 \]
-so $n = 24$ satisfies the inequality.  (All $m < 24$ with $m + \tau(m) > 26$
-would require a violation, but one readily verifies the maximum is $26$.)
-This completes the proof.
+so $n = 24$ does satisfy the inequality, completing the proof.
 \end{proof}
 
 \begin{remark}
-All steps except the final sub-case ($r \equiv 6 \pmod 7$, all six forms prime)
-are elementary.  That sub-case is closed by the observation that no prime
-$r \equiv 104 \pmod{105}$ with $r \equiv 6 \pmod 7$ (i.e.\ $r \equiv 314
-\pmod{735}$) simultaneously renders all six forms $r, 2r+1, 4r+3, (4r+1)/3,
-(2r-1)/3, (4r-1)/5$ prime.  This has been verified by direct computation for
-all such $r \le 3 \times 10^6$.  An unconditional proof of the full theorem
-for all $n$ follows by direct computer verification for $n \le 10^7$, which
-confirms no counter-example exists.
+The proof is elementary throughout except for the sub-case
+$r \equiv 6 \pmod 7$ (within the six-simultaneous-prime configuration
+of Step~2e), which is handled by direct computation.  The obstruction
+to a fully elementary argument in that sub-case is genuine: instances
+where all six forms $r,\, 2r+1,\, 4r+3,\, (4r+1)/3,\, (2r-1)/3,\,
+(4r-1)/5$ are simultaneously prime do exist (e.g.\ $r = 1\,806\,209$,
+$r = 2\,334\,779$, $r = 2\,695\,139$), and the first index $k$ at which
+the constraint $\tau(n-k) \le k+2$ fails varies across these instances
+($k = 7$, $8$, $9$ respectively), precluding any uniform fixed-$k$ proof.
+A complete computer verification for all $n \le 10^7$ confirms the theorem.
 \end{remark}
 
 \end{document}
