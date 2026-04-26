@@ -216,10 +216,9 @@ Write $n - 3 = 3s$ with $s = (4r+1)/3$.
       \tau(n - 7) \ge k + 2 = 9
       \implies n - 7 \text{ has} \ge 9 \text{ divisors.}
     \]
-    For $\tau(n - 7) \le 9$ to hold, $n - 7$ must be of one of the forms:
-    $1,\,p,\,p^2,\,p^3,\,p^4,\,p^5,\,p^6,\,p^7,\,p^8,\,p^2 q,\,p^2 q^2,\,pq$
-    (with $p, q$ distinct primes $\ge 7$; the list covers all $n$ with
-    $\tau(n)\le 9$).
+    For $\tau(n - 7) \le 9$ to hold, $n - 7$ must have at most $9$ divisors;
+    the possible forms are $p^k$ ($k \le 8$), $p^2 q$, $p^2 q^2$, or $pq$,
+    with $p, q$ distinct primes $\ge 7$.
 
     We now work modulo $7$.  Recall $r \equiv 14 \pmod{15}$, and we are
     checking all residues of $r \pmod 7$:
