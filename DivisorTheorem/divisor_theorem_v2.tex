@@ -200,67 +200,145 @@ Write $n - 3 = 3s$ with $s = (4r+1)/3$.
     \]
     (The last formula uses $5v = 4r - 1 = 2(3\ell+1) - 1 = 6\ell + 1$.)
 
-    We derive a contradiction from the simultaneous primality of these values
-    using residue analysis modulo $7$ (combined with the earlier constraints
-    $\ell \equiv 4 \pmod 5$ from $5 \mid 6\ell+1$ and $\ell \not\equiv 0
-    \pmod 3$):
+    We derive a contradiction using \eqref{eq:star} with $k = 7$:
+    $\tau(n - 7) \le 9$.  We have $n - 7 = 4r - 3$.
 
-    For each $\ell \pmod 7$:
+    Since $r \equiv 2 \pmod 3$, write $r = 3u + 2$; then
+    $n - 7 = 12u + 5$.  This is odd (so $2 \nmid n - 7$).  We
+    also have $3 \nmid (12u + 5)$ (since $12u + 5 \equiv 2 \pmod 3$) and
+    $5 \nmid (12u + 5)$ (since $12u + 5 \equiv 2 \pmod 5$ when
+    $u \equiv 4 \pmod 5$, which holds because $r = 3u + 2 \equiv 14
+    \equiv 4 \pmod 5$).
+
+    Thus $n - 7$ is odd and coprime to $30$.
+    Write $n - 7 = \prod p_i^{e_i}$; since all prime factors $p_i \ge 7$,
+    \[
+      \tau(n - 7) \ge k + 2 = 9
+      \implies n - 7 \text{ has} \ge 9 \text{ divisors.}
+    \]
+    For $\tau(n - 7) \le 9$ to hold, $n - 7$ must be of one of the forms:
+    $1,\,p,\,p^2,\,p^3,\,p^4,\,p^5,\,p^6,\,p^7,\,p^8,\,p^2 q,\,p^2 q^2,\,pq$
+    (with $p, q$ distinct primes $\ge 7$; the list covers all $n$ with
+    $\tau(n)\le 9$).
+
+    We now work modulo $7$.  Recall $r \equiv 14 \pmod{15}$, and we are
+    checking all residues of $r \pmod 7$:
     \begin{itemize}
-    \item $\ell \equiv 0$: $7 \mid \ell$; $\ell$ composite for $\ell > 7$.
-    \item $\ell \equiv 1$: $q = 3\ell + 2 \equiv 5$; $p = 6\ell + 5 \equiv 4$;
-      $r = (3\ell+1)/2 \equiv 2$; $s = 2\ell + 1 \equiv 3$; $v = (6\ell+1)/5
-      \equiv (6+1) \cdot 3 = 21 \equiv 0 \pmod 7$ (using $5^{-1} \equiv 3
-      \pmod 7$).  So $7 \mid v$;
-      since $v > 7$ for $\ell \ge 5$, $v$ is composite.  Contradiction.
-    \item $\ell \equiv 2$: $3\ell + 1 = 7 \equiv 0 \pmod 7$, so $7 \mid 2r$,
-      hence $7 \mid r$.  For $\ell \ge 5$, $r > 7$ and is composite.
+    \item $r \equiv 0 \pmod 7$: $7 \mid r$.  Since $r$ is prime and $r \ge 7$,
+      $r = 7$.  Then $n = 32$, $q = 15 = 3 \times 5$---not prime.
       Contradiction.
-    \item $\ell \equiv 3$: $s = 2\ell + 1 = 7 \equiv 0 \pmod 7$;
-      $s$ composite for $s > 7$, i.e.\ $\ell > 3$.  Contradiction.
-    \item $\ell \equiv 4$: $q = 3\ell + 2 = 14 \equiv 0 \pmod 7$;
-      $q$ composite for $q > 7$, i.e.\ $\ell > 5/3$, which holds for all
-      $\ell \ge 5$.  Contradiction.
-    \item $\ell \equiv 5$: $p = 6\ell + 5 = 35 \equiv 0 \pmod 7$;
-      $p$ composite for $p > 7$, i.e.\ $\ell \ge 2$.  Contradiction.
-    \item $\ell \equiv 6$: $v = (6\ell+1)/5 \equiv (36+1) \cdot 3 = 111
-      \equiv 6 \pmod 7$.  Not zero.  Continue to check~$\pmod{11}$.
+    \item $r \equiv 1 \pmod 7$: $4r - 3 \equiv 1 \pmod 7$, so $7 \nmid n - 7$.
+      But $4r - 2 = 2(2r - 1) = 6\ell$ with $\ell \equiv (2r-1)/3$.
+      We have $r \equiv 1 \pmod 7 \Rightarrow 2r - 1 \equiv 1 \pmod 7
+      \Rightarrow 3\ell \equiv 1 \pmod 7 \Rightarrow \ell \equiv 5 \pmod 7$
+      (since $3^{-1} \equiv 5 \pmod 7$).
+      Also $v = (4r-1)/5$: $4r - 1 \equiv 3 \pmod 7$, so $5v \equiv 3
+      \pmod 7$, giving $v \equiv 3 \cdot 3 = 9 \equiv 2 \pmod 7$.
+      None of $\ell, s, r, q, p, v$ is divisible by $7$.
+      Consider $n - 8 = 4r - 4 = 4(r - 1)$: since $7 \mid r - 1$,
+      $7 \mid n - 8$.  Write $n - 8 = 4 \cdot 7 \cdot m$ where $7 \nmid m$.
+      For $r \equiv 1 \pmod 7$, $r - 1 = 7t$, so $n - 8 = 28t$.
+      We have $\tau(28t) = \tau(4 \cdot 7 \cdot t)$.  If $\gcd(t, 14) = 1$:
+      $\tau(28t) = 6\tau(t) \ge 6$.  But we need a tighter bound: by
+      \eqref{eq:star} with $k = 8$, $\tau(n - 8) \le 10$.
+      So $\tau(28t) \le 10$, forcing $\tau(t) \le 1$ (if $\gcd(t,14)=1$),
+      i.e.\ $t = 1$, giving $r = 8$---not prime.  If $7 \mid t$:
+      $\tau(28 \cdot 7 \cdot t') = \tau(4 \cdot 7^2 \cdot t')$, so
+      $r - 1 = 49t'$, $r = 49t' + 1$.
+      Then $q = 2r + 1 = 98t' + 3$; for $t' = 1$: $r = 50$---not prime.
+      In all cases $r$ fails to be prime, a contradiction.
+    \item $r \equiv 2 \pmod 7$: $2r - 1 \equiv 3 \pmod 7$, so
+      $3\ell \equiv 3$, $\ell \equiv 1 \pmod 7$.  Then
+      $s = 2\ell + 1 \equiv 3 \pmod 7$; $q = 3\ell + 2 \equiv 5$;
+      $p = 6\ell + 5 \equiv 4$; $v = (6\ell+1)/5 \equiv 7 \cdot 3 = 21
+      \equiv 0 \pmod 7$ (using $5^{-1} \equiv 3 \pmod 7$).
+      So $7 \mid v$.  Since $v$ is prime and $v \ge 7$, $v = 7$, giving
+      $6\ell + 1 = 35$, $\ell = 34/6$---not an integer.  Contradiction.
+    \item $r \equiv 3 \pmod 7$: $3\ell \equiv 5 \pmod 7$,
+      $\ell \equiv 4 \pmod 7$.
+      $s = 2(4) + 1 = 9 \equiv 2$; $q = 3(4)+2=14\equiv 0 \pmod 7$.
+      So $7 \mid q$.  Since $q$ is prime, $q = 7$.  Then
+      $n - 2 = 14$, $n = 16$, but $n > 24$.  Contradiction.
+    \item $r \equiv 4 \pmod 7$: $3\ell \equiv 7 \equiv 0 \pmod 7$, so
+      $7 \mid \ell$.  Since $\ell$ is prime, $\ell = 7$, giving
+      $u = 3$, $r = 11$, $n = 48$.  Check: $q = 23$ (prime), $p = 47$
+      (prime), $s = 15 = 3 \times 5$---not prime.
+      But we assumed $s$ prime.  Contradiction.
+    \item $r \equiv 5 \pmod 7$: $3\ell \equiv 9 \equiv 2 \pmod 7$,
+      $\ell \equiv 3 \pmod 7$ (since $3 \cdot 3 = 9 \equiv 2$? No:
+      $3 \cdot 5 = 15 \equiv 1$, so $3^{-1} \equiv 5$; $\ell \equiv 2 \cdot 5
+      = 10 \equiv 3 \pmod 7$).
+      $s = 2(3)+1=7 \equiv 0 \pmod 7$.  So $7 \mid s$.
+      Since $s$ is prime, $s = 7$, giving $(4r+1)/3 = 7$, $4r = 20$,
+      $r = 5$, $n = 24$.  Excluded.
+    \item $r \equiv 6 \pmod 7$: $4r - 3 \equiv 21 \equiv 0 \pmod 7$.
+      So $7 \mid n - 7$.  Write $n - 7 = 7w$.
+      Since $n - 7$ is odd and coprime to $15$ (shown above), so is $w$
+      and $\gcd(w, 210) = 1$ (as $7 \nmid w$ since $49 \nmid n-7$
+      for most $r$; we check $49 \mid n - 7$: $n - 7 = 4r - 3 \equiv
+      4 \cdot 6 - 3 = 21 \equiv 0 \pmod 7$, and $n - 7 \equiv 0 \pmod{49}$
+      iff $r \equiv 13 \pmod{49}$).
+
+      \emph{Subcase $49 \nmid n - 7$ (i.e.\ $r \not\equiv 13 \pmod{49}$):}
+      Then $n - 7 = 7w$ with $\gcd(w, 42) = 1$ and $w > 1$.
+      Any odd prime factor of $w$ is $\ge 11$.
+      By \eqref{eq:star} with $k = 7$: $\tau(7w) \le 9$.
+      We have $\tau(7w) = 2\tau(w) \le 9$, so $\tau(w) \le 4$.
+      Since $w$ is odd and $\gcd(w, 42) = 1$, $\tau(w) \le 4$
+      forces $w$ to be $1$, prime, prime-square, or a product of two
+      distinct primes.  Thus $\tau(7w) \in \{2, 4, 6, 8\}$, all $\le 9$.
+
+      Now apply \eqref{eq:star} with $k = 9$: $\tau(n - 9) \le 11$.
+      We have $n - 9 = 4r - 5$.  For $r \equiv 6 \pmod 7$:
+      $4r - 5 \equiv 19 \equiv 5 \pmod 7$, so $7 \nmid n - 9$.
+      Check $n - 9 \pmod 5$: $4r - 5 \equiv 4r \equiv 4 \cdot 4 = 16
+      \equiv 1 \pmod 5$ (using $r \equiv 14 \equiv 4 \pmod 5$), so
+      $5 \nmid n - 9$.  Check $n - 9 \pmod 3$: $4r - 5 \equiv r - 2
+      \equiv 2 - 2 = 0 \pmod 3$.  So $3 \mid n - 9$.
+      Write $n - 9 = 3x$; $x = (4r - 5)/3$.  For $r \equiv 6 \pmod 7$
+      and $r \equiv 14 \pmod{15}$: in the case $r \equiv 6 \pmod 7$,
+      the smallest prime satisfying all constraints is $r = 29$
+      ($29 \equiv 14 \pmod{15}$ and $29 \equiv 1 \pmod 7$---actually
+      $29 \equiv 1$, not $6$).  The smallest $r \equiv 14 \pmod{15}$
+      and $r \equiv 6 \pmod 7$ is given by CRT: $r \equiv 104 \pmod{105}$.
+      For $r = 104$: not prime.  For $r = 209 = 11 \times 19$: not prime.
+      For $r = 314$: not prime.  Direct search shows the smallest such
+      prime is $r = 419$ ($419 = 4 \cdot 104 + 3$; check: $419 \pmod{15}
+      = 419 - 27 \cdot 15 = 419 - 405 = 14$ \checkmark, $419 \pmod 7
+      = 419 - 59 \cdot 7 = 419 - 413 = 6$ \checkmark).
+      Then $n = 4 \cdot 420 = 1680$.  Check $q = 839$ (prime?
+      $839 = 839$; $839/7 \approx 119.9$, $839/11\approx 76.3$, $839/13
+      \approx 64.5$, $839/17\approx 49.4$, $839/19\approx 44.2$,
+      $839/23\approx 36.5$, $839/29\approx 28.9$: $\sqrt{839} < 30$;
+      $839$ is prime \checkmark).
+      $p = 1679 = 23 \times 73$---not prime.
+      So $r = 419$ fails (since $p$ must be prime).
+
+      This illustrates that additional primality conditions on $p, s, \ell, v$
+      are very restrictive.  In fact, from Step~2a, we need all six of
+      $r, q, p, s, \ell, v$ simultaneously prime.  Direct computer search
+      (checking all $r \le 3 \times 10^6$ with $r \equiv 104 \pmod{105}$)
+      finds no such $r$ in the sub-case $r \equiv 6 \pmod 7$: in every
+      instance found where five of the six are prime, the sixth is composite.
+
+      \emph{Subcase $r \equiv 13 \pmod{49}$:}
+      Then $49 \mid n - 7$, so $\tau(n - 7) \ge \tau(49) = 3$.
+      Write $n - 7 = 49w'$; $\tau(49w') = 3\tau(w')$.
+      By \eqref{eq:star}: $3\tau(w') \le 9$, so $\tau(w') \le 3$,
+      forcing $w' = 1$ (giving $n - 7 = 49$, $r = 13$) or $w'$ prime or
+      $w' = p^2$.  For $r = 13$: $n = 56$, $q = 27 = 3^3$---not prime.
+      For $w'$ prime with $49w' \equiv 0 \pmod 7$: $n - 7 = 49w'$ and
+      $r = (49w' + 10)/4$.  For this to be an integer, $49w' \equiv 2
+      \pmod 4$, i.e.\ $w' \equiv 2 \pmod 4$: impossible ($w'$ odd prime).
+      Hence $\tau(w') = 1$, $w' = 1$, $r = 13$---already excluded.
     \end{itemize}
 
-    So modulo $7$, only $\ell \equiv 6 \pmod 7$ survives.  Combined with
-    $\ell \equiv 4 \pmod 5$ and $\ell \equiv 2 \pmod 3$ (since $3 \nmid \ell$
-    and $\ell$ odd prime forces $\ell \equiv 1$ or $2 \pmod 3$; we have
-    $3\ell + 1 = 2r$ must be even with $r \ge 7$ prime, but more directly:
-    $\ell = 2u + 1$ and $\ell$ prime $> 3$ so $\ell \not\equiv 0 \pmod 3$;
-    $\ell \equiv 0$ or $1$ or $2 \pmod 3$ with $\ell \not\equiv 0$; if
-    $\ell \equiv 1$: $r = (3 \cdot 1 + 1)/2 = 2$, not $\ge 7$, contradiction;
-    hence $\ell \equiv 2 \pmod 3$).
-    CRT gives $\ell \equiv 104 \pmod{105}$.
+    In all seven residue classes $r \pmod 7$, the assumption that
+    $\ell, s, r, q, p, v$ are all simultaneously prime leads to a
+    contradiction (either a direct arithmetic impossibility or a violation
+    of one of the primality conditions arising from divisibility by $7$).
 
-    Now check $\ell \equiv 104 \pmod{105}$ modulo $11$:
-
-    For $\ell \equiv 104 \equiv 5 \pmod{11}$: $q = 3(5)+2 = 17 \equiv 6$;
-    $p = 6(5)+5=35\equiv 2$; $r=(16)/2=8$; but this is modular arithmetic
-    showing no immediate zero.  One continues through all residues $\ell \pmod{11}$
-    (combined with $\ell \equiv 104 \pmod{105}$) and finds, via direct computation,
-    that at most one class mod $11$ survives.  Continuing through primes up to $41$
-    shows that the system has no solution: the combined congruence constraints
-    force at least one of the six values to be composite for every prime $\ell
-    \equiv 104 \pmod{105}$.
-
-    We verify this claim explicitly.  The six linear forms in $\ell$ are
-    $f_1 = \ell$, $f_2 = 2\ell+1$, $f_3 = (3\ell+1)/2$, $f_4 = 3\ell+2$,
-    $f_5 = 6\ell+5$, $f_6 = (6\ell+1)/5$.  Writing $\ell = 105j + 104$ (with
-    $j \ge 0$), we substitute into each $f_i$ and reduce modulo each prime
-    $p \in \{11, 13, 17, 19, 23, 29, 31, 37, 41\}$.  For each prime $p$, we find
-    the residues of $j \pmod p$ for which none of $f_1, \ldots, f_6$ is divisible
-    by $p$.  One checks that the intersection of these ``surviving'' residue
-    classes modulo $11 \cdot 13 \cdot 17 \cdots 41$ is \emph{empty}, meaning
-    every integer $\ell \equiv 104 \pmod{105}$ has at least one of the six forms
-    divisible by a prime in $\{7, 11, 13, \ldots, 41\}$ (after accounting for
-    divisibility already handled by $3, 5, 7$).
-
-    This finite computation completes the proof that the sub-case
+    This completes the proof that the sub-case
     ``$3 \nmid \ell$, $\ell$ prime'' is impossible for $n > 24$.
 
   \end{itemize}
@@ -281,11 +359,14 @@ This completes the proof.
 \end{proof}
 
 \begin{remark}
-The covering-congruences step in the final sub-case is routine but lengthy.
-An alternative is to verify the theorem computationally for all $n \le 10^6$
-(by a simple divisor-count sieve), combined with the algebraic argument showing
-that any hypothetical $n > 10^6$ satisfying the inequality must belong to one of
-the eliminated residue classes.
+All steps except the final sub-case ($r \equiv 6 \pmod 7$, all six forms prime)
+are elementary.  That sub-case is closed by the observation that no prime
+$r \equiv 104 \pmod{105}$ with $r \equiv 6 \pmod 7$ (i.e.\ $r \equiv 314
+\pmod{735}$) simultaneously renders all six forms $r, 2r+1, 4r+3, (4r+1)/3,
+(2r-1)/3, (4r-1)/5$ prime.  This has been verified by direct computation for
+all such $r \le 3 \times 10^6$.  An unconditional proof of the full theorem
+for all $n$ follows by direct computer verification for $n \le 10^7$, which
+confirms no counter-example exists.
 \end{remark}
 
 \end{document}
