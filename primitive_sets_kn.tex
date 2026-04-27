@@ -281,28 +281,46 @@ As $n \to \infty$,
 \[
   \log k(n) = (\log n)^{1/2 + o(1)}.
 \]
-In particular the estimate $\log k(n) \leq (\log n)^{1/2+o(1)}$ is
-\textbf{true and sharp}.
+In particular $\log k(n)/(\log n)^{1/2}$ is bounded both above and below by
+positive constants times arbitrarily small positive powers of $\log n$;
+this determines the correct order of magnitude on the logarithmic scale.
 \end{theorem}
 
 \begin{proof}
 Theorems~\ref{thm:lower} and~\ref{thm:upper}.
 \end{proof}
 
-\begin{proposition}[Precise leading constant]\label{prop:precise}
-$\log k(n) \sim \bigl(\tfrac{1}{2}\log n \cdot \log\log n\bigr)^{1/2}$
-as $n\to\infty$.
-\end{proposition}
+\begin{remark}[Heuristic for the leading constant]\label{rem:heuristic}
+A heuristic argument suggests that
+$\log k(n) \sim \bigl(\tfrac{1}{2}\log n \cdot \log\log n\bigr)^{1/2}$.
+The idea is that the transition in $k(n)$ occurs roughly where the global
+count $\Psi(n,k)$ crosses $n/k$; using $\Psi(n,k) \approx n\rho(u)$ with
+$u = \log n/\log k$ and $\rho(u) = e^{-u\log u(1+o(1))}$, one solves
+$e^{-u\log u} \approx e^{-\log k}$ to get $u\log u \approx \log k$.
+Setting $L = \log k$ and $\ell = \log n$ this gives
+$L^2 \sim \ell \cdot \tfrac{1}{2}\log\ell$, hence $c = 1/\sqrt{2}$.
+However, this heuristic conflates a global sparsity threshold
+(used in the lower bound) with a local density condition
+(used in the upper bound), and we do not attempt to make it rigorous here.
+\end{remark}
 
-\begin{proof}[Sketch]
-The threshold for $k$ is where $\Psi(n,k) \asymp n/k$.
-Using $\rho(u) = e^{-u\log u(1+o(1))}$ with $u = \log n/\log k$, this
-becomes $e^{-u\log u} \asymp 1/k = e^{-\log k}$, i.e.\ $u\log u \sim \log k$.
-Writing $L = \log k$ and $\ell = \log n$: the equation $(\ell/L)\log(\ell/L) \sim L$
-gives $L^2 \sim \ell\log(\ell/L)$.  Setting $L = c\sqrt{\ell\log\ell}$:
-$c^2\ell\log\ell \sim \ell\cdot\tfrac{1}{2}\log\ell$, giving $c = 1/\sqrt{2}$.
-Hence $\log k(n) \sim (\tfrac{1}{2}\log n\cdot\log\log n)^{1/2}$.
-\end{proof}
+\begin{remark}[Logical structure of the two bounds]
+The lower and upper bounds use fundamentally different tools and should not
+be conflated.
+\begin{itemize}
+\item The \emph{lower bound} (Theorem~\ref{thm:lower}) uses a global sparsity
+  estimate: Lemma~\ref{lem:rankin} gives $\Psi(n,k_0) < n/k_0$, and pigeonhole
+  then forces an empty block of length $k_0$.  No information about smooth
+  numbers in short intervals is needed.
+\item The \emph{upper bound} (Theorem~\ref{thm:upper}) uses a local density
+  estimate: Theorem~\ref{thm:HT} gives a lower bound on the number of
+  $k_1$-smooth integers in every short interval $[m+1,m+k_1]$.  This requires
+  the full strength of the saddle-point asymptotic and its uniform error bound;
+  the global count $\Psi(n,k_1)$ alone is insufficient.
+\end{itemize}
+The two criteria are not equivalent, and the constant $1/\sqrt{2}$ suggested
+by Remark~\ref{rem:heuristic} is not established by this proof.
+\end{remark}
 
 \begin{remark}[Primitive sets]
 Each $k$-run $\{m+1,\ldots,m+k\}$ is a primitive set (no element divides
