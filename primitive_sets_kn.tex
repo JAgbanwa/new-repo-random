@@ -86,21 +86,19 @@ The proof via Mertens' theorem is given completely in \cite[Lemma~III.5.1]{Ten}.
 
 \begin{theorem}[Hildebrand--Tenenbaum {\cite{HT}}; Tenenbaum {\cite[Ch.~III.5, Th.~3]{Ten}}]\label{thm:HT}
 Let $\rho$ denote the Dickman function.  Fix $\varepsilon > 0$.
-For any $\delta > 0$ there exists a threshold $Y_0 = Y_0(\varepsilon,\delta)$,
-depending only on $\varepsilon$ and $\delta$ (in particular, \emph{independent of $x$}),
-such that for all $y \geq Y_0$ and all $x \geq 3$ satisfying
+For all $x \geq 3$ and $y$ satisfying
 \begin{equation}\label{eq:HTrange}
   y \;\geq\; \exp\!\bigl((\log\log x)^{5/3+\varepsilon}\bigr),
 \end{equation}
 setting $u = \log x / \log y$,
 \[
-  \Psi(x + y,\, y) - \Psi(x,\, y) \;=\; y\,\rho(u)\,\bigl(1 + \eta(x,y)\bigr),
-  \quad |\eta(x,y)| \leq \delta.
+  \Psi(x + y,\, y) - \Psi(x,\, y) \;=\; y\,\rho(u)\,\bigl(1 + \eta(x,y)\bigr)
 \]
-Here $Y_0$ is independent of $x$: for a given $y \geq Y_0$, the bound
-$|\eta(x,y)| \leq \delta$ holds \emph{simultaneously} for all $x \geq 3$
-satisfying \eqref{eq:HTrange}.  This is the content of the uniformity
-proved in \cite{HT} and \cite[Ch.~III.5]{Ten}.
+uniformly in $x$ and $y$ in the region \eqref{eq:HTrange}
+(in the sense of Hildebrand--Tenenbaum \cite{HT}).
+In particular, for any fixed $\delta > 0$, the error satisfies
+$|\eta(x,y)| \leq \delta$ uniformly in $x$ once $y$ is sufficiently large
+(depending only on $\varepsilon$ and $\delta$).
 \end{theorem}
 
 \begin{remark}[Proof method]\label{rem:HTproof}
