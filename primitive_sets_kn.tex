@@ -84,15 +84,17 @@ The proof via Mertens' theorem is given completely in \cite[Lemma~III.5.1]{Ten}.
 
 \begin{theorem}[Tenenbaum {\cite[Ch.~III.5, Th.~3]{Ten}}]\label{thm:HT}
 Let $\rho$ denote the Dickman function.  Fix $\varepsilon > 0$.
-Uniformly for $x \geq 3$ and
+There is an absolute constant $C > 0$ such that the following holds.
+For all $x \geq 3$ and
 \begin{equation}\label{eq:HTrange}
   y \;\geq\; \exp\!\bigl((\log\log x)^{5/3+\varepsilon}\bigr),
 \end{equation}
 setting $u = \log x / \log y$,
 \[
-  \Psi(x + y,\, y) - \Psi(x,\, y) \;=\; y\,\rho(u)\,(1 + o(1))
+  \Psi(x + y,\, y) - \Psi(x,\, y) \;=\; y\,\rho(u)\,
+  \Bigl(1 + O\Bigl(\frac{\log(u+1)}{\log y}\Bigr)\Bigr),
 \]
-as $x \to \infty$, uniformly in $y$ satisfying \eqref{eq:HTrange}.
+uniformly in $x$ and $y$ satisfying \eqref{eq:HTrange}.
 \end{theorem}
 
 \begin{remark}[Proof method]\label{rem:HTproof}
@@ -210,20 +212,49 @@ Set $u_1 = \log m/\log k_1$.  Since $m \in [k_1, n]$,
   u_1 \;\in\; \Bigl[1,\; \frac{\log n}{\log k_1}\Bigr]
   = \bigl[1,\; (\log n)^{1/2-\varepsilon}\bigr].
 \]
-By Theorem~\ref{thm:HT},
-$\Psi(m+k_1, k_1) - \Psi(m, k_1) = k_1\,\rho(u_1)\,(1+o(1))$.
-Using $\rho(u) = e^{-u\log u(1+o(1))}$ (see \cite[Cor.~III.5.4]{Ten}):
+By Theorem~\ref{thm:HT} applied pointwise at $x = m$, $y = k_1$:
 \[
-  \log\bigl(k_1\rho(u_1)\bigr)
-  = (\log n)^{1/2+\varepsilon} - u_1\log u_1\,(1+o(1)).
+  \Psi(m+k_1, k_1) - \Psi(m, k_1)
+  = k_1\rho(u_1)\biggl(1 + O\Bigl(\frac{\log(u_1+1)}{\log k_1}\Bigr)\biggr).
 \]
-Since $u_1 \leq (\log n)^{1/2-\varepsilon}$,
+The error term is, uniformly for all $m \in [k_1, n]$:
 \[
-  u_1\log u_1 \leq (1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n
-  = o\!\bigl((\log n)^{1/2+\varepsilon}\bigr).
+  \frac{\log(u_1+1)}{\log k_1}
+  \;\leq\; \frac{\log\bigl((\log n)^{1/2-\varepsilon}+1\bigr)}{(\log n)^{1/2+\varepsilon}}
+  \;=\; O\!\Bigl(\frac{\log\log n}{(\log n)^{1/2+\varepsilon}}\Bigr) \;\to\; 0.
 \]
-Hence $\log(k_1\rho(u_1)) \to +\infty$, so $k_1\rho(u_1) \geq 1$ for all large $n$,
-and $[m+1, m+k_1]$ contains at least one $k_1$-smooth integer.
+The bound depends only on $n$, not on $m$, so it goes to zero
+\emph{uniformly} for all $m \in [k_1, n]$.  In particular,
+for all large $n$, the implicit constant in the $O(\cdot)$ gives
+$\bigl|O\bigl(\frac{\log(u_1+1)}{\log k_1}\bigr)\bigr| \leq \frac{1}{2}$,
+and hence:
+\begin{equation}\label{eq:halfbound}
+  \Psi(m+k_1, k_1) - \Psi(m, k_1)
+  \;\geq\; \tfrac{1}{2}\,k_1\rho(u_1)
+  \quad\text{for all } m \in [k_1, n].
+\end{equation}
+
+It remains to show $k_1\rho(u_1) \geq 2$ uniformly for all $m \in [k_1, n]$.
+Since $\rho$ is decreasing and $u_1 \leq (\log n)^{1/2-\varepsilon}$,
+\[
+  k_1\rho(u_1) \;\geq\; k_1\rho\bigl((\log n)^{1/2-\varepsilon}\bigr).
+\]
+Using $\rho(u) = e^{-u\log u\,(1+o(1))}$ (\cite[Cor.~III.5.4]{Ten}):
+\[
+  \log\bigl(k_1\rho\bigl((\log n)^{1/2-\varepsilon}\bigr)\bigr)
+  = (\log n)^{1/2+\varepsilon}
+    - (1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n\cdot(1+o(1)).
+\]
+Since $(1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n = o\bigl((\log n)^{1/2+\varepsilon}\bigr)$,
+the right side is $(\log n)^{1/2+\varepsilon}(1-o(1)) \to +\infty$.
+Hence $k_1\rho(u_1) \geq 2$ for all $m \in [k_1, n]$ and all large $n$.
+
+Substituting into \eqref{eq:halfbound}:
+\[
+  \Psi(m+k_1, k_1) - \Psi(m, k_1)
+  \;\geq\; \tfrac{1}{2} \cdot 2 = 1
+  \quad\text{for all } m \in [k_1, n]\text{ and all large } n.
+\]
 
 \medskip
 \noindent\textit{Case 2: $m < k_1$.}
