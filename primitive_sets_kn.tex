@@ -187,66 +187,55 @@ For every fixed $\varepsilon > 0$ and all sufficiently large $n$,
 \begin{proof}
 Set $k_1 := \lfloor\exp((\log n)^{1/2+\varepsilon})\rfloor$.
 We show every interval $[m+1, m+k_1]$ with $m \leq n$ contains a $k_1$-smooth
-integer, so no $k_1$-run below $n$ exists.
+integer, so no $k_1$-run below $n$ exists.  We split into two cases.
 
 \medskip
-\noindent\textit{Step 1: Verifying hypothesis \eqref{eq:HTrange}.}
-We apply Theorem~\ref{thm:HT} with $x = m \in [n^{1/2}, n]$ and $y = k_1$.
-We need $\log k_1 \geq (\log\log m)^{5/3+\varepsilon'}$ for some fixed $\varepsilon' > 0$.
-We have
+\noindent\textit{Case 1: $m \geq k_1$.}
+
+\noindent\textit{Step 1a: Verifying hypothesis \eqref{eq:HTrange}.}
+We apply Theorem~\ref{thm:HT} with $x = m$ and $y = k_1$.
+For $m \geq k_1$ we have $\log m \geq \log k_1 = (\log n)^{1/2+\varepsilon}$, so
 \[
-  \log k_1 = (\log n)^{1/2+\varepsilon},
-  \qquad
-  \log\log m \leq \log\log n.
+  \log\log m \;\geq\; \log\bigl((\log n)^{1/2+\varepsilon}\bigr)
+  = (1/2+\varepsilon)\log\log n.
 \]
-Since any positive power of $\log n$ grows faster than any fixed power of
-$\log\log n$ as $n\to\infty$, we have
-$(\log n)^{1/2+\varepsilon} \geq (\log\log n)^{5/3+\varepsilon'}$
-for all large $n$ and any fixed $\varepsilon' > 0$.
-Hence \eqref{eq:HTrange} holds with $x=m$, $y=k_1$ for all $m \in [n^{1/2},n]$.
+We need $\log k_1 \geq (\log\log m)^{5/3+\varepsilon'}$ for some fixed $\varepsilon' > 0$.
+Since $\log\log m \leq \log\log n$ and $(\log n)^{1/2+\varepsilon} \geq (\log\log n)^{5/3+\varepsilon'}$
+for all large $n$ (any positive power of $\log n$ dominates any power of $\log\log n$),
+hypothesis \eqref{eq:HTrange} holds with $x = m$, $y = k_1$ for all $m \in [k_1, n]$.
 
-\medskip
-\noindent\textit{Step 2: Smooth integers are dense in $[m+1, m+k_1]$.}
-For $m \in [n^{1/2}, n]$, set $u_1 = \log m/\log k_1$.  Since
-$\log m \in [\tfrac{1}{2}\log n, \log n]$,
+\noindent\textit{Step 1b: Smooth integers are dense in $[m+1, m+k_1]$.}
+Set $u_1 = \log m/\log k_1$.  Since $m \in [k_1, n]$,
 \[
-  u_1 = \frac{\log m}{\log k_1} \;\in\;
-  \Bigl[\frac{\frac{1}{2}\log n}{(\log n)^{1/2+\varepsilon}},\;
-        \frac{\log n}{(\log n)^{1/2+\varepsilon}}\Bigr]
-  = \bigl[\tfrac{1}{2}(\log n)^{1/2-\varepsilon},\; (\log n)^{1/2-\varepsilon}\bigr].
+  u_1 \;\in\; \Bigl[1,\; \frac{\log n}{\log k_1}\Bigr]
+  = \bigl[1,\; (\log n)^{1/2-\varepsilon}\bigr].
 \]
 By Theorem~\ref{thm:HT},
-\[
-  \Psi(m+k_1,\, k_1) - \Psi(m,\, k_1) = k_1\,\rho(u_1)\,(1+o(1)).
-\]
-The Dickman function satisfies $\rho(u) = e^{-u\log u(1+o(1))}$ as $u\to\infty$
-(see \cite[Cor.~III.5.4]{Ten}), so
+$\Psi(m+k_1, k_1) - \Psi(m, k_1) = k_1\,\rho(u_1)\,(1+o(1))$.
+Using $\rho(u) = e^{-u\log u(1+o(1))}$ (see \cite[Cor.~III.5.4]{Ten}):
 \[
   \log\bigl(k_1\rho(u_1)\bigr)
   = (\log n)^{1/2+\varepsilon} - u_1\log u_1\,(1+o(1)).
 \]
 Since $u_1 \leq (\log n)^{1/2-\varepsilon}$,
 \[
-  u_1\log u_1 \leq (\log n)^{1/2-\varepsilon}\cdot\log\!\bigl((\log n)^{1/2-\varepsilon}\bigr)
-  = (1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n
+  u_1\log u_1 \leq (1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n
   = o\!\bigl((\log n)^{1/2+\varepsilon}\bigr).
 \]
-Hence $\log(k_1\rho(u_1)) = (\log n)^{1/2+\varepsilon}(1-o(1)) \to +\infty$,
-so $k_1\rho(u_1) \to \infty$, and for all large $n$ the count
-$\Psi(m+k_1,k_1) - \Psi(m,k_1) \geq 1$.
-Thus $[m+1, m+k_1]$ contains at least one $k_1$-smooth integer.
+Hence $\log(k_1\rho(u_1)) \to +\infty$, so $k_1\rho(u_1) \geq 1$ for all large $n$,
+and $[m+1, m+k_1]$ contains at least one $k_1$-smooth integer.
 
 \medskip
-\noindent\textit{Step 3: Small $m < n^{1/2}$.}
-For $m < n^{1/2} \ll k_1$, the interval $[m+1, m+k_1]$ contains integers
-$\leq k_1$, and every positive integer $j \leq k_1$ is $k_1$-smooth
-(since all prime factors of $j$ are $\leq j \leq k_1$).
+\noindent\textit{Case 2: $m < k_1$.}
+Since $m < k_1$, the integer $k_1$ lies in the interval $[m+1, m+k_1]$
+(as $m+1 \leq k_1 \leq m+k_1$).  Since all prime factors of $k_1$ are
+$\leq k_1$, it is $k_1$-smooth.
 
 \medskip
 \noindent\textit{Conclusion.}
 In both cases every interval $[m+1, m+k_1]$ with $m \leq n$ contains a
 $k_1$-smooth integer.  No $k_1$-run below $n$ exists, so
-$k(n) < k_1 = e^{(\log n)^{1/2+\varepsilon}(1+o(1))}$.
+$k(n) < k_1 \leq e^{(\log n)^{1/2+\varepsilon}}$.
 \end{proof}
 
 \section{Main Result and Sharpness}
