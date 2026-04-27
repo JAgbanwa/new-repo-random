@@ -25,7 +25,7 @@ We prove unconditionally that
   \log k(n) = (\log n)^{1/2 + o(1)},
 \]
 confirming the proposed estimate $\log k(n) \leq (\log n)^{1/2+o(1)}$ and
-showing it is sharp.  The lower bound uses Rankin's method (an elementary
+establishing the correct order of magnitude on the logarithmic scale.  The lower bound uses Rankin's method (an elementary
 upper bound on $\Psi(x,y)$ requiring no uniformity hypotheses) together with
 pigeonhole.  The upper bound uses the saddle-point asymptotic for smooth
 numbers in short intervals, as proved in Tenenbaum's book via the
@@ -72,7 +72,9 @@ Mertens' theorem gives $\prod_{p\leq y}(1-p^{-\sigma_0})^{-1} = e^{O(u/\log u)}$
 equals $\sum_{p\leq y}p^{-\sigma_0}$ to within a constant factor, and the latter
 equals $O(u/\log u)$ by a Stieltjes integral against $\pi(t) \sim t/\log t$
 --- see \cite[Lemma~III.5.1]{Ten} for the complete calculation).
-Hence $\Psi(x,y) \leq x\cdot e^{-u\log u + O(u/\log u)} \leq x\cdot e^{-u\log u/2}$ for $u \geq 3$.
+Hence $\Psi(x,y) \leq x\cdot e^{-u\log u + O(u/\log u)} \leq x\cdot e^{-u\log u/2}$
+for all sufficiently large $u$ (specifically for $u \geq 3$, where
+$O(u/\log u) \leq \tfrac{1}{2}u\log u$; see \cite[Lemma~III.5.1]{Ten}).
 \end{proof}
 
 \begin{remark}
@@ -239,6 +241,10 @@ simultaneously for all $m \in [k_1,n]$.  Hence:
 \end{equation}
 
 It remains to show $k_1\rho(u_1) \geq 2$ uniformly for all $m \in [k_1, n]$.
+(Note: for $u_1 \in [1,2]$, $\rho(u_1)$ is bounded below by a positive
+constant---$\rho$ is continuous, positive, and decreasing with $\rho(1)=1$---so
+$k_1\rho(u_1) \geq k_1\rho(2) > 0$ in this range; the lower bound $\geq 2$ follows
+trivially from $k_1 \to \infty$.  For $u_1 > 2$ we argue as follows.)
 Since $\rho$ is decreasing and $u_1 \leq (\log n)^{1/2-\varepsilon}$,
 \[
   k_1\rho(u_1) \;\geq\; k_1\rho\bigl((\log n)^{1/2-\varepsilon}\bigr).
@@ -251,7 +257,9 @@ Using $\rho(u) = e^{-u\log u\,(1+o(1))}$ (\cite[Cor.~III.5.4]{Ten}):
 \]
 Since $(1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n = o\bigl((\log n)^{1/2+\varepsilon}\bigr)$,
 the right side is $(\log n)^{1/2+\varepsilon}(1-o(1)) \to +\infty$.
-Hence $k_1\rho(u_1) \geq 2$ for all $m \in [k_1, n]$ and all large $n$.
+Hence there exists $n_1 = n_1(\varepsilon)$ such that for all $n \geq n_1$,
+$k_1\rho\bigl((\log n)^{1/2-\varepsilon}\bigr) \geq 2$.
+In particular, $k_1\rho(u_1) \geq 2$ for all $m \in [k_1, n]$ and all $n \geq n_1$.
 
 Substituting into \eqref{eq:halfbound}:
 \[
