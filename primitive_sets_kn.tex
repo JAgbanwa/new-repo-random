@@ -84,17 +84,18 @@ The proof via Mertens' theorem is given completely in \cite[Lemma~III.5.1]{Ten}.
 
 \begin{theorem}[Tenenbaum {\cite[Ch.~III.5, Th.~3]{Ten}}]\label{thm:HT}
 Let $\rho$ denote the Dickman function.  Fix $\varepsilon > 0$.
-There is an absolute constant $C > 0$ such that the following holds.
-For all $x \geq 3$ and
+There exists a constant $C_\varepsilon > 0$, depending only on $\varepsilon$,
+such that for all $x \geq 3$ and
 \begin{equation}\label{eq:HTrange}
   y \;\geq\; \exp\!\bigl((\log\log x)^{5/3+\varepsilon}\bigr),
 \end{equation}
 setting $u = \log x / \log y$,
 \[
   \Psi(x + y,\, y) - \Psi(x,\, y) \;=\; y\,\rho(u)\,
-  \Bigl(1 + O\Bigl(\frac{\log(u+1)}{\log y}\Bigr)\Bigr),
+  \biggl(1 + \theta\,C_\varepsilon\,\frac{\log(u+1)}{\log y}\biggr)
 \]
-uniformly in $x$ and $y$ satisfying \eqref{eq:HTrange}.
+for some real $|\theta| \leq 1$, uniformly in $x$ and $y$
+satisfying \eqref{eq:HTrange}.
 \end{theorem}
 
 \begin{remark}[Proof method]\label{rem:HTproof}
@@ -217,17 +218,22 @@ By Theorem~\ref{thm:HT} applied pointwise at $x = m$, $y = k_1$:
   \Psi(m+k_1, k_1) - \Psi(m, k_1)
   = k_1\rho(u_1)\biggl(1 + O\Bigl(\frac{\log(u_1+1)}{\log k_1}\Bigr)\biggr).
 \]
-The error term is, uniformly for all $m \in [k_1, n]$:
+Let $C_\varepsilon$ be the constant from Theorem~\ref{thm:HT}; it is finite
+because $\varepsilon$ is fixed throughout the proof.  The absolute error
+$C_\varepsilon\,\frac{\log(u_1+1)}{\log k_1}$ satisfies, for all $m \in [k_1, n]$:
 \[
-  \frac{\log(u_1+1)}{\log k_1}
-  \;\leq\; \frac{\log\bigl((\log n)^{1/2-\varepsilon}+1\bigr)}{(\log n)^{1/2+\varepsilon}}
-  \;=\; O\!\Bigl(\frac{\log\log n}{(\log n)^{1/2+\varepsilon}}\Bigr) \;\to\; 0.
+  C_\varepsilon\,\frac{\log(u_1+1)}{\log k_1}
+  \;\leq\; C_\varepsilon\,
+  \frac{\log\bigl((\log n)^{1/2-\varepsilon}+1\bigr)}{(\log n)^{1/2+\varepsilon}}
+  \;\leq\; C_\varepsilon\,
+  \frac{(1/2-\varepsilon)\log\log n + 1}{(\log n)^{1/2+\varepsilon}}
+  \;\to\; 0 \quad (n\to\infty).
 \]
-The bound depends only on $n$, not on $m$, so it goes to zero
-\emph{uniformly} for all $m \in [k_1, n]$.  In particular,
-for all large $n$, the implicit constant in the $O(\cdot)$ gives
-$\bigl|O\bigl(\frac{\log(u_1+1)}{\log k_1}\bigr)\bigr| \leq \frac{1}{2}$,
-and hence:
+This bound is independent of $m$, so it tends to zero \emph{uniformly}
+for all $m \in [k_1, n]$.  Choose $n_0 = n_0(\varepsilon)$ large enough that
+the right side is $\leq \tfrac{1}{2}$ for all $n \geq n_0$.  Then for all $n \geq n_0$
+and all $m \in [k_1, n]$ we have $|\theta|\,C_\varepsilon\,\frac{\log(u_1+1)}{\log k_1}
+\leq C_\varepsilon\,\frac{\log(u_1+1)}{\log k_1} \leq \tfrac{1}{2}$, and hence:
 \begin{equation}\label{eq:halfbound}
   \Psi(m+k_1, k_1) - \Psi(m, k_1)
   \;\geq\; \tfrac{1}{2}\,k_1\rho(u_1)
