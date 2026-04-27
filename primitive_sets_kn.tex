@@ -196,16 +196,15 @@ integer, so no $k_1$-run below $n$ exists.  We split into two cases.
 \noindent\textit{Case 1: $m \geq k_1$.}
 
 \noindent\textit{Step 1a: Verifying hypothesis \eqref{eq:HTrange}.}
-We apply Theorem~\ref{thm:HT} with $x = m$ and $y = k_1$.
+We apply Theorem~\ref{thm:HT} with $x = m$, $y = k_1$, and parameter $\varepsilon$.
 For $m \geq k_1$ we have $\log m \geq \log k_1 = (\log n)^{1/2+\varepsilon}$, so
-\[
-  \log\log m \;\geq\; \log\bigl((\log n)^{1/2+\varepsilon}\bigr)
-  = (1/2+\varepsilon)\log\log n.
-\]
-We need $\log k_1 \geq (\log\log m)^{5/3+\varepsilon'}$ for some fixed $\varepsilon' > 0$.
-Since $\log\log m \leq \log\log n$ and $(\log n)^{1/2+\varepsilon} \geq (\log\log n)^{5/3+\varepsilon'}$
-for all large $n$ (any positive power of $\log n$ dominates any power of $\log\log n$),
-hypothesis \eqref{eq:HTrange} holds with $x = m$, $y = k_1$ for all $m \in [k_1, n]$.
+$\log\log m \leq \log\log n$.
+We need $\log k_1 \geq (\log\log m)^{5/3+\varepsilon}$, i.e.
+$(\log n)^{1/2+\varepsilon} \geq (\log\log n)^{5/3+\varepsilon}$.
+This holds for all large $n$ since any positive power of $\log n$ eventually
+dominates any power of $\log\log n$.
+Thus hypothesis~\eqref{eq:HTrange} holds for all $m \in [k_1, n]$, and
+Theorem~\ref{thm:HT} applies with the constant $C_\varepsilon$ for this fixed $\varepsilon$.
 
 \noindent\textit{Step 1b: Smooth integers are dense in $[m+1, m+k_1]$.}
 Set $u_1 = \log m/\log k_1$.  Since $m \in [k_1, n]$,
@@ -213,14 +212,14 @@ Set $u_1 = \log m/\log k_1$.  Since $m \in [k_1, n]$,
   u_1 \;\in\; \Bigl[1,\; \frac{\log n}{\log k_1}\Bigr]
   = \bigl[1,\; (\log n)^{1/2-\varepsilon}\bigr].
 \]
-By Theorem~\ref{thm:HT} applied pointwise at $x = m$, $y = k_1$:
+By Theorem~\ref{thm:HT} (with the constant $C_\varepsilon$ established in Step~1a):
 \[
   \Psi(m+k_1, k_1) - \Psi(m, k_1)
-  = k_1\rho(u_1)\biggl(1 + O\Bigl(\frac{\log(u_1+1)}{\log k_1}\Bigr)\biggr).
+  = k_1\rho(u_1)\biggl(1 + \theta\,C_\varepsilon\,\frac{\log(u_1+1)}{\log k_1}\biggr),
+  \quad |\theta| \leq 1.
 \]
-Let $C_\varepsilon$ be the constant from Theorem~\ref{thm:HT}; it is finite
-because $\varepsilon$ is fixed throughout the proof.  The absolute error
-$C_\varepsilon\,\frac{\log(u_1+1)}{\log k_1}$ satisfies, for all $m \in [k_1, n]$:
+The error magnitude $C_\varepsilon\,\frac{\log(u_1+1)}{\log k_1}$ satisfies,
+for all $m \in [k_1, n]$:
 \[
   C_\varepsilon\,\frac{\log(u_1+1)}{\log k_1}
   \;\leq\; C_\varepsilon\,
