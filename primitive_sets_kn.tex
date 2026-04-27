@@ -55,7 +55,7 @@ $k$-run below $n$ exists.
 \subsection*{Upper bound on $\Psi$: Rankin's method}
 
 \begin{lemma}[Rankin bound]\label{lem:rankin}
-For all $x \geq 2$, $y \geq 2$, and $u = \log x/\log y \geq 2$,
+For all $x \geq y \geq e^{e^2}$ with $u = \log x/\log y \geq 4$ and $y \geq \log x$,
 \[
   \Psi(x, y) \;\leq\; x \cdot e^{-\frac{1}{2}u\log u}.
 \]
@@ -78,9 +78,8 @@ Then
 \]
 
 \noindent\textbf{Bounding $\zeta_y(\sigma)$.}
-Using $-\log(1-t) \leq 2t$ for $0 \leq t \leq 1/2$, and noting
-$p^{-\sigma} \leq y^{-\sigma} = u^{-1/2} \leq 1/\sqrt{2} < 1/2$
-(valid since $u \geq 2$):
+Since $u \geq 4$, every prime $p \leq y$ satisfies $p^{-\sigma} \leq y^{-\sigma} = u^{-1/2} \leq 1/2$.
+Applying $-\log(1-t) \leq 2t$ (valid for $0 \leq t \leq 1/2$):
 \[
   \log\zeta_y(\sigma) \leq 2\sum_{p \leq y} p^{-\sigma}.
 \]
@@ -95,42 +94,31 @@ The prime number theorem gives $\pi(y) \leq 2y/\log y$ for $y \geq 2$, so
 
 \noindent\textbf{Conclusion.}
 Combining: $\log\Psi(x,y) \leq \tfrac{1}{2}u\log u + 4y/(u^{1/2}\log y)$.
-To obtain the stated bound, we need
+To obtain the stated bound $\Psi(x,y) \leq x\cdot e^{-u\log u/2}$, it suffices to show
 \[
-  \frac{u\log u}{2} + \frac{4y}{u^{1/2}\log y} \;\leq\; u\log y - \frac{u\log u}{2},
+  \frac{u\log u}{2} + \frac{4y}{u^{1/2}\log y}
+  \;\leq\; \log x - \frac{u\log u}{2} = u\log y - \frac{u\log u}{2},
 \]
-i.e.\ $u\log u + 4y/(u^{1/2}\log y) \leq u\log y$.  Since $u \geq 2$
-and $\log y \geq \log u$ (i.e.\ $u \leq y$, which holds since $u = \log x/\log y$
-and we may assume $\log x \leq y$; this is satisfied in our application where
-$\log x = \log n$ and $y = k_0 = e^{(\log n)^{1/2-\varepsilon}} \geq \log n$ for large $n$),
-we have $u\log u \leq u\log y$.  It remains to check
-$4y/(u^{1/2}\log y) \leq u\log y - u\log u = u\log(y/u)$.
-Since $y/u = y\log y/\log x \geq \log y$ (as $y \geq \log x$), we have
-$\log(y/u) \geq \log\log y$.  Also $4y/(u^{1/2}\log y)$ and $u\log\log y$:
+i.e.\ $u\log u + 4y/(u^{1/2}\log y) \leq u\log y$.
+
+Since $y \geq \log x = u\log y$ implies $y/\log y \geq u$, so $y \geq u\log y \geq u\log u$
+(as $\log y \geq \log u$ when $y \geq u$), the first term satisfies $u\log u \leq u\log y$.
+It remains to show $4y/(u^{1/2}\log y) \leq u\log y - u\log u = u\log(y/u)$.
+From $y \geq u\log y$ we get $y/u \geq \log y$, hence $\log(y/u) \geq \log\log y$.
+So it suffices to verify $4y \leq u^{3/2}\log y\log\log y$.
+From $y \geq u\log y$ this reduces to $4u\log y \leq u^{3/2}\log y\log\log y$,
+i.e.\ $4 \leq u^{1/2}\log\log y$.  Since $y \geq e^{e^2}$, we have $\log\log y \geq 2$,
+and since $u \geq 4$, we get $u^{1/2}\log\log y \geq 2\cdot 2 = 4$.  Hence the inequality
+holds, and
 \[
-  \frac{4y}{u^{1/2}\log y} \leq u\log\log y
-  \;\Longleftrightarrow\;
-  4y \leq u^{3/2}\log y\log\log y.
-\]
-In our application ($x = n$, $y = k_0 = e^{(\log n)^{1/2-\varepsilon}}$,
-$u = u_0 = (\log n)^{1/2+\varepsilon}(1+o(1))$):
-\[
-  u_0^{3/2}\log k_0\log\log k_0
-  = (\log n)^{3(1/2+\varepsilon)/2}\cdot (\log n)^{1/2-\varepsilon}\cdot O(\log\log n)
-  \gg k_0 = e^{(\log n)^{1/2-\varepsilon}}
-\]
-for large $n$ (an exponential vs.\ a polynomial in $\log n$).  Hence all
-conditions hold for large $n$, and
-\[
-  \Psi(n, k_0) \;\leq\; n \cdot e^{-\frac{1}{2}u_0\log u_0}. \qedhere
+  \Psi(x, y) \;\leq\; x \cdot e^{-\frac{1}{2}u\log u}. \qedhere
 \]
 \end{proof}
 
 \begin{remark}
-The restriction $y \geq \log x$ (equivalently $u \leq y/\log y$, i.e.\ roughly
-$\log x \leq y$) is mild and holds throughout our application.  One can also
-give a version valid for all $x,y$ by a slightly different choice of $\sigma$,
-but the present form suffices.
+The hypotheses $y \geq \log x$, $u \geq 4$, $y \geq e^{e^2}$ are all satisfied
+in the lower-bound application (Section~\ref{sec:lower}), where $y = k_0 = e^{(\log n)^{1/2-\varepsilon}}$,
+$\log x = \log n$, and $u_0 = (\log n)^{1/2+\varepsilon}\to\infty$.
 \end{remark}
 
 \subsection*{Lower bound for smooth numbers in short intervals}
@@ -170,7 +158,7 @@ ensures the tails of the Perron integral contribute $o(y\rho(u))$.
 The complete proof is in \cite[Ch.~III.5, Th.~3]{Ten}.
 \end{remark}
 
-\section{The Lower Bound}
+\section{The Lower Bound}\label{sec:lower}
 
 \begin{theorem}[Lower bound]\label{thm:lower}
 For every fixed $\varepsilon > 0$ and all sufficiently large $n$,
@@ -185,9 +173,10 @@ Set $k_0 := \lfloor \exp((\log n)^{1/2-\varepsilon}) \rfloor$.
 \medskip
 \noindent\textit{Step 1: The $k_0$-smooth integers in $[1,n]$ are sparse.}
 Let $u_0 = \log n / \log k_0 = (\log n)^{1/2+\varepsilon}(1+o(1))$.
-For large $n$ we have $u_0 \geq 2$ and $k_0 \geq \log n$
-(since $(\log n)^{1/2-\varepsilon} > \log\log n$ for large $n$),
-so Lemma~\ref{lem:rankin} applies and gives
+For large $n$: $u_0 \geq 4$ (since $u_0 \to\infty$); $k_0 = e^{(\log n)^{1/2-\varepsilon}} \geq \log n$
+(since $(\log n)^{1/2-\varepsilon} > \log\log n$ for large $n$), which gives $k_0 \geq \log n = \log x$;
+and $k_0 \geq e^{e^2}$ for large $n$.
+Hence Lemma~\ref{lem:rankin} applies (with $x=n$, $y=k_0$) and gives
 \[
   \Psi(n, k_0) \;\leq\; n \cdot e^{-\frac{1}{2}u_0\log u_0}.
 \]
@@ -206,12 +195,11 @@ Hence $\Psi(n, k_0) \leq n/k_0$ for all sufficiently large $n$.
 
 \medskip
 \noindent\textit{Step 2: Pigeonhole produces an empty block.}
-Partition $\{1, \ldots, \lfloor n/k_0\rfloor\cdot k_0\}$ into
-$B = \lfloor n/k_0\rfloor$ consecutive blocks
+Partition $\{1, \ldots, Bk_0\}$ (where $B = \lfloor n/k_0\rfloor$) into $B$ consecutive blocks
 $I_i = [(i-1)k_0+1,\; ik_0]$ of length $k_0$, for $i = 1, \ldots, B$.
-There are $B$ blocks but only $\Psi(n,k_0) \leq n/k_0 \approx B$ smooth
-integers among $\{1,\ldots,n\}$.  In fact $\Psi(n,k_0) \ll n/k_0$ (strictly
-fewer smooth integers than blocks), so by pigeonhole at least one block $I_i$
+The number of $k_0$-smooth integers in $\{1,\ldots,Bk_0\}$ is at most $\Psi(n,k_0)$.
+From Step~1, $\Psi(n,k_0) \leq n\cdot e^{-(\log n)^{1/2+\varepsilon/2}} = o(n/k_0) = o(B)$.
+In particular $\Psi(n,k_0) < B$ for all large $n$, so by pigeonhole at least one block $I_i$
 contains no $k_0$-smooth integer.
 
 \medskip
