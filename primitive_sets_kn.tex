@@ -326,9 +326,13 @@ by Remark~\ref{rem:heuristic} is not established by this proof.
 \end{remark}
 
 \begin{remark}[Primitive sets]
-Each $k$-run $\{m+1,\ldots,m+k\}$ is a primitive set (no element divides
-another): if $a \mid b$ with $a < b$ both in the run, then $b \geq 2a > m+k$.
-The condition $P^+(a) > k$ gives each element a large prime certificate.
+Every valid $k$-run $\{m+1,\ldots,m+k\}$ satisfies $m \geq k$.
+(If $m < k$ then $m+1 \leq k$, so $P^+(m+1) \leq m+1 \leq k$,
+contradicting the run condition $P^+(m+1) > k$.)
+Hence $\{m+1,\ldots,m+k\}$ is a primitive set: if $a \mid b$ with
+$a < b$ both in the run, then $b \geq 2a \geq 2(m+1)$.
+Since $m \geq k$, we have $2(m+1) = m + (m+2) \geq m + (k+2) > m+k$,
+so $b > m+k$, contradicting $b \leq m+k$.
 \end{remark}
 
 \begin{thebibliography}{9}
