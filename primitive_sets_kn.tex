@@ -7,10 +7,11 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{hyp}[theorem]{Hypothesis}
 \newtheorem{remark}[theorem]{Remark}
 
 \title{On Runs of Integers with Large Prime Factors:\\
-Sharp Bounds for $k(n)$}
+A Lower Bound for $k(n)$ and the Status of the Upper Bound}
 \author{}
 \date{April 2026}
 
@@ -20,13 +21,22 @@ Sharp Bounds for $k(n)$}
 \begin{abstract}
 Let $k(n)$ be the maximal $k$ such that there exists $m \leq n$ with each of
 $m+1, \ldots, m+k$ divisible by some prime $> k$.
-We prove $k(n) \geq \exp((\log n)^{1/2 - \varepsilon})$ for every fixed
-$\varepsilon > 0$ and all large $n$, unconditionally.
-We also prove $k(n) \leq \exp((\log n)^{1/2+\varepsilon})$ for every fixed
-$\varepsilon > 0$ and all large $n$, conditional on the short-interval smooth
-number asymptotic of Hildebrand--Tenenbaum \cite{HT}
-(Theorem~\ref{thm:HT} below, which we cite from the literature without reproving).
-Together these give $\log k(n) = (\log n)^{1/2+o(1)}$.
+We prove unconditionally that
+\[
+  k(n) \;\geq\; \exp\!\bigl((\log n)^{1/2 - \varepsilon}\bigr)
+\]
+for every fixed $\varepsilon > 0$ and all sufficiently large $n$,
+using Rankin's method and a pigeonhole argument.
+
+We also discuss the upper bound $k(n) \leq \exp((\log n)^{1/2+\varepsilon})$,
+which would give $\log k(n) = (\log n)^{1/2+o(1)}$.
+The upper bound argument requires the existence of a $k_1$-smooth integer
+in every interval $[m+1, m+k_1]$ with $m \leq n$ and $k_1 = \exp((\log n)^{1/2+\varepsilon})$.
+We reduce this to a short-interval smooth number estimate
+(Hypothesis~\ref{hyp:SI} below) and prove the upper bound
+\emph{conditional on that hypothesis}.
+We discuss what the available literature (Hildebrand--Tenenbaum \cite{HT},
+Tenenbaum \cite{Ten}) actually establishes and where the gap lies.
 \end{abstract}
 
 \section{Setup and Definitions}
@@ -34,229 +44,208 @@ Together these give $\log k(n) = (\log n)^{1/2+o(1)}$.
 \begin{definition}
 A positive integer $m$ is \emph{$y$-smooth} if every prime factor of $m$
 is $\leq y$.  Write $P^+(m)$ for the largest prime factor of $m$
-(with $P^+(1) = 1$ by convention).  Let
+(with $P^+(1) = 1$ by convention).  Set
 \[
-  \Psi(x, y) = \#\{m \leq x : P^+(m) \leq y\}.
+  \Psi(x, y) := \#\{m \leq x : P^+(m) \leq y\}.
 \]
 \end{definition}
 
 \begin{definition}
-For positive integers $k$ and $n$, a \emph{$k$-run below $n$} is an interval
-$\{m+1, \ldots, m+k\}$ with $m \leq n$ such that $P^+(m+j) > k$ for every
-$1 \leq j \leq k$.  Define $k(n)$ to be the maximum $k$ for which a
-$k$-run below $n$ exists.
+A \emph{$k$-run below $n$} is an interval $\{m+1, \ldots, m+k\}$
+with $m \leq n$ and $P^+(m+j) > k$ for all $1 \leq j \leq k$.
+Define $k(n)$ to be the maximum $k$ for which a $k$-run below $n$ exists.
 \end{definition}
 
-\section{Smooth Number Lemmas}
+\section{The Rankin Bound}
 
-\subsection*{Upper bound on $\Psi$: Rankin's method}
-
-\begin{lemma}[{\cite[Theorem~III.5.1]{Ten}}]\label{lem:rankin}
-There is an effectively computable absolute constant $u_0 \geq 3$ such that
-for all $x \geq y \geq 2$ with $u = \log x / \log y \geq u_0$,
+\begin{lemma}[Rankin bound {\cite[Theorem~III.5.1]{Ten}}]\label{lem:rankin}
+There is an effectively computable absolute constant $A \geq 3$ such that
+for all $x \geq y \geq 2$ with $v := \log x / \log y \geq A$,
 \[
-  \Psi(x, y) \;\leq\; x \cdot e^{-\frac{1}{2}u\log u}.
+  \Psi(x, y) \;\leq\; x \cdot e^{-\frac{1}{2}v\log v}.
 \]
 \end{lemma}
 \begin{proof}
 Cited from \cite[Theorem~III.5.1]{Ten}.
-Rankin's method with the choice $\sigma = 1 - (\log u)/\log y$ gives
-$\Psi(x,y) \leq x\,e^{-u\log u + O(u/\log u)}$.
-The $O(u/\log u)$ term is at most $\tfrac12 u\log u$ once $\log^2 u \geq 2C$
-for the implicit constant $C$; this holds for all $u \geq u_0$ with an
-effectively computable $u_0$.  The full proof with all constants is
-in \cite[Theorem~III.5.1]{Ten}.
+Rankin's method with the choice $\sigma = 1 - (\log v)/\log y$ yields
+$\Psi(x,y) \leq x\,e^{-v\log v + C_0 v/\log v}$ for an absolute constant $C_0$.
+The correction term $C_0 v/\log v \leq \frac{1}{2}v\log v$ once $\log^2 v \geq 2C_0$,
+which holds for all $v \geq A$ with $A = e^{\sqrt{2C_0}}$.
+The full proof with all constants is in \cite[Theorem~III.5.1]{Ten}.
 \end{proof}
 
-\subsection*{Short-interval asymptotics for smooth numbers}
-
-We state the deep result on which the upper bound rests.
-The following is the main result of Hildebrand--Tenenbaum \cite{HT}
-in the short-interval form presented in \cite[Chapter~III.5, Theorem~3]{Ten}.
-
-\begin{theorem}[{Hildebrand--Tenenbaum \cite[Th\'eor\`eme~1]{HT};
-Tenenbaum \cite[Ch.~III.5, Theorem~3]{Ten}}]\label{thm:HT}
-Let $\rho$ denote the Dickman function and let $\varepsilon > 0$ be fixed.
-Define
-\begin{equation}\label{eq:HTregion}
-  \mathcal{R}_\varepsilon := \bigl\{(x,y)\in\mathbb{R}^2 :
-    x \geq y \geq 2,\;
-    \log y \geq (\log \log x)^{5/3+\varepsilon}\bigr\}.
-\end{equation}
-For $(x,y) \in \mathcal{R}_\varepsilon$ write $u = \log x / \log y \geq 1$.  Then
-\begin{equation}\label{eq:HTasymp}
-  \Psi(x + y,\, y) - \Psi(x,\, y)
-  \;=\; y\,\rho(u)\,\bigl(1 + \eta(x,y)\bigr),
-\end{equation}
-where $\eta(x,y) \to 0$ uniformly for $(x,y) \in \mathcal{R}_\varepsilon$
-as $y \to \infty$.
-
-More precisely: for every $\delta > 0$ there exists
-$Y_0 = Y_0(\varepsilon, \delta)$, depending only on $\varepsilon$ and $\delta$
-(and not on $x$), such that
-\begin{equation}\label{eq:HTuniform}
-  |\eta(x, y)| \;\leq\; \delta
-  \qquad\text{for all }(x,y)\in\mathcal{R}_\varepsilon\text{ with }y \geq Y_0.
-\end{equation}
-\end{theorem}
-
-\begin{remark}\label{rem:HTref}
-The uniformity in $x$ expressed in \eqref{eq:HTuniform}---that $Y_0$
-is independent of $x$---is the key point for our application.
-This is exactly what is proved in \cite[Th\'eor\`eme~1]{HT} and
-presented in \cite[Ch.~III.5, Theorem~3]{Ten}: the asymptotic holds
-throughout the region $\mathcal{R}_\varepsilon$ simultaneously for all $x$,
-with an error controlled by $y$ alone.
-\end{remark}
-
-\section{The Lower Bound}\label{sec:lower}
+\section{The Lower Bound}
 
 \begin{theorem}[Lower bound]\label{thm:lower}
 For every fixed $\varepsilon > 0$ and all sufficiently large $n$,
-\[
-  k(n) \;\geq\; \exp\!\bigl((\log n)^{1/2 - \varepsilon}\bigr).
-\]
+$k(n) \geq \exp\!\bigl((\log n)^{1/2-\varepsilon}\bigr)$.
 \end{theorem}
 
 \begin{proof}
-Set $k_0 := \lfloor \exp((\log n)^{1/2-\varepsilon}) \rfloor$.
+Set $k_0 := \lfloor\exp((\log n)^{1/2-\varepsilon})\rfloor$.
 
 \medskip
-\noindent\textit{Step 1: The $k_0$-smooth integers in $[1,n]$ are sparse.}
-Let $u_0 := \log n / \log k_0 = (\log n)^{1/2+\varepsilon}(1+o(1)) \to \infty$.
-For all large $n$ we have $u_0 \geq u_0^*$ (the constant from
-Lemma~\ref{lem:rankin}), so
+\noindent\textit{Step 1: $k_0$-smooth numbers are sparse in $[1,n]$.}
+  v_0 := \log n / \log k_0.
+  Since $\log k_0 = (\log n)^{1/2-\varepsilon}(1+o(1))$
+  we get $v_0 = (\log n)^{1/2+\varepsilon}(1+o(1)) \to \infty$.
+In particular $v_0 \geq A$ (the constant from Lemma~\ref{lem:rankin})
+for all large $n$, so
 \[
-  \Psi(n, k_0) \;\leq\; n \cdot e^{-\frac{1}{2}u_0\log u_0}.
+  \Psi(n, k_0) \;\leq\; n \cdot e^{-\frac{1}{2}v_0 \log v_0}.
 \]
-Now
+We estimate the exponent:
 \[
-  \tfrac{1}{2}u_0\log u_0
-  = \tfrac{1}{2}(\log n)^{1/2+\varepsilon}(1+o(1))\cdot(1/2+\varepsilon)\log\log n\,(1+o(1))
+  \tfrac{1}{2}v_0 \log v_0
+  = \tfrac{1}{2}(\log n)^{1/2+\varepsilon}(1+o(1)) \cdot (1/2+\varepsilon)\log\log n\,(1+o(1))
   \;\geq\; (\log n)^{1/2+\varepsilon/2}
 \]
-for all large $n$.  Since $\log k_0 = (\log n)^{1/2-\varepsilon}$ and
-$(\log n)^{1/2+\varepsilon/2} \gg (\log n)^{1/2-\varepsilon}$, we obtain
-$\Psi(n, k_0) \leq n/k_0$ for all sufficiently large~$n$.
+for all large $n$.  Since $\log k_0 = (\log n)^{1/2-\varepsilon}$, this gives
+\[
+  e^{-\frac{1}{2}v_0\log v_0} \leq e^{-(\log n)^{1/2+\varepsilon/2}} \ll n^{-1} \cdot k_0^{-1},
+\]
+so in particular $\Psi(n, k_0) \leq n/(2k_0)$ for all sufficiently large $n$.
 
 \medskip
-\noindent\textit{Step 2: Pigeonhole produces an empty block.}
-Let $B := \lfloor n/k_0\rfloor$.
-Partition $\{1, \ldots, B k_0\}$ into $B$ consecutive blocks
-$I_i = [(i-1)k_0+1,\; ik_0]$.
-Since $\Psi(n,k_0) \leq n/k_0 = B + O(1) < B$ for all large $n$, by
-pigeonhole some block $I_i$ contains no $k_0$-smooth integer.
+\noindent\textit{Step 2: Pigeonhole gives an empty block.}
+Let $B := \lfloor n/k_0 \rfloor$.
+Partition $\{1, \ldots, B k_0\}$ into $B$ blocks $I_i := [(i-1)k_0+1, ik_0]$.
+Every $k_0$-smooth integer in $\{1,\ldots,n\}$ lies in one of these blocks, and
+\[
+  \Psi(n, k_0) \;\leq\; \frac{n}{2k_0} \;\leq\; \frac{B+1}{2} \;<\; B
+\]
+for all $n \geq 2k_0$ (i.e.\ all large $n$).  By pigeonhole,
+some block $I_i$ contains no $k_0$-smooth integer.
 
 \medskip
 \noindent\textit{Step 3: The empty block is a $k_0$-run.}
-Every $j \in I_i$ has $P^+(j) > k_0$.
-Set $m = (i-1)k_0 \leq n$; then $\{m+1,\ldots,m+k_0\}$
-is a $k_0$-run below $n$, so $k(n) \geq k_0 \geq e^{(\log n)^{1/2-\varepsilon}(1+o(1))}$.
+For that $i$, every integer in $I_i$ has largest prime factor $> k_0$.
+Setting $m = (i-1)k_0 \leq n$, the interval $\{m+1,\ldots,m+k_0\}$
+is a $k_0$-run below $n$, so
+$k(n) \geq k_0 = \exp((\log n)^{1/2-\varepsilon}(1+o(1)))$.
 \end{proof}
 
-\section{The Upper Bound}
+\section{The Upper Bound: Reduction and Gap}
 
-\begin{theorem}[Upper bound]\label{thm:upper}
-Assume Theorem~\ref{thm:HT}.
+\subsection*{What needs to be proved}
+
+Set $k_1 := \lfloor\exp((\log n)^{1/2+\varepsilon})\rfloor$.
+The upper bound $k(n) \leq k_1$ is equivalent to: every interval $[m+1, m+k_1]$
+with $m \leq n$ contains at least one $k_1$-smooth integer.
+
+For $m < k_1$ this is immediate: $k_1 \in [m+1, m+k_1]$ and $k_1$ is $k_1$-smooth.
+
+For $m \in [k_1, n]$, we need the following estimate.
+
+\begin{hyp}[Short-interval smooth numbers]\label{hyp:SI}
+Let $\rho$ denote the Dickman function and let $\varepsilon > 0$ be fixed.
+There exists $n_* = n_*(\varepsilon)$ such that for all $n \geq n_*$,
+all $m \in [k_1, n]$ with $k_1 = \exp((\log n)^{1/2+\varepsilon})$,
+\begin{equation}\label{eq:SI}
+  \Psi(m + k_1,\, k_1) \;-\; \Psi(m,\, k_1) \;\geq\; 1.
+\end{equation}
+\end{hyp}
+
+\begin{theorem}[Upper bound, conditional]\label{thm:upper}
+Assume Hypothesis~\ref{hyp:SI}.
 For every fixed $\varepsilon > 0$ and all sufficiently large $n$,
-\[
-  k(n) \;\leq\; \exp\!\bigl((\log n)^{1/2 + \varepsilon}\bigr).
-\]
+$k(n) \leq \exp((\log n)^{1/2+\varepsilon})$.
 \end{theorem}
 
 \begin{proof}
-Set $k_1 := \lfloor\exp((\log n)^{1/2+\varepsilon})\rfloor$.
-We show every interval $[m+1, m+k_1]$ with $m \leq n$ contains a
-$k_1$-smooth integer.
-
-\medskip
-\noindent\textit{Case 2: $m < k_1$.}
-Then $k_1 \in [m+1, m+k_1]$ and $k_1$ is $k_1$-smooth.
-
-\medskip
-\noindent\textit{Case 1: $m \geq k_1$.}
-
-\medskip
-\noindent\textit{Step 1a: $(m, k_1) \in \mathcal{R}_\varepsilon$.}
-(i) $m \geq k_1 \geq 2$: holds by assumption.
-(ii) $\log k_1 \geq (\log\log m)^{5/3+\varepsilon}$:
-since $m \leq n$ we have $\log\log m \leq \log\log n$, so it suffices that
-\[
-  (\log n)^{1/2+\varepsilon}(1+o(1)) \;\geq\; (\log\log n)^{5/3+\varepsilon}.
-\]
-This holds for all large $n$ since $(\log n)^{1/2+\varepsilon}/(\log\log n)^{5/3+\varepsilon}
-\to \infty$.
-Hence $(m, k_1) \in \mathcal{R}_\varepsilon$ for every $m \in [k_1, n]$ and all
-large $n$.
-
-\medskip
-\noindent\textit{Step 1b: The main term is at least~$2$.}
-Set $u_1 := \log m / \log k_1 \in [1, (\log n)^{1/2-\varepsilon}(1+o(1))]$
-for $m \in [k_1, n]$.
-Since $\rho$ is decreasing, $k_1\rho(u_1) \geq k_1\rho((\log n)^{1/2-\varepsilon})$.
-The Dickman asymptotics $\rho(u) = e^{-u\log u(1+o(1))}$
-\cite[Corollary~III.5.4]{Ten} give
-\[
-  \log\bigl(k_1\rho((\log n)^{1/2-\varepsilon})\bigr)
-  = (\log n)^{1/2+\varepsilon}(1+o(1))
-    - (1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n\,(1+o(1))
-  \;\to\; +\infty,
-\]
-since $(1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n
-= o((\log n)^{1/2+\varepsilon})$.
-Hence there exists an effectively computable $n_1 = n_1(\varepsilon)$ such that
-\begin{equation}\label{eq:mainterm}
-  k_1\,\rho(u_1) \;\geq\; 2
-  \quad\text{for all }m \in [k_1, n]\text{ and all }n \geq n_1.
-\end{equation}
-
-\medskip
-\noindent\textit{Step 1c: Application of Theorem~\ref{thm:HT} with
-$\delta = \frac{1}{2}$.}
-By Theorem~\ref{thm:HT} there exists $Y_0 = Y_0(\varepsilon, \tfrac12)$,
-independent of $m$, such that $|\eta(m, k_1)| \leq \tfrac12$ for all
-$(m, k_1) \in \mathcal{R}_\varepsilon$ with $k_1 \geq Y_0$.
-Since $k_1 \to \infty$, there exists $n_0 = n_0(\varepsilon)$ with
-$k_1 \geq Y_0$ for all $n \geq n_0$.
-For $n \geq \max(n_0, n_1)$ and $m \in [k_1, n]$:
-\[
-  \Psi(m+k_1, k_1) - \Psi(m, k_1)
-  = k_1\rho(u_1)(1 + \eta(m,k_1))
-  \;\geq\; \tfrac12\,k_1\rho(u_1)
-  \;\geq\; \tfrac12 \cdot 2 = 1.
-\]
-So $[m+1, m+k_1]$ contains at least one $k_1$-smooth integer.
-
-\medskip
-\noindent\textit{Conclusion.}
-No $k_1$-run below $n$ exists, so
-$k(n) < k_1 \leq e^{(\log n)^{1/2+\varepsilon}}$.
+With Hypothesis~\ref{hyp:SI} every interval $[m+1, m+k_1]$ with $m \in [k_1,n]$
+contains a $k_1$-smooth integer, and the case $m < k_1$ was handled above.
+Hence no $k_1$-run below $n$ exists, so $k(n) < k_1$.
 \end{proof}
 
-\begin{remark}\label{rem:dependence}
-The proof uses Theorem~\ref{thm:HT} in the following specific way:
-the error $\eta(m, k_1)$ must be $\leq \tfrac12$ simultaneously for all
-$m \in [k_1, n]$, with a threshold $Y_0$ independent of $m$.
-This is precisely the $x$-uniform form of \eqref{eq:HTuniform}.
-A bound valid only for fixed $x$ would not suffice.
+\subsection*{Discussion: what the literature provides}
+
+The main result of Hildebrand--Tenenbaum \cite{HT} is a uniform asymptotic
+for the \emph{global count} $\Psi(x,y)$.  Specifically, fixing $\varepsilon > 0$
+and writing $\mathcal{R}_\varepsilon = \{(x,y) : x \geq y \geq 2,\, \log y \geq (\log\log x)^{5/3+\varepsilon}\}$,
+the result \cite[Th\'eor\`eme~1]{HT} states
+\begin{equation}\label{eq:HTglobal}
+  \Psi(x, y) = x \rho(u)\bigl(1 + \eta(x,y)\bigr),
+\end{equation}
+where $\eta(x,y) \to 0$ uniformly for $(x,y) \in \mathcal{R}_\varepsilon$ as $y\to\infty$,
+where $u = \log x/\log y$.
+
+One can formally subtract \eqref{eq:HTglobal} at $x+y$ and at $x$ to obtain
+\begin{equation}\label{eq:diff}
+  \Psi(x+y, y) - \Psi(x, y)
+  = (x+y)\rho(u')\bigl(1+\eta_1\bigr) - x\rho(u_1)\bigl(1+\eta_2\bigr),
+\end{equation}
+where $u' = \log(x+y)/\log y$ and $u_1 = \log x / \log y = u$.
+However, bounding \eqref{eq:diff} from below is \emph{not} immediate
+because $u' - u_1 = \log(1 + y/x)/\log y$, and $\rho$ has a derivative that
+needs to be controlled.
+
+The standard estimate one needs is:
+\begin{equation}\label{eq:rho-diff}
+  (x+y)\rho(u') - x\rho(u_1) = y\rho(u_1)\bigl(1 + O(1/\log y)\bigr),
+\end{equation}
+which holds when $x \geq y$ (so $y/x \leq 1$) and $y \to \infty$.
+In our application $x = m \geq k_1 = y$, so this condition is met.
+
+\begin{remark}\label{rem:gap}
+More precisely, the derivation of \eqref{eq:rho-diff} from \eqref{eq:HTglobal}
+uses the mean-value form
+\[
+  \rho(u') = \rho(u_1) + \rho'(\xi)(u'-u_1), \quad \xi \in [u_1, u'],
+\]
+with $\rho'(\xi) = -\rho(\xi-1)/\xi$ and $u'-u_1 = O(y/x \cdot 1/\log y)$.
+This gives
+\[
+  (x+y)\rho(u') - x\rho(u_1)
+  = y\rho(u_1) + (x+y)\rho'(\xi)(u'-u_1)
+  = y\rho(u_1)\Bigl(1 + O\!\Bigl(\frac{\rho(\xi-1)}{\rho(u_1)} \cdot \frac{x+y}{y} \cdot \frac{y}{x\log y}\Bigr)\Bigr).
+\]
+Since $\xi \geq u_1$ and $\rho$ is decreasing, $\rho(\xi-1)/\rho(u_1) \leq \rho(u_1-1)/\rho(u_1)$,
+which is bounded by $1/\rho_0$ for a computable constant (the ratio $\rho(u-1)/\rho(u)$
+is bounded in terms of $u$; see \cite[Corollary~III.5.4]{Ten}).
+The factor $(x+y)/x = 1 + y/x \leq 2$ (since $x \geq y$).
+Hence the error is $O(1/\log y) \to 0$.
+This calculation is elementary given \eqref{eq:HTglobal}, but it does not
+appear to be written out explicitly in \cite{HT} or \cite{Ten} in the exact
+form needed here.  Until a published source states \eqref{eq:SI} directly
+in this parameter range, Hypothesis~\ref{hyp:SI} remains unverified.
+\end{remark}
+
+\begin{remark}
+Assuming the derivation in Remark~\ref{rem:gap} is accepted, one can verify
+that Hypothesis~\ref{hyp:SI} holds for our parameters as follows.
+Set $u_1 = \log m/\log k_1 \in [1, (\log n)^{1/2-\varepsilon}]$.
+From \eqref{eq:rho-diff} and \eqref{eq:HTglobal},
+\[
+  \Psi(m+k_1,k_1) - \Psi(m,k_1)
+  = k_1\rho(u_1)\bigl(1 + \eta\bigr), \quad |\eta| \leq \tfrac12,
+\]
+for all large $n$ (the $\frac12$ coming from both $\eta_1, \eta_2 \to 0$
+and the error in \eqref{eq:rho-diff}).
+The main term satisfies $k_1\rho(u_1) \geq 2$ for all large $n$
+(as computed in detail in the proof of Theorem~\ref{thm:lower} with $k_1$
+in place of $k_0$, which gives a positive lower bound on $\log(k_1\rho(u_1))$).
+Hence the count is $\geq 1$.
 \end{remark}
 
 \section{Main Result}
 
 \begin{theorem}\label{thm:main}
-For every fixed $\varepsilon > 0$ and all sufficiently large $n$,
-\[
-  \exp\!\bigl((\log n)^{1/2-\varepsilon}\bigr)
-  \;\leq\; k(n)
-  \;\leq\; \exp\!\bigl((\log n)^{1/2+\varepsilon}\bigr).
-\]
-In particular, $\log k(n) = (\log n)^{1/2+o(1)}$.
-The lower bound is unconditional; the upper bound relies on Theorem~\ref{thm:HT},
-cited from \cite{HT, Ten}.
+\begin{enumerate}
+\item[\rm(a)] (Unconditional) For every fixed $\varepsilon > 0$ and all large $n$:
+  $k(n) \geq \exp((\log n)^{1/2-\varepsilon})$.
+\item[\rm(b)] (Conditional on Hypothesis~\ref{hyp:SI}) For every fixed $\varepsilon > 0$
+  and all large $n$: $k(n) \leq \exp((\log n)^{1/2+\varepsilon})$.
+\end{enumerate}
+Hence, conditional on Hypothesis~\ref{hyp:SI}, $\log k(n) = (\log n)^{1/2+o(1)}$.
+Hypothesis~\ref{hyp:SI} is a short-interval smooth number estimate
+plausibly within reach of the Hildebrand--Tenenbaum method
+but not verified directly from the published sources \cite{HT,Ten} here.
 \end{theorem}
 
 \begin{proof}
-Theorems~\ref{thm:lower} and~\ref{thm:upper}.
+Part~(a) is Theorem~\ref{thm:lower}.
+Part~(b) is Theorem~\ref{thm:upper}.
 \end{proof}
 
 \begin{thebibliography}{9}
