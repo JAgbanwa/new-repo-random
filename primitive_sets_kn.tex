@@ -86,11 +86,11 @@ The proof via Mertens' theorem is given completely in \cite[Lemma~III.5.1]{Ten}.
 
 \begin{theorem}[Hildebrand--Tenenbaum {\cite{HT}}; Tenenbaum {\cite[Ch.~III.5, Th.~3]{Ten}}]\label{thm:HT}
 Let $\rho$ denote the Dickman function.  Fix $\varepsilon > 0$.
-For all $x \geq 3$ and $y$ satisfying
+For all $x \geq y \geq 2$ satisfying
 \begin{equation}\label{eq:HTrange}
   y \;\geq\; \exp\!\bigl((\log\log x)^{5/3+\varepsilon}\bigr),
 \end{equation}
-setting $u = \log x / \log y$,
+setting $u = \log x / \log y \geq 1$,
 \[
   \Psi(x + y,\, y) - \Psi(x,\, y) \;=\; y\,\rho(u)\,\bigl(1 + \eta(x,y)\bigr)
 \]
@@ -206,8 +206,8 @@ We need $\log k_1 \geq (\log\log m)^{5/3+\varepsilon}$, i.e.
 $(\log n)^{1/2+\varepsilon} \geq (\log\log n)^{5/3+\varepsilon}$.
 This holds for all large $n$ since any positive power of $\log n$ eventually
 dominates any power of $\log\log n$.
-Thus hypothesis~\eqref{eq:HTrange} holds for all $m \in [k_1, n]$, and
-Theorem~\ref{thm:HT} applies.
+The condition $y \leq x$ (i.e.~$k_1 \leq m$) holds since we are in Case~1.
+Thus all hypotheses of Theorem~\ref{thm:HT} hold for all $m \in [k_1, n]$.
 
 \noindent\textit{Step 1b: Smooth integers are dense in $[m+1, m+k_1]$.}
 Set $u_1 = \log m/\log k_1$.  Since $m \in [k_1, n]$,
@@ -215,32 +215,8 @@ Set $u_1 = \log m/\log k_1$.  Since $m \in [k_1, n]$,
   u_1 \;\in\; \Bigl[1,\; \frac{\log n}{\log k_1}\Bigr]
   = \bigl[1,\; (\log n)^{1/2-\varepsilon}\bigr].
 \]
-Apply Theorem~\ref{thm:HT} with $\delta = \tfrac{1}{2}$.
-The theorem guarantees the existence of a finite threshold
-$Y_0 = Y_0\bigl(\varepsilon,\tfrac{1}{2}\bigr)$, depending only on $\varepsilon$,
-such that $|\eta(x,y)| \leq \tfrac{1}{2}$ for all $y \geq Y_0$ and all $x$
-satisfying \eqref{eq:HTrange}.
-Since $k_1 = \exp((\log n)^{1/2+\varepsilon}) \to \infty$, there exists
-$n_0 = n_0(\varepsilon)$ such that $k_1 \geq Y_0$ for all $n \geq n_0$.
 
-For all $n \geq n_0$ and every $m \in [k_1, n]$: hypothesis~\eqref{eq:HTrange}
-holds (Step~1a) and $y = k_1 \geq Y_0$, so Theorem~\ref{thm:HT} gives
-\[
-  \Psi(m+k_1, k_1) - \Psi(m, k_1)
-  = k_1\rho(u_1)\bigl(1 + \eta(m,k_1)\bigr),
-  \quad |\eta(m,k_1)| \leq \tfrac{1}{2}.
-\]
-Crucially, $Y_0$ is independent of $x = m$: the single condition $k_1 \geq Y_0$
-suffices for all $m \in [k_1,n]$ simultaneously.
-This is precisely the independence-of-$x$ stated in Theorem~\ref{thm:HT}.
-The threshold $n_0$ therefore depends only on $\varepsilon$, not on $m$.  Hence:
-\begin{equation}\label{eq:halfbound}
-  \Psi(m+k_1, k_1) - \Psi(m, k_1)
-  \;\geq\; \tfrac{1}{2}\,k_1\rho(u_1)
-  \quad\text{for all } m \in [k_1, n].
-\end{equation}
-
-It remains to show $k_1\rho(u_1) \geq 2$ for all $m \in [k_1, n]$.
+\textit{Substep (i): The main term $k_1\rho(u_1)$ is large.}
 Since $\rho$ is decreasing and $u_1 \leq (\log n)^{1/2-\varepsilon}$,
 \[
   k_1\rho(u_1) \;\geq\; k_1\rho\bigl((\log n)^{1/2-\varepsilon}\bigr).
@@ -252,16 +228,21 @@ Using $\rho(u) = e^{-u\log u\,(1+o(1))}$ (\cite[Cor.~III.5.4]{Ten}):
     - (1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n\cdot(1+o(1)).
 \]
 Since $(1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n = o\bigl((\log n)^{1/2+\varepsilon}\bigr)$,
-the right side is $(\log n)^{1/2+\varepsilon}(1-o(1)) \to +\infty$.
-Hence there exists $n_1 = n_1(\varepsilon)$ such that for all $n \geq n_1$,
-$k_1\rho\bigl((\log n)^{1/2-\varepsilon}\bigr) \geq 2$.
-In particular, $k_1\rho(u_1) \geq 2$ for all $m \in [k_1, n]$ and all $n \geq n_1$.
+the right side tends to $+\infty$.  Hence there exists $n_1 = n_1(\varepsilon)$
+such that $k_1\rho(u_1) \geq 2$ for all $m \in [k_1, n]$ and all $n \geq n_1$.
 
-Substituting into \eqref{eq:halfbound}:
+\textit{Substep (ii): Apply Theorem~\ref{thm:HT} with $\delta = \tfrac{1}{2}$.}
+All hypotheses were verified in Step~1a.  The theorem (applied in the
+non-trivial regime $k_1\rho(u_1) \geq 2$ established above) guarantees a threshold
+$Y_0 = Y_0(\varepsilon, \tfrac{1}{2})$, independent of $m$, such that
+$|\eta(m,k_1)| \leq \tfrac{1}{2}$ for all $m \in [k_1,n]$ once $k_1 \geq Y_0$.
+Choose $n_0 = n_0(\varepsilon)$ so that $k_1 \geq Y_0$ for all $n \geq n_0$.
+For all $n \geq \max(n_0, n_1)$ and every $m \in [k_1, n]$:
 \[
   \Psi(m+k_1, k_1) - \Psi(m, k_1)
-  \;\geq\; \tfrac{1}{2} \cdot 2 = 1
-  \quad\text{for all } m \in [k_1, n]\text{ and all large } n.
+  = k_1\rho(u_1)\bigl(1 + \eta(m,k_1)\bigr)
+  \;\geq\; \tfrac{1}{2}\,k_1\rho(u_1)
+  \;\geq\; \tfrac{1}{2} \cdot 2 = 1.
 \]
 
 \medskip
