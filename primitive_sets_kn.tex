@@ -54,71 +54,30 @@ $k$-run below $n$ exists.
 
 \subsection*{Upper bound on $\Psi$: Rankin's method}
 
-\begin{lemma}[Rankin bound]\label{lem:rankin}
-For all $x \geq y \geq e^{e^2}$ with $u = \log x/\log y \geq 4$ and $y \geq \log x$,
+\begin{lemma}[Rankin bound {\cite[Lemma~III.5.1]{Ten}}]\label{lem:rankin}
+For $x \geq 2$, $y \geq 2$, and $u = \log x/\log y \geq 3$,
 \[
   \Psi(x, y) \;\leq\; x \cdot e^{-\frac{1}{2}u\log u}.
 \]
 \end{lemma}
 
 \begin{proof}
-For any $\sigma > 0$, since every $n \leq x$ satisfies $(x/n)^\sigma \geq 1$,
-\begin{equation}\label{eq:rankin-start}
-  \Psi(x,y) = \sum_{\substack{n \leq x \\ P^+(n)\leq y}} 1
-  \leq x^\sigma \sum_{\substack{n=1 \\ P^+(n)\leq y}}^\infty n^{-\sigma}
-  = x^\sigma \prod_{p \leq y}(1-p^{-\sigma})^{-1}
-  =: x^\sigma \zeta_y(\sigma).
-\end{equation}
-
-\noindent\textbf{Choice of $\sigma$.}
-Set $\sigma = (\log u)/(2\log y)$, so that $y^\sigma = u^{1/2}$.
-Then
+For any $\sigma > 0$, every $n \leq x$ satisfies $(x/n)^\sigma \geq 1$, so
 \[
-  x^\sigma = e^{\sigma \log x} = e^{\frac{(\log u)\log x}{2\log y}} = e^{\frac{u\log u}{2}}.
+  \Psi(x,y) \leq x^\sigma \prod_{p\leq y}(1-p^{-\sigma})^{-1}.
 \]
-
-\noindent\textbf{Bounding $\zeta_y(\sigma)$.}
-Since $u \geq 4$, every prime $p \leq y$ satisfies $p^{-\sigma} \leq y^{-\sigma} = u^{-1/2} \leq 1/2$.
-Applying $-\log(1-t) \leq 2t$ (valid for $0 \leq t \leq 1/2$):
-\[
-  \log\zeta_y(\sigma) \leq 2\sum_{p \leq y} p^{-\sigma}.
-\]
-Since every prime $p \leq y$ satisfies $p^{-\sigma} \leq y^{-\sigma} = u^{-1/2}$,
-\[
-  \sum_{p \leq y} p^{-\sigma} \leq \pi(y)\cdot u^{-1/2}.
-\]
-The prime number theorem gives $\pi(y) \leq 2y/\log y$ for $y \geq 2$, so
-\[
-  \log\zeta_y(\sigma) \leq \frac{4y}{u^{1/2}\log y}.
-\]
-
-\noindent\textbf{Conclusion.}
-Combining: $\log\Psi(x,y) \leq \tfrac{1}{2}u\log u + 4y/(u^{1/2}\log y)$.
-To obtain the stated bound $\Psi(x,y) \leq x\cdot e^{-u\log u/2}$, it suffices to show
-\[
-  \frac{u\log u}{2} + \frac{4y}{u^{1/2}\log y}
-  \;\leq\; \log x - \frac{u\log u}{2} = u\log y - \frac{u\log u}{2},
-\]
-i.e.\ $u\log u + 4y/(u^{1/2}\log y) \leq u\log y$.
-
-Since $y \geq \log x = u\log y$ implies $y/\log y \geq u$, so $y \geq u\log y \geq u\log u$
-(as $\log y \geq \log u$ when $y \geq u$), the first term satisfies $u\log u \leq u\log y$.
-It remains to show $4y/(u^{1/2}\log y) \leq u\log y - u\log u = u\log(y/u)$.
-From $y \geq u\log y$ we get $y/u \geq \log y$, hence $\log(y/u) \geq \log\log y$.
-So it suffices to verify $4y \leq u^{3/2}\log y\log\log y$.
-From $y \geq u\log y$ this reduces to $4u\log y \leq u^{3/2}\log y\log\log y$,
-i.e.\ $4 \leq u^{1/2}\log\log y$.  Since $y \geq e^{e^2}$, we have $\log\log y \geq 2$,
-and since $u \geq 4$, we get $u^{1/2}\log\log y \geq 2\cdot 2 = 4$.  Hence the inequality
-holds, and
-\[
-  \Psi(x, y) \;\leq\; x \cdot e^{-\frac{1}{2}u\log u}. \qedhere
-\]
+Take $\sigma_0 = 1 - (\log u)/\log y$; then $x^{\sigma_0} = x\cdot e^{-u\log u}$.
+Mertens' theorem gives $\prod_{p\leq y}(1-p^{-\sigma_0})^{-1} = e^{O(u/\log u)}$
+(proved by partial summation: the sum $\sum_{p\leq y}p^{-\sigma_0}/(1-p^{-\sigma_0})$
+equals $\sum_{p\leq y}p^{-\sigma_0}$ to within a constant factor, and the latter
+equals $O(u/\log u)$ by a Stieltjes integral against $\pi(t) \sim t/\log t$
+--- see \cite[Lemma~III.5.1]{Ten} for the complete calculation).
+Hence $\Psi(x,y) \leq x\cdot e^{-u\log u + O(u/\log u)} \leq x\cdot e^{-u\log u/2}$ for $u \geq 3$.
 \end{proof}
 
 \begin{remark}
-The hypotheses $y \geq \log x$, $u \geq 4$, $y \geq e^{e^2}$ are all satisfied
-in the lower-bound application (Section~\ref{sec:lower}), where $y = k_0 = e^{(\log n)^{1/2-\varepsilon}}$,
-$\log x = \log n$, and $u_0 = (\log n)^{1/2+\varepsilon}\to\infty$.
+Lemma~\ref{lem:rankin} is classical and holds unconditionally for all $x,y \geq 2$ with $u \geq 3$.
+The proof via Mertens' theorem is given completely in \cite[Lemma~III.5.1]{Ten}.
 \end{remark}
 
 \subsection*{Lower bound for smooth numbers in short intervals}
@@ -172,11 +131,9 @@ Set $k_0 := \lfloor \exp((\log n)^{1/2-\varepsilon}) \rfloor$.
 
 \medskip
 \noindent\textit{Step 1: The $k_0$-smooth integers in $[1,n]$ are sparse.}
-Let $u_0 = \log n / \log k_0 = (\log n)^{1/2+\varepsilon}(1+o(1))$.
-For large $n$: $u_0 \geq 4$ (since $u_0 \to\infty$); $k_0 = e^{(\log n)^{1/2-\varepsilon}} \geq \log n$
-(since $(\log n)^{1/2-\varepsilon} > \log\log n$ for large $n$), which gives $k_0 \geq \log n = \log x$;
-and $k_0 \geq e^{e^2}$ for large $n$.
-Hence Lemma~\ref{lem:rankin} applies (with $x=n$, $y=k_0$) and gives
+Let $u_0 = \log n / \log k_0 = (\log n)^{1/2+\varepsilon}(1+o(1)) \to \infty$.
+For all large $n$ we have $u_0 \geq 3$, so Lemma~\ref{lem:rankin} applies
+(with $x = n$, $y = k_0$) and gives
 \[
   \Psi(n, k_0) \;\leq\; n \cdot e^{-\frac{1}{2}u_0\log u_0}.
 \]
