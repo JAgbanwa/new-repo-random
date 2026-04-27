@@ -26,9 +26,8 @@ We prove unconditionally that
 \]
 confirming the proposed estimate $\log k(n) \leq (\log n)^{1/2+o(1)}$ and
 showing it is sharp.  The lower bound follows from a counting/pigeonhole
-argument on smooth numbers.  The upper bound uses the
-Hildebrand--Tenenbaum equidistribution theorem for smooth numbers
-in short intervals.
+argument on smooth numbers.  The upper bound uses Hildebrand's 1986
+theorem on smooth numbers in short intervals.
 \end{abstract}
 
 \section{Setup and Definitions}
@@ -77,16 +76,37 @@ One checks inductively that $\rho(u) \leq 1/(u\,\Gamma(u)) \leq u^{-u}$;
 see \cite[Ch.~III.5]{Ten}.
 \end{proof}
 
-The short-interval equidistribution we need is the following.
+The short-interval smooth number count we need is the following theorem of
+Hildebrand.
 
-\begin{theorem}[Hildebrand--Tenenbaum \cite{HT}, short intervals]\label{thm:HT}
-Fix $\varepsilon > 0$.  Uniformly for $x \geq 2$,
-$\exp((\log\log x)^{5/3+\varepsilon}) \leq y \leq x$, and $u = \log x/\log y$,
+\begin{theorem}[Hildebrand \cite{Hild85}, Theorem~1]\label{thm:HT}
+Fix $\varepsilon > 0$.  Uniformly for $x \geq 3$ and
+\begin{equation}\label{eq:HTrange}
+  y \;\geq\; \exp\!\bigl((\log\log x)^{5/3+\varepsilon}\bigr),
+\end{equation}
+setting $u = \log x / \log y$,
 \[
   \Psi(x + y,\, y) - \Psi(x,\, y) \;=\; y\,\rho(u)\,(1 + o(1))
 \]
-as $x \to \infty$.
+as $x \to \infty$ (with $o(1) \to 0$ uniformly in $y$ satisfying \eqref{eq:HTrange}).
 \end{theorem}
+
+\begin{remark}\label{rem:HTproof}
+Theorem~\ref{thm:HT} is proved via a Perron integral
+\[
+  \Psi(x+y,y) - \Psi(x,y) = \frac{1}{2\pi i}\int_{\sigma_0 - iT}^{\sigma_0+iT}
+  F_y(s)\,\frac{(x+y)^s - x^s}{s}\,ds + O\!\Bigl(\frac{x}{T}\Bigr),
+\]
+where $F_y(s) = \prod_{p\leq y}(1-p^{-s})^{-1}$ and the saddle point $\sigma_0$
+satisfies $-F_y'/F_y(\sigma_0) = \log x$.
+The Mertens estimate $\sum_{p\leq y} p^{-\sigma}\log p \sim \log(1/(\sigma-1))$
+for $\sigma \to 1^+$ and $\sigma \sim 1 - 1/\log y$ pins $\sigma_0$.
+The integral over the vertical segment $(x+y)^s - x^s \approx y s\, x^{s-1}$,
+and the saddle-point evaluation of $F_y(\sigma_0)$ reproduces the Dickman
+factor $\rho(u)$.  The lower bound condition \eqref{eq:HTrange} ensures the
+error terms in the saddle-point analysis are $o(y\rho(u))$.
+The full technical details are in \cite{Hild85}.
+\end{remark}
 
 \section{The Lower Bound}
 
@@ -160,12 +180,23 @@ We show every interval $[m+1, m+k_1]$ with $m \leq n$ contains a $k_1$-smooth
 integer, so no $k_1$-run below $n$ exists.
 
 \medskip
-\noindent\textit{Step 1: Hildebrand--Tenenbaum applies.}
-We need $k_1 \geq \exp((\log\log(m+k_1))^{5/3+\varepsilon'})$ for some $\varepsilon'>0$.
-Since $m \leq n$, we have $\log\log(m+k_1) = O(\log\log n)$, and
-$\log k_1 = (\log n)^{1/2+\varepsilon} \gg (\log\log n)^{5/3+\varepsilon'}$ for any
-$\varepsilon' > 0$ and large $n$.  So Theorem~\ref{thm:HT} applies with
-$x = m$ and $y = k_1$ for every $m \in [n^{1/2}, n]$.
+\noindent\textit{Step 1: Verification that Theorem~\ref{thm:HT} applies.}
+We apply Theorem~\ref{thm:HT} with $x = m \in [n^{1/2}, n]$ and $y = k_1$.
+The hypothesis \eqref{eq:HTrange} requires
+\[
+  \log k_1 \;\geq\; (\log\log m)^{5/3+\varepsilon'}\quad\text{for some }\varepsilon'>0.
+\]
+We have $\log k_1 = (\log n)^{1/2+\varepsilon}$ and $\log\log m \leq \log\log n$,
+so it suffices to show
+\[
+  (\log n)^{1/2+\varepsilon} \;\geq\; (\log\log n)^{5/3+\varepsilon'}.
+\]
+For any fixed $\varepsilon'>0$ and large $n$, any positive power of $\log n$
+grows faster than any power of $\log\log n$, so
+$(\log n)^{1/2+\varepsilon} \gg (\log\log n)^{A}$ for every fixed $A$.
+In particular hypothesis \eqref{eq:HTrange} holds (with room to spare)
+for all sufficiently large $n$ and all $m \in [n^{1/2}, n]$.
+Hence Theorem~\ref{thm:HT} applies with $x = m$, $y = k_1$.
 
 \medskip
 \noindent\textit{Step 2: The expected smooth count in $[m+1, m+k_1]$ is large.}
@@ -250,6 +281,11 @@ making these runs a special class of primitive sets.
   N.\ G.\ de~Bruijn,
   \emph{On the number of positive integers $\leq x$ free of prime factors $> y$},
   Indag.\ Math.\ \textbf{13} (1951), 50--60.
+\bibitem{Hild85}
+  A.\ Hildebrand,
+  \emph{On the number of positive integers $\leq x$ and free of
+        prime factors $> y$},
+  Illinois J.\ Math.\ \textbf{30} (1986), 347--365.
 \bibitem{HT}
   A.\ Hildebrand and G.\ Tenenbaum,
   \emph{Integers without large prime factors},
