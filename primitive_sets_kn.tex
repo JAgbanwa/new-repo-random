@@ -139,11 +139,14 @@ For $m \in [k_1, n]$, we need the following estimate.
 
 \begin{hyp}[Short-interval smooth numbers]\label{hyp:SI}
 Let $\rho$ denote the Dickman function and let $\varepsilon > 0$ be fixed.
-There exists $n_* = n_*(\varepsilon)$ such that for all $n \geq n_*$,
-all $m \in [k_1, n]$ with $k_1 = \exp((\log n)^{1/2+\varepsilon})$,
+Set $k_1 := \lfloor\exp((\log n)^{1/2+\varepsilon})\rfloor$.
+There exists $n_* = n_*(\varepsilon)$ such that for all $n \geq n_*$
+and all integers $m \in [k_1, n]$,
 \begin{equation}\label{eq:SI}
   \Psi(m + k_1,\, k_1) \;-\; \Psi(m,\, k_1) \;\geq\; 1.
 \end{equation}
+(Since $m$ is a positive integer, the difference counts exactly the $k_1$-smooth
+integers in the interval $(m, m+k_1] = \{m+1,\ldots,m+k_1\}$.)
 \end{hyp}
 
 \begin{theorem}[Upper bound, conditional]\label{thm:upper}
@@ -158,153 +161,199 @@ contains a $k_1$-smooth integer, and the case $m < k_1$ was handled above.
 Hence no $k_1$-run below $n$ exists, so $k(n) < k_1$.
 \end{proof}
 
-\subsection*{Discussion: what the literature provides and where the gap lies}
+\subsection*{Discussion: the subtraction approach, its failure, and two routes to a proof}
 
 The main result of Hildebrand--Tenenbaum \cite{HT} is a uniform asymptotic
 for the \emph{global count}.  Writing
 $\mathcal{R}_\varepsilon = \{(x,y) : x \geq y \geq 2,\, \log y \geq (\log\log x)^{5/3+\varepsilon}\}$
 and $\eta(x,y) := \Psi(x,y)/(x\rho(u)) - 1$ with $u = \log x/\log y$,
-the result \cite[Th\'eor\`eme~1]{HT} states
+\cite[Th\'eor\`eme~1]{HT} gives
 \begin{equation}\label{eq:HTglobal}
   \eta(x,y) \to 0 \quad\text{uniformly for }(x,y)\in\mathcal{R}_\varepsilon
   \text{ as }y\to\infty.
 \end{equation}
-In other words: for every $\delta > 0$ there exists $Y_0(\varepsilon,\delta)$
-such that $|\eta(x,y)| \leq \delta$ for all $(x,y)\in\mathcal{R}_\varepsilon$
-with $y \geq Y_0$.  This is a statement about $y$ alone: $Y_0$ does \emph{not}
-depend on $x$.
+Explicitly: for every $\delta > 0$ there exists $Y_0(\varepsilon,\delta)$
+(independent of $x$) such that $|\eta(x,y)| \leq \delta$ for all
+$(x,y)\in\mathcal{R}_\varepsilon$ with $y \geq Y_0$.
 
-\subsubsection*{The subtraction approach and why it fails here}
+\subsubsection*{A natural case split at $m = k_1^2$}
 
-Subtracting \eqref{eq:HTglobal} at $x + y$ and at $x$:
+The range $m \in [k_1, n]$ splits naturally at $m = k_1^2$,
+equivalently at $u_1 := \log m/\log k_1 = 2$.
+
+\noindent\textbf{Sub-range~1a}: $m \in [k_1, k_1^2)$, i.e.\ $u_1 \in [1,2)$.
+Write $m = qk_1 + r$ with $0 \leq r < k_1$ (Euclidean division).
+The integer $(q+1)k_1 = m - r + k_1$ satisfies $m < (q+1)k_1 \leq m + k_1$,
+so $(q+1)k_1 \in [m+1, m+k_1]$.
+Since $m < k_1^2$ we have $q \leq k_1 - 1$, giving $q+1 \leq k_1$.
+Every prime factor of $q+1$ is at most $q+1 \leq k_1$, so $(q+1)k_1$ is $k_1$-smooth.
+Thus every interval $[m+1, m+k_1]$ with $m \in [k_1, k_1^2)$
+contains a $k_1$-smooth integer by an elementary divisibility argument,
+with no analytic input.
+
+\noindent\textbf{Sub-range~1b}: $m \in [k_1^2, n]$, i.e.\ $u_1 \geq 2$.
+Here we must use smooth-number asymptotics.
+We analyze the subtraction approach for this range.
+
+\subsubsection*{The subtraction approach for sub-range~1b and why it fails}
+
+Subtracting \eqref{eq:HTglobal} at $m + k_1$ and at $m$:
 \begin{equation}\label{eq:diff}
-  \Psi(x+y,y) - \Psi(x,y)
-  \;=\; \underbrace{(x+y)\rho(u') - x\rho(u_1)}_{\text{(I)}}
-  \;+\; \underbrace{(x+y)\rho(u')\eta_1 - x\rho(u_1)\eta_2}_{\text{(II)}},
+  \Psi(m+k_1,k_1) - \Psi(m,k_1)
+  \;=\; \underbrace{(m+k_1)\rho(u') - m\rho(u_1)}_{\text{(I)}}
+  \;+\; \underbrace{(m+k_1)\rho(u')\eta_1 - m\rho(u_1)\eta_2}_{\text{(II)}},
 \end{equation}
-where $u' = \log(x+y)/\log y$, $u_1 = u$, $\eta_j = \eta(\cdot)$ evaluated
-at the respective arguments.
+where $u' = \log(m+k_1)/\log k_1$ and $\eta_j$ is $\eta(\cdot)$ at the
+respective argument.
 
-\emph{Term~(I).}
-A mean-value argument using $\rho'(t) = -\rho(t-1)/t$ and
-$u'-u_1 = \log(1+y/x)/\log y \leq (y/x)/\log y$ gives
+\emph{Term~(I) for $u_1 \geq 2$.}
+Set $g(t) = t\rho(\log t/\log k_1)$.  By the mean-value theorem,
+$g(m+k_1) - g(m) = k_1 g'(\xi)$ for some $\xi \in [m, m+k_1]$.
+Computing the derivative:
+\[
+  g'(t) = \rho(u_t)\Bigl(1 - \frac{\rho(u_t-1)}{u_t\,\rho(u_t)\,\log k_1}\Bigr),
+  \qquad u_t := \frac{\log t}{\log k_1}.
+\]
+For $u_t \geq 2$, the Dickman delay-differential equation $\rho'(u) = -\rho(u-1)/u$
+and the standard asymptotics \cite[Corollary~III.5.4]{Ten} give
+$\rho(u-1)/\rho(u) = O(u\log u)$ for $u \geq 2$.
+The relative correction is therefore
+\[
+  \frac{\rho(u_t-1)}{u_t\,\rho(u_t)\,\log k_1}
+  = O\!\left(\frac{\log u_1}{\log k_1}\right)
+  \leq \frac{(1/2-\varepsilon)\log\log n}{(\log n)^{1/2+\varepsilon}} \to 0.
+\]
+Hence, for sub-range~1b:
 \begin{equation}\label{eq:termI}
-  \text{(I)} \;=\; y\rho(u_1)\!\left(1 + O\!\left(\frac{1}{\log y}\right)\right),
+  \text{(I)} = k_1\rho(u_1)\!\left(1 + O\!\left(\frac{\log u_1}{\log k_1}\right)\right)
+  = k_1\rho(u_1)(1+o(1)).
 \end{equation}
-valid for $x \geq y$ and $y \geq 2$.  (The calculation: expand $g(t) = t\rho(\log t/\log y)$
-by the mean-value theorem; the derivative $g'(t) = \rho(u) - \rho(u-1)/(u\log y)$
-has a relative correction $O(1/\log y)$ since $\rho(u-1)/\rho(u) = O(u)$
-and $u \leq u_1 \leq (\log n)^{1/2-\varepsilon} = o(\log y)$.)
-So Term~(I) is the main term, equal to $k_1\rho(u_1)(1+O(1/\log k_1))$
-with a \emph{relative} error $O(1/\log k_1) \to 0$.
 
-\emph{Term~(II) is the obstacle.}
+\begin{remark}
+The estimate \eqref{eq:termI} relies on $\rho(u_t-1)/\rho(u_t) = O(u_t\log u_t)$,
+which holds for $u_t \geq 2$ but \emph{fails} for $u_t \in (1,2)$.
+For $u \in (1,2)$, $\rho(u) = 1-\log u$ and $\rho(u-1) = 1$,
+so $\rho(u-1)/\rho(u) = 1/(1-\log u) \to \infty$ as $u\to 1^+$.
+This is why sub-range~1a requires the separate elementary argument above.
+\end{remark}
+
+\emph{Term~(II) is the fundamental obstacle.}
 With $|\eta_1|, |\eta_2| \leq \delta$:
 \[
-  |\text{(II)}| \;\leq\; \bigl[(x+y)\rho(u') + x\rho(u_1)\bigr]\delta
-  \;\approx\; 2x\rho(u_1)\delta.
+  |\text{(II)}| \;\leq\;
+  \bigl[(m+k_1)\rho(u') + m\rho(u_1)\bigr]\delta
+  \;\lesssim\; 2m\rho(u_1)\delta.
 \]
-In our application $x = m$ and $y = k_1$, so $|\text{(II)}| \lesssim 2m\rho(u_1)\delta$.
-The ratio of this error to the main term is
+The ratio to the main term is
 \[
-  \frac{|\text{(II)}|}{y\rho(u_1)} \;\approx\; \frac{2m\delta}{k_1}.
+  \frac{|\text{(II)}|}{k_1\rho(u_1)} \;\lesssim\; \frac{2m\delta}{k_1}.
 \]
-For $m \in [k_1, n]$ this ratio ranges up to $2n\delta/k_1$.
-Now $n/k_1 = \exp(\log n - (\log n)^{1/2+\varepsilon}) \to \infty$,
-so \emph{no matter how small $\delta$ is} (as long as it is a fixed positive
-number, even an astronomically small one), the ratio $n\delta/k_1 \to \infty$.
-The error term dominates the main term for large $m$.
+For $m \in [k_1^2, n]$ this ranges from $2k_1\delta$ to $2(n/k_1)\delta$.
+Since $n/k_1 = \exp(\log n - (\log n)^{1/2+\varepsilon}) \to \infty$,
+even at the lower end of sub-range~1b the ratio is $2k_1\delta \to \infty$
+for any fixed $\delta > 0$.
+No choice of $\delta$ depending only on $\varepsilon$ can control this:
+\emph{the error swamps the main term throughout sub-range~1b.}
 
-\textbf{Conclusion}: the naive subtraction of two applications of \eqref{eq:HTglobal}
-does \emph{not} prove Hypothesis~\ref{hyp:SI}.
-The ``$|\eta| \leq \delta$ uniformly in $x$'' form of the HT theorem is
-insufficient because two near-cancelling large quantities are being subtracted.
+\textbf{Conclusion}: The subtraction of two applications of \eqref{eq:HTglobal}
+does not prove Hypothesis~\ref{hyp:SI} for sub-range~1b.
 
-\subsubsection*{What would close the gap: two routes}
+\subsubsection*{Route~1: A Lipschitz bound on $\eta$}
 
-\emph{Route~1: A Lipschitz bound on the error term.}
-If the HT error satisfies, for $(x,y)\in\mathcal{R}_\varepsilon$ and $y\geq Y_1(\varepsilon)$,
+If one could establish, for $(x,y)\in\mathcal{R}_\varepsilon$ and $y\geq Y_1(\varepsilon)$,
 \begin{equation}\label{eq:LipHT}
-  |\eta(x+y,y) - \eta(x,y)| \;\leq\; \frac{C\,y}{x\log y}
+  \bigl|\eta(x+y,y) - \eta(x,y)\bigr| \;\leq\; \frac{Cy}{x\log y}
 \end{equation}
-for some absolute constant $C$, then in \eqref{eq:diff}:
+for an absolute constant $C$, then in \eqref{eq:diff}:
 \[
-  |\text{(II)}| \leq (x+y)\rho(u')|\eta_1 - \eta_2| + O(y\rho(u_1)|\eta_2|)
-  \leq \frac{2Cy\rho(u_1)}{\log y} + O(y\rho(u_1)\delta).
+  |\text{(II)}|
+  \leq (m+k_1)\rho(u')|\eta_1 - \eta_2| + k_1\rho(u_1)|\eta_2|
+  \leq \frac{2Ck_1\rho(u_1)}{\log k_1} + k_1\rho(u_1)\delta.
 \]
-Choosing $\delta = \frac{1}{4}$ and $y$ large enough so $2C/\log y \leq \frac{1}{4}$,
-Term~(II) is at most $\frac{1}{2}y\rho(u_1)$, which is half the main term.
-Combined with $k_1\rho(u_1) \geq 2$ (established above), the count is $\geq 1$.
+Choosing $\delta = 1/4$ and $k_1 \geq e^{8C}$ (ensured by $n$ large),
+Term~(II) is at most $\tfrac12 k_1\rho(u_1)$.
+Since $k_1\rho(u_1) \geq 2$ (the main-term lower bound, established by the
+same calculation as in the lower bound proof but with $k_1$ in place of $k_0$),
+the difference is $\geq 1$.
 
-Bound \eqref{eq:LipHT} says: as $x$ varies by one step of size $y$,
-the \emph{relative error} $\eta$ changes by at most $Cy/(x\log y)$,
-i.e.\ the relative error is Lipschitz in $x$ with a Lipschitz constant $O(1/(x\log y))$.
-This is the kind of equicontinuity that one expects from the saddle-point analysis
-(the saddle-point location $\sigma_0$ shifts smoothly with $x$), but it does not
-appear explicitly in \cite{HT,Ten}.
+Bound~\eqref{eq:LipHT} says the relative error $\eta$ is Lipschitz in $x$
+with constant $O((x\log y)^{-1})$.
+This is the equicontinuity expected from the saddle-point analysis
+(the saddle point $\sigma_0 = 1 - (\log u)/\log y$ shifts by $O(1/(x\log y))$
+as $x$ increases by $y$), but establishing it rigorously requires a
+second-order expansion of $\Psi(x,y)$ in $1/\log y$ that is \emph{uniform in $x$}.
+This is not stated in \cite{HT,Ten}.
 
-\emph{Route~2: Direct Perron analysis of the short-interval integral.}
-Rather than subtracting two global estimates, one can analyze
-the Perron integral
+\subsubsection*{Route~2: Direct Perron analysis}
+
+Rather than subtracting two global estimates, one can work with
+the combined Perron integral for the difference directly:
 \begin{equation}\label{eq:PerronSI}
   \Psi(m+k_1,k_1) - \Psi(m,k_1)
   = \frac{1}{2\pi i}\int_{\sigma_0 - iT}^{\sigma_0+iT}
-    F_{k_1}(s)\,\frac{(m+k_1)^s - m^s}{s}\,ds + \text{(tail)}
+    F_{k_1}(s)\,\frac{(m+k_1)^s - m^s}{s}\,ds + \mathcal{E}(m,T),
 \end{equation}
-\emph{directly}, where $F_y(s) = \prod_{p\leq y}(1-p^{-s})^{-1}$ and
-$\sigma_0 = 1 - (\log u_1)/\log k_1$ is the saddle point.
-The kernel satisfies
+where $F_y(s) = \prod_{p\leq y}(1-p^{-s})^{-1}$,
+$\sigma_0 = 1 - (\log u_1)/\log k_1$, and $\mathcal{E}(m,T)$ is the tail.
+Expanding the kernel:
+\begin{equation}\label{eq:kernelexp}
+  \frac{(m+k_1)^s - m^s}{s}
+  = m^{s-1}k_1\!\left(1 + O\!\left(\frac{|s|k_1}{m}\right)\right).
+\end{equation}
+For $m \geq k_1^2$ and $s$ near the saddle point ($|\Im(s)| \leq C/\log m$),
+$|s| \approx \sigma_0 \approx 1$, so $|s|k_1/m \leq C/k_1 \to 0$.
+The leading-term integral $\frac{k_1}{2\pi i}\int F_{k_1}(s)m^{s-1}ds$
+yields $k_1\rho(u_1)(1+O(1/\log k_1))$ by the HT saddle-point analysis.
+For $m \gg k_1\log n$ the correction $O(k_1/m)$ is $o(1)$, giving
+$k_1\rho(u_1)(1+o(1)) \geq 1$ for large $n$.
+The range $m \in [k_1^2, k_1\log n \cdot k_1] = [k_1^2, k_1^2\log n]$ is covered by the same argument (the correction is $O(k_1/k_1^2) = O(1/k_1) = o(1)$ for $m \geq k_1^2$).
+
+This sketch glosses over three genuine technical obstacles, which
+a complete proof would need to address.
+
+\textbf{Obstacle~1} (Bounding the correction-term integral).
+The correction $O(|s|k_1/m)$ in \eqref{eq:kernelexp} contributes
+$O(k_1^2/m)$ times the integral $\int_{\sigma_0-iT}^{\sigma_0+iT}|s||F_{k_1}(s)|m^{\sigma_0-1}|ds|$.
+This $s$-weighted integral is \emph{not} a direct consequence of
+the Perron formula for $\Psi(m,k_1)$: inserting an extra factor $|s|^2/m$
+into the Perron integrand requires bounding $|F_{k_1}(\sigma_0+it)|$
+for $|t|$ up to $T$, and such vertical-strip bounds must be stated explicitly.
+
+\textbf{Obstacle~2} (Tail uniformity in $m$).
+The tail satisfies
 \[
-  (m+k_1)^s - m^s = m^s\bigl[(1+k_1/m)^s - 1\bigr]
-  = m^s\Bigl[s\,\frac{k_1}{m} + O\!\Bigl(s^2\,\frac{k_1^2}{m^2}\Bigr)\Bigr].
+  \mathcal{E}(m,T) = O\!\left(\frac{(m+k_1)^{\sigma_0}F_{k_1}(\sigma_0)}{T}\right)
+  \approx O\!\left(\frac{m\rho(u_1)}{T}\right).
 \]
-The leading term $s\,k_1 m^{s-1}$ is, up to the factor $s$, the integrand
-for $\Psi'(m,k_1)\cdot k_1$ (the ``derivative'' of $\Psi$ with respect to $m$).
-The HT saddle-point analysis of $F_{k_1}(s)m^{s-1}$ at $s = \sigma_0$
-gives the main term $m^{-1} \cdot m\rho(u_1) = \rho(u_1)$, so
-the leading contribution to \eqref{eq:PerronSI} is $k_1\rho(u_1)(1+O(1/\log k_1))$.
+To achieve $\mathcal{E}(m,T) = o(k_1\rho(u_1))$ one needs $T \gg m/k_1$.
+Since $\sigma_0 = 1 - (\log u_1)/\log k_1$ depends on $m$,
+both the choice of $T$ and the resulting error must be controlled
+\emph{uniformly} over all $m \in [k_1^2, n]$.
+As $m/k_1$ ranges up to $n/k_1 \to \infty$, this requires
+the saddle-point analysis to remain valid for $T$ growing without bound,
+which is a non-trivial uniformity statement.
 
-The correction from the $O(s^2 k_1^2/m^2)$ term contributes
-$O(k_1^2/m^2) \cdot \frac{1}{2\pi i}\int F_{k_1}(s)m^s s\,ds$.
-The integral $\frac{1}{2\pi i}\int F_{k_1}(s)m^s s\,ds$
-is of order $m\rho(u_1)\sigma_0\log m \leq m\rho(u_1)\log n$
-(bounded by differentiating the Perron formula for $\Psi(m,k_1)$).
-Hence the correction is $O(k_1^2\rho(u_1)\log n/m) = O(k_1\rho(u_1)\cdot k_1\log n/m)$,
-which is $o(k_1\rho(u_1))$ whenever $m \gg k_1\log n$.
+\textbf{Obstacle~3} (Contour validity for large $|\Im(s)|$).
+The expansion \eqref{eq:kernelexp} and the bound on $F_{k_1}(\sigma_0+it)$
+must hold uniformly for $|\Im(s)|$ up to $T = O(m/k_1) \to \infty$.
+In the HT framework, $|F_y(\sigma_0+it)| \ll |F_y(\sigma_0)|e^{-c(\log y)|t|}$
+for some $c > 0$ when $|t| \leq 1$; extending this to $|t| \to \infty$
+as required here demands additional input on the distribution of $F_y(s)$
+on tall rectangles, which is available (it follows from zero-free regions for
+$F_y(s)$) but must be made explicit.
 
-For $m \leq C k_1 \log n$ (a thin initial range), the interval
-$[m+1, m+k_1]$ contains $m + k_1 \leq (C\log n + 1)k_1$,
-so the relevant multiple of $k_1$ in that interval is $j k_1$ with
-$j \leq C\log n + 1$.  For $j \leq k_1$, $j k_1$ is $k_1$-smooth (since
-all prime factors of $j$ are $\leq j \leq k_1$).
-As $k_1 = e^{(\log n)^{1/2+\varepsilon}} \gg \log n$, the condition $j \leq k_1$
-is satisfied throughout this initial range.
-
-Thus Route~2 would yield Hypothesis~\ref{hyp:SI} by splitting into
-$m \leq Ck_1\log n$ (where $j k_1 \in [m+1,m+k_1]$ with $j \leq k_1$ is
-a $k_1$-smooth witness) and $m > Ck_1\log n$ (where the direct Perron
-analysis gives $k_1\rho(u_1)(1+o(1)) \geq 1$).
-The second part requires completing the saddle-point analysis of
-\eqref{eq:PerronSI} uniformly in $m$, with all error terms made explicit.
-This is within the scope of the HT method but has not been written out in
-this form in \cite{HT,Ten}.
-
-\begin{remark}[What an unconditional proof would require]
-Both routes above are ``incrementally hard'' in the sense that they require
-tightening known results rather than new ideas.  Concretely:
-\begin{itemize}
-\item Route~1 requires the HT saddle-point method to yield a second-order
-  expansion $\Psi(x,y) = x\rho(u)[1 + c_1(u)/\log y + O((\log y)^{-2})]$
-  with $c_1(u)$ uniformly Lipschitz in $u$, together with a statement that
-  this expansion is uniform in $x$ (not just for fixed $x$).
-\item Route~2 requires the direct Perron analysis of the short-interval
-  integral \eqref{eq:PerronSI} to be carried through to completion,
-  tracking saddle-point and tail errors uniformly in $m \in [Ck_1\log n, n]$.
-\end{itemize}
-Either approach is a refinement of existing technology.  The key inputs
-(saddle-point for $F_y(s)m^s$, bounds on the Dickman function and its
-derivative, Mertens-type estimates for $\prod_{p\leq y}(1-p^{-\sigma})^{-1}$)
-are all available in \cite{HT,Ten}.
+\begin{remark}[Summary: what an unconditional proof requires]\label{rem:obstacles}
+Both routes are refinements of the HT saddle-point method, not new ideas.
+Route~1 requires a second-order uniform expansion
+$\Psi(x,y) = x\rho(u)(1 + c_1(u)/\log y + O((\log y)^{-2}))$
+with $c_1(u)$ satisfying a Lipschitz bound, uniform in $x$.
+Route~2 requires resolving Obstacles~1--3 above: bounding
+$s$-weighted Perron integrals, controlling tails uniformly in $m$,
+and extending saddle-point bounds to tall contours.
+All necessary inputs---the Perron integral for $F_y(s)m^s$,
+bounds on $|F_y(\sigma+it)|$, the Dickman function and its derivatives---are
+available in principle via \cite{HT,Ten}, but the arguments have not been
+assembled into a complete proof of Hypothesis~\ref{hyp:SI}.
 \end{remark}
 
 \section{Main Result}
