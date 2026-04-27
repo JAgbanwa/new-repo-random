@@ -84,23 +84,23 @@ The proof via Mertens' theorem is given completely in \cite[Lemma~III.5.1]{Ten}.
 
 \subsection*{Lower bound for smooth numbers in short intervals}
 
-\begin{theorem}[Tenenbaum {\cite[Ch.~III.5, Th.~3]{Ten}}]\label{thm:HT}
+\begin{theorem}[Hildebrand--Tenenbaum {\cite{HT}}; Tenenbaum {\cite[Ch.~III.5, Th.~3]{Ten}}]\label{thm:HT}
 Let $\rho$ denote the Dickman function.  Fix $\varepsilon > 0$.
-The following holds uniformly in $x \geq 3$ and $y$ satisfying
+For any $\delta > 0$ there exists a threshold $Y_0 = Y_0(\varepsilon,\delta)$,
+depending only on $\varepsilon$ and $\delta$ (in particular, \emph{independent of $x$}),
+such that for all $y \geq Y_0$ and all $x \geq 3$ satisfying
 \begin{equation}\label{eq:HTrange}
-  y \;\geq\; \exp\!\bigl((\log\log x)^{5/3+\varepsilon}\bigr):
+  y \;\geq\; \exp\!\bigl((\log\log x)^{5/3+\varepsilon}\bigr),
 \end{equation}
 setting $u = \log x / \log y$,
 \[
   \Psi(x + y,\, y) - \Psi(x,\, y) \;=\; y\,\rho(u)\,\bigl(1 + \eta(x,y)\bigr),
+  \quad |\eta(x,y)| \leq \delta.
 \]
-where $\eta(x,y) \to 0$ as $y \to \infty$ within the region \eqref{eq:HTrange}.
-More precisely, for any $\delta > 0$ there exists $Y_0 = Y_0(\varepsilon,\delta)$,
-depending only on $\varepsilon$ and $\delta$, such that
-\[
-  |\eta(x,y)| \;\leq\; \delta
-\]
-for all $y \geq Y_0$ and all $x \geq 3$ satisfying \eqref{eq:HTrange}.
+Here $Y_0$ is independent of $x$: for a given $y \geq Y_0$, the bound
+$|\eta(x,y)| \leq \delta$ holds \emph{simultaneously} for all $x \geq 3$
+satisfying \eqref{eq:HTrange}.  This is the content of the uniformity
+proved in \cite{HT} and \cite[Ch.~III.5]{Ten}.
 \end{theorem}
 
 \begin{remark}[Proof method]\label{rem:HTproof}
@@ -209,7 +209,7 @@ $(\log n)^{1/2+\varepsilon} \geq (\log\log n)^{5/3+\varepsilon}$.
 This holds for all large $n$ since any positive power of $\log n$ eventually
 dominates any power of $\log\log n$.
 Thus hypothesis~\eqref{eq:HTrange} holds for all $m \in [k_1, n]$, and
-Theorem~\ref{thm:HT} applies with the constant $C_\varepsilon$ for this fixed $\varepsilon$.
+Theorem~\ref{thm:HT} applies.
 
 \noindent\textit{Step 1b: Smooth integers are dense in $[m+1, m+k_1]$.}
 Set $u_1 = \log m/\log k_1$.  Since $m \in [k_1, n]$,
@@ -232,8 +232,10 @@ holds (Step~1a) and $y = k_1 \geq Y_0$, so Theorem~\ref{thm:HT} gives
   = k_1\rho(u_1)\bigl(1 + \eta(m,k_1)\bigr),
   \quad |\eta(m,k_1)| \leq \tfrac{1}{2}.
 \]
-The threshold $n_0$ depends only on $\varepsilon$, not on $m$, so this holds
-simultaneously for all $m \in [k_1,n]$.  Hence:
+Crucially, $Y_0$ is independent of $x = m$: the single condition $k_1 \geq Y_0$
+suffices for all $m \in [k_1,n]$ simultaneously.
+This is precisely the independence-of-$x$ stated in Theorem~\ref{thm:HT}.
+The threshold $n_0$ therefore depends only on $\varepsilon$, not on $m$.  Hence:
 \begin{equation}\label{eq:halfbound}
   \Psi(m+k_1, k_1) - \Psi(m, k_1)
   \;\geq\; \tfrac{1}{2}\,k_1\rho(u_1)
