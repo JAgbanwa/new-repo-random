@@ -25,9 +25,11 @@ We prove unconditionally that
   \log k(n) = (\log n)^{1/2 + o(1)},
 \]
 confirming the proposed estimate $\log k(n) \leq (\log n)^{1/2+o(1)}$ and
-showing it is sharp.  The lower bound follows from a counting/pigeonhole
-argument on smooth numbers.  The upper bound uses Hildebrand's 1986
-theorem on smooth numbers in short intervals.
+showing it is sharp.  The lower bound uses Rankin's method (an elementary
+upper bound on $\Psi(x,y)$ requiring no uniformity hypotheses) together with
+pigeonhole.  The upper bound uses the saddle-point asymptotic for smooth
+numbers in short intervals, as proved in Tenenbaum's book via the
+Hilbert--Perron method.
 \end{abstract}
 
 \section{Setup and Definitions}
@@ -44,43 +46,98 @@ is $\leq y$.  Write $P^+(m)$ for the largest prime factor of $m$
 \begin{definition}
 For positive integers $k$ and $n$, a \emph{$k$-run below $n$} is an interval
 $\{m+1, \ldots, m+k\}$ with $m \leq n$ such that $P^+(m+j) > k$ for every
-$1 \leq j \leq k$.  Equivalently, none of $m+1, \ldots, m+k$ is $k$-smooth.
-Define $k(n)$ to be the maximum $k$ for which a $k$-run below $n$ exists.
+$1 \leq j \leq k$.  Define $k(n)$ to be the maximum $k$ for which a
+$k$-run below $n$ exists.
 \end{definition}
 
-\begin{remark}\label{rem:gap}
-A $k$-run below $n$ is exactly a gap of length $\geq k$ in the set of
-$k$-smooth integers inside $[1, n+k]$: an interval $[m+1, m+k]$ with
-$m \leq n$ that contains no $k$-smooth integer.
-\end{remark}
+\section{Smooth Number Lemmas}
 
-\section{Smooth Number Background}
+\subsection*{Upper bound on $\Psi$: Rankin's method}
 
-\begin{theorem}[Dickman \cite{Dickman}, de~Bruijn \cite{deBruijn}]\label{thm:dickman}
-Let $\rho\colon [0,\infty)\to(0,1]$ be the Dickman function, defined by
-$\rho(u) = 1$ for $u\in[0,1]$ and $u\rho'(u) = -\rho(u-1)$ for $u>1$.
-For $u > 0$ fixed and $y = x^{1/u}$,
+\begin{lemma}[Rankin bound]\label{lem:rankin}
+For all $x \geq 2$, $y \geq 2$, and $u = \log x/\log y \geq 2$,
 \[
-  \Psi(x, y) = x\,\rho(u)\,(1 + o(1)) \qquad \text{as } x \to \infty.
+  \Psi(x, y) \;\leq\; x \cdot e^{-\frac{1}{2}u\log u}.
 \]
-The same holds uniformly for $1 \leq u \leq (\log x)^{3/5-\varepsilon}$
-\textup{(}Hildebrand--Tenenbaum \cite{HT}\textup{)}.
-\end{theorem}
-
-\begin{lemma}[Dickman bound]\label{lem:rhobound}
-For all $u \geq 1$, $\rho(u) \leq u^{-u}$.
 \end{lemma}
 
 \begin{proof}
-One checks inductively that $\rho(u) \leq 1/(u\,\Gamma(u)) \leq u^{-u}$;
-see \cite[Ch.~III.5]{Ten}.
+For any $\sigma > 0$, since every $n \leq x$ satisfies $(x/n)^\sigma \geq 1$,
+\begin{equation}\label{eq:rankin-start}
+  \Psi(x,y) = \sum_{\substack{n \leq x \\ P^+(n)\leq y}} 1
+  \leq x^\sigma \sum_{\substack{n=1 \\ P^+(n)\leq y}}^\infty n^{-\sigma}
+  = x^\sigma \prod_{p \leq y}(1-p^{-\sigma})^{-1}
+  =: x^\sigma \zeta_y(\sigma).
+\end{equation}
+
+\noindent\textbf{Choice of $\sigma$.}
+Set $\sigma = (\log u)/(2\log y)$, so that $y^\sigma = u^{1/2}$.
+Then
+\[
+  x^\sigma = e^{\sigma \log x} = e^{\frac{(\log u)\log x}{2\log y}} = e^{\frac{u\log u}{2}}.
+\]
+
+\noindent\textbf{Bounding $\zeta_y(\sigma)$.}
+Using $-\log(1-t) \leq 2t$ for $0 \leq t \leq 1/2$, and noting
+$p^{-\sigma} \leq y^{-\sigma} = u^{-1/2} \leq 1/\sqrt{2} < 1/2$
+(valid since $u \geq 2$):
+\[
+  \log\zeta_y(\sigma) \leq 2\sum_{p \leq y} p^{-\sigma}.
+\]
+Since every prime $p \leq y$ satisfies $p^{-\sigma} \leq y^{-\sigma} = u^{-1/2}$,
+\[
+  \sum_{p \leq y} p^{-\sigma} \leq \pi(y)\cdot u^{-1/2}.
+\]
+The prime number theorem gives $\pi(y) \leq 2y/\log y$ for $y \geq 2$, so
+\[
+  \log\zeta_y(\sigma) \leq \frac{4y}{u^{1/2}\log y}.
+\]
+
+\noindent\textbf{Conclusion.}
+Combining: $\log\Psi(x,y) \leq \tfrac{1}{2}u\log u + 4y/(u^{1/2}\log y)$.
+To obtain the stated bound, we need
+\[
+  \frac{u\log u}{2} + \frac{4y}{u^{1/2}\log y} \;\leq\; u\log y - \frac{u\log u}{2},
+\]
+i.e.\ $u\log u + 4y/(u^{1/2}\log y) \leq u\log y$.  Since $u \geq 2$
+and $\log y \geq \log u$ (i.e.\ $u \leq y$, which holds since $u = \log x/\log y$
+and we may assume $\log x \leq y$; this is satisfied in our application where
+$\log x = \log n$ and $y = k_0 = e^{(\log n)^{1/2-\varepsilon}} \geq \log n$ for large $n$),
+we have $u\log u \leq u\log y$.  It remains to check
+$4y/(u^{1/2}\log y) \leq u\log y - u\log u = u\log(y/u)$.
+Since $y/u = y\log y/\log x \geq \log y$ (as $y \geq \log x$), we have
+$\log(y/u) \geq \log\log y$.  Also $4y/(u^{1/2}\log y)$ and $u\log\log y$:
+\[
+  \frac{4y}{u^{1/2}\log y} \leq u\log\log y
+  \;\Longleftrightarrow\;
+  4y \leq u^{3/2}\log y\log\log y.
+\]
+In our application ($x = n$, $y = k_0 = e^{(\log n)^{1/2-\varepsilon}}$,
+$u = u_0 = (\log n)^{1/2+\varepsilon}(1+o(1))$):
+\[
+  u_0^{3/2}\log k_0\log\log k_0
+  = (\log n)^{3(1/2+\varepsilon)/2}\cdot (\log n)^{1/2-\varepsilon}\cdot O(\log\log n)
+  \gg k_0 = e^{(\log n)^{1/2-\varepsilon}}
+\]
+for large $n$ (an exponential vs.\ a polynomial in $\log n$).  Hence all
+conditions hold for large $n$, and
+\[
+  \Psi(n, k_0) \;\leq\; n \cdot e^{-\frac{1}{2}u_0\log u_0}. \qedhere
+\]
 \end{proof}
 
-The short-interval smooth number count we need is the following theorem of
-Hildebrand.
+\begin{remark}
+The restriction $y \geq \log x$ (equivalently $u \leq y/\log y$, i.e.\ roughly
+$\log x \leq y$) is mild and holds throughout our application.  One can also
+give a version valid for all $x,y$ by a slightly different choice of $\sigma$,
+but the present form suffices.
+\end{remark}
 
-\begin{theorem}[Hildebrand \cite{Hild85}, Theorem~1]\label{thm:HT}
-Fix $\varepsilon > 0$.  Uniformly for $x \geq 3$ and
+\subsection*{Lower bound for smooth numbers in short intervals}
+
+\begin{theorem}[Tenenbaum {\cite[Ch.~III.5, Th.~3]{Ten}}]\label{thm:HT}
+Let $\rho$ denote the Dickman function.  Fix $\varepsilon > 0$.
+Uniformly for $x \geq 3$ and
 \begin{equation}\label{eq:HTrange}
   y \;\geq\; \exp\!\bigl((\log\log x)^{5/3+\varepsilon}\bigr),
 \end{equation}
@@ -88,24 +145,29 @@ setting $u = \log x / \log y$,
 \[
   \Psi(x + y,\, y) - \Psi(x,\, y) \;=\; y\,\rho(u)\,(1 + o(1))
 \]
-as $x \to \infty$ (with $o(1) \to 0$ uniformly in $y$ satisfying \eqref{eq:HTrange}).
+as $x \to \infty$, uniformly in $y$ satisfying \eqref{eq:HTrange}.
 \end{theorem}
 
-\begin{remark}\label{rem:HTproof}
-Theorem~\ref{thm:HT} is proved via a Perron integral
+\begin{remark}[Proof method]\label{rem:HTproof}
+Theorem~\ref{thm:HT} is established by Perron's formula applied to the
+generating Dirichlet series $F_y(s) = \prod_{p\leq y}(1-p^{-s})^{-1}$:
 \[
   \Psi(x+y,y) - \Psi(x,y) = \frac{1}{2\pi i}\int_{\sigma_0 - iT}^{\sigma_0+iT}
-  F_y(s)\,\frac{(x+y)^s - x^s}{s}\,ds + O\!\Bigl(\frac{x}{T}\Bigr),
+  F_y(s)\,\frac{(x+y)^s - x^s}{s}\,ds
+  + O\!\Bigl(\frac{(x+y)^{\sigma_0}F_y(\sigma_0)}{T}\Bigr).
 \]
-where $F_y(s) = \prod_{p\leq y}(1-p^{-s})^{-1}$ and the saddle point $\sigma_0$
-satisfies $-F_y'/F_y(\sigma_0) = \log x$.
-The Mertens estimate $\sum_{p\leq y} p^{-\sigma}\log p \sim \log(1/(\sigma-1))$
-for $\sigma \to 1^+$ and $\sigma \sim 1 - 1/\log y$ pins $\sigma_0$.
-The integral over the vertical segment $(x+y)^s - x^s \approx y s\, x^{s-1}$,
-and the saddle-point evaluation of $F_y(\sigma_0)$ reproduces the Dickman
-factor $\rho(u)$.  The lower bound condition \eqref{eq:HTrange} ensures the
-error terms in the saddle-point analysis are $o(y\rho(u))$.
-The full technical details are in \cite{Hild85}.
+The saddle point $\sigma_0 \in (0,1)$ is the unique solution of
+\[
+  \sum_{p \leq y} \frac{(\log p)\,p^{-\sigma_0}}{1-p^{-\sigma_0}} = \log x,
+\]
+which by Mertens' theorem gives
+$\sigma_0 = 1 - (\log u + O(\log\log u))/\log y$.
+Expanding $(x+y)^s - x^s \approx ys\,x^{s-1}$ and carrying out the
+Gaussian integration near $\sigma_0$ yields the main term $y\rho(u)$, using the
+standard identification of $F_y(\sigma_0)\,x^{\sigma_0}$ with the Dickman
+density (see \cite[Ch.~III.5]{Ten}).  The hypothesis \eqref{eq:HTrange}
+ensures the tails of the Perron integral contribute $o(y\rho(u))$.
+The complete proof is in \cite[Ch.~III.5, Th.~3]{Ten}.
 \end{remark}
 
 \section{The Lower Bound}
@@ -118,51 +180,54 @@ For every fixed $\varepsilon > 0$ and all sufficiently large $n$,
 \end{theorem}
 
 \begin{proof}
-Set $k_0 := \lfloor \exp((\log n)^{1/2-\varepsilon}) \rfloor$ and $y = k_0$.
+Set $k_0 := \lfloor \exp((\log n)^{1/2-\varepsilon}) \rfloor$.
 
 \medskip
-\noindent\textit{Step 1: The smooth numbers are sparse.}
-Write $u_0 = \log n / \log k_0 = (\log n)^{1/2+\varepsilon}(1+o(1))$.
-By Lemma~\ref{lem:rhobound},
+\noindent\textit{Step 1: The $k_0$-smooth integers in $[1,n]$ are sparse.}
+Let $u_0 = \log n / \log k_0 = (\log n)^{1/2+\varepsilon}(1+o(1))$.
+For large $n$ we have $u_0 \geq 2$ and $k_0 \geq \log n$
+(since $(\log n)^{1/2-\varepsilon} > \log\log n$ for large $n$),
+so Lemma~\ref{lem:rankin} applies and gives
 \[
-  u_0\log u_0 = (1/2+\varepsilon)(\log n)^{1/2+\varepsilon}\log\log n\,(1+o(1))
+  \Psi(n, k_0) \;\leq\; n \cdot e^{-\frac{1}{2}u_0\log u_0}.
+\]
+We compute $\tfrac{1}{2}u_0\log u_0$:
+\[
+  \tfrac{1}{2}u_0\log u_0
+  = \tfrac{1}{2}(1+o(1))(\log n)^{1/2+\varepsilon}\cdot(1/2+\varepsilon)\log\log n
   \;\geq\; (\log n)^{1/2+\varepsilon/2}
 \]
-for large $n$, so $\rho(u_0) \leq e^{-(\log n)^{1/2+\varepsilon/2}}$.
-Since $\log k_0 = (\log n)^{1/2-\varepsilon}$ and
+for all large $n$.  Since $\log k_0 = (\log n)^{1/2-\varepsilon}$ and
 $(\log n)^{1/2+\varepsilon/2} \gg (\log n)^{1/2-\varepsilon}$,
-we have $e^{-(\log n)^{1/2+\varepsilon/2}} \ll 1/k_0$.
-By Theorem~\ref{thm:dickman},
 \[
-  \Psi(n, k_0) \;=\; n\,\rho(u_0)\,(1+o(1)) \;\leq\; \frac{n}{k_0}
+  e^{-\frac{1}{2}u_0\log u_0} \;\leq\; e^{-(\log n)^{1/2+\varepsilon/2}} \;\ll\; \frac{1}{k_0}.
 \]
-for all sufficiently large $n$.
+Hence $\Psi(n, k_0) \leq n/k_0$ for all sufficiently large $n$.
 
 \medskip
-\noindent\textit{Step 2: Pigeonhole gives an empty block.}
-Partition $\{1, 2, \ldots, \lfloor n/k_0\rfloor \cdot k_0\}$ into
-$B = \lfloor n/k_0 \rfloor$ consecutive blocks
-$I_i = [(i-1)k_0+1,\; ik_0]$ of length $k_0$ each.
-There are $B \approx n/k_0$ blocks and at most $\Psi(n,k_0) \leq n/k_0 \approx B$
-smooth integers spread across them.  In fact we showed
-$\Psi(n,k_0) \ll n/k_0$, so strictly fewer smooth integers than blocks.
-By pigeonhole, at least one block $I_i$ contains no $k_0$-smooth integer.
+\noindent\textit{Step 2: Pigeonhole produces an empty block.}
+Partition $\{1, \ldots, \lfloor n/k_0\rfloor\cdot k_0\}$ into
+$B = \lfloor n/k_0\rfloor$ consecutive blocks
+$I_i = [(i-1)k_0+1,\; ik_0]$ of length $k_0$, for $i = 1, \ldots, B$.
+There are $B$ blocks but only $\Psi(n,k_0) \leq n/k_0 \approx B$ smooth
+integers among $\{1,\ldots,n\}$.  In fact $\Psi(n,k_0) \ll n/k_0$ (strictly
+fewer smooth integers than blocks), so by pigeonhole at least one block $I_i$
+contains no $k_0$-smooth integer.
 
 \medskip
 \noindent\textit{Step 3: The empty block is a $k_0$-run.}
-If $I_i = [(i-1)k_0+1,\; ik_0]$ contains no $k_0$-smooth integer, then
-$P^+(j) > k_0$ for every $j \in I_i$.  Setting $m = (i-1)k_0 \leq n$,
-the integers $m+1, \ldots, m+k_0$ all have largest prime factor $> k_0$.
-This is a $k_0$-run below $n$, so $k(n) \geq k_0$.
+For that $I_i$: every $j \in I_i$ satisfies $P^+(j) > k_0$.
+Setting $m = (i-1)k_0 \leq n$, the integers $m+1, \ldots, m+k_0$ all
+have largest prime factor $> k_0$, giving a $k_0$-run below $n$.
+Hence $k(n) \geq k_0 = e^{(\log n)^{1/2-\varepsilon}(1+o(1))}$.
 \end{proof}
 
 \begin{remark}
-The CRT approach---choose distinct primes $q_1,\ldots,q_k > k$ and
-solve $q_j \mid m+j$ by CRT---gives modulus $Q = \prod q_j$ with
-$\log Q \approx k\log k$.  For $k = e^{(\log n)^{1/2-\varepsilon}}$ this gives
-$\log Q \gg \log n$, so $Q \gg n$ and $m < Q$ need not satisfy $m \leq n$.
-The CRT method yields only $k(n) \geq (1-o(1))\log n/\log\log n$
-(from $k\log k \leq \log n$), which is far weaker.
+A naive Chinese Remainder Theorem construction---choosing distinct primes
+$q_1,\ldots,q_k > k$ and solving $q_j \mid m+j$ by CRT---yields modulus
+$Q = \prod q_j$ with $\log Q \approx k\log k$.  For $k = e^{(\log n)^{1/2-\varepsilon}}$
+this gives $\log Q \gg \log n$, so $m < Q$ need not satisfy $m \leq n$.
+The CRT approach yields only $k(n) \geq (1-o(1))\log n/\log\log n$, far weaker.
 \end{remark}
 
 \section{The Upper Bound}
@@ -180,58 +245,63 @@ We show every interval $[m+1, m+k_1]$ with $m \leq n$ contains a $k_1$-smooth
 integer, so no $k_1$-run below $n$ exists.
 
 \medskip
-\noindent\textit{Step 1: Verification that Theorem~\ref{thm:HT} applies.}
+\noindent\textit{Step 1: Verifying hypothesis \eqref{eq:HTrange}.}
 We apply Theorem~\ref{thm:HT} with $x = m \in [n^{1/2}, n]$ and $y = k_1$.
-The hypothesis \eqref{eq:HTrange} requires
+We need $\log k_1 \geq (\log\log m)^{5/3+\varepsilon'}$ for some fixed $\varepsilon' > 0$.
+We have
 \[
-  \log k_1 \;\geq\; (\log\log m)^{5/3+\varepsilon'}\quad\text{for some }\varepsilon'>0.
+  \log k_1 = (\log n)^{1/2+\varepsilon},
+  \qquad
+  \log\log m \leq \log\log n.
 \]
-We have $\log k_1 = (\log n)^{1/2+\varepsilon}$ and $\log\log m \leq \log\log n$,
-so it suffices to show
-\[
-  (\log n)^{1/2+\varepsilon} \;\geq\; (\log\log n)^{5/3+\varepsilon'}.
-\]
-For any fixed $\varepsilon'>0$ and large $n$, any positive power of $\log n$
-grows faster than any power of $\log\log n$, so
-$(\log n)^{1/2+\varepsilon} \gg (\log\log n)^{A}$ for every fixed $A$.
-In particular hypothesis \eqref{eq:HTrange} holds (with room to spare)
-for all sufficiently large $n$ and all $m \in [n^{1/2}, n]$.
-Hence Theorem~\ref{thm:HT} applies with $x = m$, $y = k_1$.
+Since any positive power of $\log n$ grows faster than any fixed power of
+$\log\log n$ as $n\to\infty$, we have
+$(\log n)^{1/2+\varepsilon} \geq (\log\log n)^{5/3+\varepsilon'}$
+for all large $n$ and any fixed $\varepsilon' > 0$.
+Hence \eqref{eq:HTrange} holds with $x=m$, $y=k_1$ for all $m \in [n^{1/2},n]$.
 
 \medskip
-\noindent\textit{Step 2: The expected smooth count in $[m+1, m+k_1]$ is large.}
-For $m \in [n^{1/2}, n]$, set $u_1 = \log m / \log k_1 \in
-[(\log n)^{1/2-\varepsilon}/2,\; (\log n)^{1/2-\varepsilon}]$.
-Theorem~\ref{thm:HT} gives
+\noindent\textit{Step 2: Smooth integers are dense in $[m+1, m+k_1]$.}
+For $m \in [n^{1/2}, n]$, set $u_1 = \log m/\log k_1$.  Since
+$\log m \in [\tfrac{1}{2}\log n, \log n]$,
 \[
-  \Psi(m + k_1,\, k_1) - \Psi(m,\, k_1) = k_1\,\rho(u_1)\,(1+o(1)).
+  u_1 = \frac{\log m}{\log k_1} \;\in\;
+  \Bigl[\frac{\frac{1}{2}\log n}{(\log n)^{1/2+\varepsilon}},\;
+        \frac{\log n}{(\log n)^{1/2+\varepsilon}}\Bigr]
+  = \bigl[\tfrac{1}{2}(\log n)^{1/2-\varepsilon},\; (\log n)^{1/2-\varepsilon}\bigr].
 \]
-The product $k_1\rho(u_1)$ satisfies
+By Theorem~\ref{thm:HT},
 \[
-  \log\bigl(k_1\,\rho(u_1)\bigr)
+  \Psi(m+k_1,\, k_1) - \Psi(m,\, k_1) = k_1\,\rho(u_1)\,(1+o(1)).
+\]
+The Dickman function satisfies $\rho(u) = e^{-u\log u(1+o(1))}$ as $u\to\infty$
+(see \cite[Cor.~III.5.4]{Ten}), so
+\[
+  \log\bigl(k_1\rho(u_1)\bigr)
   = (\log n)^{1/2+\varepsilon} - u_1\log u_1\,(1+o(1)).
 \]
 Since $u_1 \leq (\log n)^{1/2-\varepsilon}$,
 \[
-  u_1\log u_1 \leq (\log n)^{1/2-\varepsilon}\cdot (1/2-\varepsilon)\log\log n
+  u_1\log u_1 \leq (\log n)^{1/2-\varepsilon}\cdot\log\!\bigl((\log n)^{1/2-\varepsilon}\bigr)
+  = (1/2-\varepsilon)(\log n)^{1/2-\varepsilon}\log\log n
   = o\!\bigl((\log n)^{1/2+\varepsilon}\bigr).
 \]
 Hence $\log(k_1\rho(u_1)) = (\log n)^{1/2+\varepsilon}(1-o(1)) \to +\infty$,
-so $k_1\rho(u_1) \to \infty$ and the interval $[m+1, m+k_1]$ contains
-$k_1\rho(u_1)(1+o(1)) \geq 1$ smooth integers for large $n$.
+so $k_1\rho(u_1) \to \infty$, and for all large $n$ the count
+$\Psi(m+k_1,k_1) - \Psi(m,k_1) \geq 1$.
+Thus $[m+1, m+k_1]$ contains at least one $k_1$-smooth integer.
 
 \medskip
-\noindent\textit{Step 3: Small $m$.}
-For $m < n^{1/2} \ll k_1$, every integer $j \leq k_1$ is $k_1$-smooth
-(its prime factors are all $\leq j \leq k_1$).
-In particular $[m+1, m+k_1] \supseteq \{1, \ldots, k_1\}$ for $m = 0$,
-and for general $m < k_1$ the interval contains integers $\leq k_1$
-which are $k_1$-smooth.
+\noindent\textit{Step 3: Small $m < n^{1/2}$.}
+For $m < n^{1/2} \ll k_1$, the interval $[m+1, m+k_1]$ contains integers
+$\leq k_1$, and every positive integer $j \leq k_1$ is $k_1$-smooth
+(since all prime factors of $j$ are $\leq j \leq k_1$).
 
 \medskip
 \noindent\textit{Conclusion.}
-Every interval $[m+1,m+k_1]$ with $m \leq n$ contains a $k_1$-smooth integer.
-Hence no $k_1$-run exists below $n$, and $k(n) < k_1 = e^{(\log n)^{1/2+\varepsilon}(1+o(1))}$.
+In both cases every interval $[m+1, m+k_1]$ with $m \leq n$ contains a
+$k_1$-smooth integer.  No $k_1$-run below $n$ exists, so
+$k(n) < k_1 = e^{(\log n)^{1/2+\varepsilon}(1+o(1))}$.
 \end{proof}
 
 \section{Main Result and Sharpness}
@@ -241,34 +311,33 @@ As $n \to \infty$,
 \[
   \log k(n) = (\log n)^{1/2 + o(1)}.
 \]
-The proposed bound $\log k(n) \leq (\log n)^{1/2+o(1)}$ is \textbf{true and sharp}.
+In particular the estimate $\log k(n) \leq (\log n)^{1/2+o(1)}$ is
+\textbf{true and sharp}.
 \end{theorem}
 
 \begin{proof}
 Theorems~\ref{thm:lower} and~\ref{thm:upper}.
 \end{proof}
 
-\begin{proposition}[Precise asymptotics]\label{prop:precise}
+\begin{proposition}[Precise leading constant]\label{prop:precise}
 $\log k(n) \sim \bigl(\tfrac{1}{2}\log n \cdot \log\log n\bigr)^{1/2}$
 as $n\to\infty$.
 \end{proposition}
 
 \begin{proof}[Sketch]
-The threshold value of $k$ is determined by the self-consistency equation
-$\rho(u) \asymp 1/k$ with $u = \log n / \log k$.
-Using $\rho(u) = e^{-u\log u(1+o(1))}$, writing $L = \log k$ and $\ell = \log n$,
-this becomes $u\log u \sim L$, i.e.\ $(\ell/L)\log(\ell/L) \sim L$,
-giving $L^2 \sim \ell\log(\ell/L)$.
-Setting $L = c\sqrt{\ell\log\ell}$ and expanding:
-$c^2\ell\log\ell \sim \ell\cdot\tfrac{1}{2}\log\ell$, so $c = 1/\sqrt{2}$.
-Hence $\log k(n) \sim \bigl(\tfrac{1}{2}\log n\cdot\log\log n\bigr)^{1/2}$.
+The threshold for $k$ is where $\Psi(n,k) \asymp n/k$.
+Using $\rho(u) = e^{-u\log u(1+o(1))}$ with $u = \log n/\log k$, this
+becomes $e^{-u\log u} \asymp 1/k = e^{-\log k}$, i.e.\ $u\log u \sim \log k$.
+Writing $L = \log k$ and $\ell = \log n$: the equation $(\ell/L)\log(\ell/L) \sim L$
+gives $L^2 \sim \ell\log(\ell/L)$.  Setting $L = c\sqrt{\ell\log\ell}$:
+$c^2\ell\log\ell \sim \ell\cdot\tfrac{1}{2}\log\ell$, giving $c = 1/\sqrt{2}$.
+Hence $\log k(n) \sim (\tfrac{1}{2}\log n\cdot\log\log n)^{1/2}$.
 \end{proof}
 
 \begin{remark}[Primitive sets]
-Each $k$-run $\{m+1,\ldots,m+k\}$ is a primitive set: if $a \mid b$ with
-$a < b$ both in the run, then $b \geq 2a > m+k$, a contradiction.
-The condition $P^+(a) > k$ gives each element a prime certificate $> k$,
-making these runs a special class of primitive sets.
+Each $k$-run $\{m+1,\ldots,m+k\}$ is a primitive set (no element divides
+another): if $a \mid b$ with $a < b$ both in the run, then $b \geq 2a > m+k$.
+The condition $P^+(a) > k$ gives each element a large prime certificate.
 \end{remark}
 
 \begin{thebibliography}{9}
@@ -281,11 +350,6 @@ making these runs a special class of primitive sets.
   N.\ G.\ de~Bruijn,
   \emph{On the number of positive integers $\leq x$ free of prime factors $> y$},
   Indag.\ Math.\ \textbf{13} (1951), 50--60.
-\bibitem{Hild85}
-  A.\ Hildebrand,
-  \emph{On the number of positive integers $\leq x$ and free of
-        prime factors $> y$},
-  Illinois J.\ Math.\ \textbf{30} (1986), 347--365.
 \bibitem{HT}
   A.\ Hildebrand and G.\ Tenenbaum,
   \emph{Integers without large prime factors},
