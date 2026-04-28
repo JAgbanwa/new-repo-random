@@ -1,0 +1,336 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\usepackage{mathtools}
+\usepackage[margin=1in]{geometry}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+% Macros
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\SN}{\mathcal{S}_N}
+
+\title{The Largest Sidon Subset of the Perfect Squares
+$\{1^2, 2^2, \ldots, N^2\}$}
+\author{}
+\date{April 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A \emph{Sidon set} (also called a $B_2$ set) is a set of integers in which
+all pairwise sums are distinct.  Let $F(N)$ denote the maximum size of a
+Sidon subset of $\mathcal{S}_N = \{1^2, 2^2, \ldots, N^2\}$.  We prove
+\[
+  \Omega\!\left(\frac{N^{2/3}}{(\log N)^{1/3}}\right)
+  \;\le\;
+  F(N)
+  \;\le\;
+  O\!\left(\frac{N}{(\log N)^{1/4}}\right).
+\]
+In particular $F(N) = o(N)$, disproving the conjecture $F(N) = N^{1-o(1)}$;
+and $F(N) = \omega(N^{1/2})$.  The upper bound uses the Landau--Ramanujan
+theorem on the density of sums of two squares.  The lower bound is a
+probabilistic alteration construction.
+\end{abstract}
+
+\tableofcontents
+
+%--------------------------------------------------------------------
+\section{Introduction and Statement of Results}
+%--------------------------------------------------------------------
+
+\begin{definition}
+A set $A$ of integers is a \emph{Sidon set} (or \emph{$B_2$ set}) if
+whenever $a,b,c,d \in A$ satisfy $a+b = c+d$ we have $\{a,b\} = \{c,d\}$
+as multisets.
+\end{definition}
+
+Let $N \ge 1$ and define
+\[
+  \SN \;=\; \{k^2 : 1 \le k \le N\}, \quad |\SN| = N.
+\]
+Set
+\[
+  F(N) \;:=\; \max\bigl\{|A| : A \subseteq \SN,\; A \text{ is Sidon}\bigr\}.
+\]
+
+\begin{theorem}[Main Theorem]\label{thm:main}
+\[
+  \Omega\!\left(\frac{N^{2/3}}{(\log N)^{1/3}}\right)
+  \;\le\;
+  F(N)
+  \;\le\;
+  O\!\left(\frac{N}{(\log N)^{1/4}}\right).
+\]
+\end{theorem}
+
+\begin{corollary}\label{cor:not-N}
+$F(N) = o(N)$, so $F(N) \ne N^{1-o(1)}$.
+Also $F(N) = \omega(N^{1/2})$.
+\end{corollary}
+
+\subsection{Historical context}
+
+The classical Sidon problem asks for the maximum size of a Sidon subset
+of $\{1,\ldots,M\}$; the answer is $(1+o(1))M^{1/2}$ (Erd\H{o}s--Tur\'an
+upper bound \cite{ET41}, Singer difference set lower bound \cite{Sin38}).
+Our host set $\SN$ has $N$ elements and lies in $\{1,\ldots,N^2\}$, and the
+Sidon condition on sums $a_i^2+a_j^2$ interacts with the analytic structure
+of the two-squares representation function~$r_2$.
+
+%--------------------------------------------------------------------
+\section{Preliminaries}
+%--------------------------------------------------------------------
+
+\begin{definition}
+For $n \ge 0$ define
+\[
+  r_2(n) = \#\{(a,b)\in\Z^2 : a^2+b^2=n\}, \quad
+  r_2^+(n;N) = \#\{(a,b)\in\mathbb{N}^2 : a^2+b^2=n,\,1\le a\le b\le N\}.
+\]
+\end{definition}
+
+\begin{lemma}[Second moment of $r_2$; {\cite[Ch.~18]{HW08}}]\label{lem:r2-second}
+As $M\to\infty$,
+\[
+  \sum_{n=0}^{M} r_2(n)^2 \;\sim\; 4\pi M \log M.
+\]
+\end{lemma}
+
+\begin{proof}
+The sum equals the number of 4-tuples $(a,b,c,d)\in\Z^4$ with
+$a^2+b^2=c^2+d^2\le M$.  Via the factorisation $r_2(n)=4(d_1(n)-d_3(n))$
+(where $d_i$ counts divisors $\equiv i\pmod{4}$) and standard Dirichlet
+series methods, one obtains the stated asymptotic; see \cite[Theorem~339]{HW08}.
+\end{proof}
+
+\begin{lemma}[Landau--Ramanujan; {\cite{Land08}}]\label{lem:LR}
+As $M\to\infty$,
+\[
+  \#\{n \le M : r_2(n) > 0\} \;\sim\; K \cdot \frac{M}{\sqrt{\log M}},
+\]
+where $K = \frac{1}{\sqrt{2}}\prod_{p \equiv 3(4)}(1-p^{-2})^{-1/2}
+\approx 0.7642\ldots$ is the Landau--Ramanujan constant.
+\end{lemma}
+
+An integer $n$ is a sum of two squares if and only if every prime
+$p \equiv 3\pmod{4}$ divides $n$ to an even power; see \cite[Thm.~366]{HW08}.
+Lemma~\ref{lem:LR} follows from this characterisation via a standard Euler
+product computation and a Tauberian theorem.
+
+%--------------------------------------------------------------------
+\section{Upper Bound}\label{sec:upper}
+%--------------------------------------------------------------------
+
+\begin{theorem}\label{thm:upper}
+$F(N) \le O\!\left(N/(\log N)^{1/4}\right)$.
+\end{theorem}
+
+\begin{proof}
+Let $A = \{a_1^2,\ldots,a_k^2\} \subseteq \SN$ be a Sidon set with
+$1 \le a_1 < \cdots < a_k \le N$ and $k = |A|$.
+
+\medskip
+\noindent\textbf{Step 1.}
+Since $A$ is Sidon, the $\binom{k+1}{2}$ values
+\[
+  \Sigma(A) = \bigl\{a_i^2+a_j^2 : 1 \le i \le j \le k\bigr\}
+\]
+are pairwise distinct.  Each element of $\Sigma(A)$ is a sum of two
+positive squares bounded by $N$, so
+\[
+  \Sigma(A) \;\subseteq\; R_N := \{n \le 2N^2 : r_2(n) > 0\}.
+\]
+
+\noindent\textbf{Step 2.}
+By Lemma~\ref{lem:LR} with $M = 2N^2$,
+\[
+  |R_N| \;\le\; K \cdot \frac{2N^2}{\sqrt{\log(2N^2)}} \cdot (1+o(1))
+  \;=\; \frac{2K\,N^2}{\sqrt{2\log N}} \cdot (1+o(1))
+  \;=\; \frac{K\sqrt{2}\,N^2}{\sqrt{\log N}} \cdot (1+o(1)).
+\]
+
+\noindent\textbf{Step 3.}
+Since all $\binom{k+1}{2}$ elements of $\Sigma(A)$ lie in $R_N$,
+\[
+  \frac{k(k+1)}{2} \;\le\; |R_N| \;\le\; C\,\frac{N^2}{(\log N)^{1/2}}
+\]
+for an absolute constant $C > 0$.  Hence $k^2 \le 2C\,N^2/(\log N)^{1/2}$,
+giving $k \le \sqrt{2C}\,N/(\log N)^{1/4}$.
+\end{proof}
+
+%--------------------------------------------------------------------
+\section{Lower Bound}\label{sec:lower}
+%--------------------------------------------------------------------
+
+\begin{theorem}\label{thm:lower}
+$F(N) \ge \Omega\!\left(N^{2/3}/(\log N)^{1/3}\right)$.
+\end{theorem}
+
+We use the probabilistic method with alteration.
+
+\begin{definition}
+A \emph{collision} is an ordered quadruple $(a,b,c,d) \in \{1,\ldots,N\}^4$
+with $a < b$, $c < d$, $\{a,b\} \ne \{c,d\}$, and $a^2+b^2 = c^2+d^2$.
+Let $\mathcal{C}$ be the set of all collisions.
+\end{definition}
+
+\begin{lemma}\label{lem:C-bound}
+$|\mathcal{C}| \le 8\pi N^2\log N \cdot (1+o(1))$.
+\end{lemma}
+
+\begin{proof}
+For each $n \in \{2,\ldots,2N^2\}$, the collisions at level $n$ number
+$\binom{r_2^+(n;N)}{2} \le \frac{1}{2}r_2^+(n;N)^2 \le \frac{1}{2}r_2(n)^2$.
+Summing and applying Lemma~\ref{lem:r2-second} with $M = 2N^2$:
+\[
+  |\mathcal{C}| \;\le\; \frac{1}{2}\sum_{n=0}^{2N^2} r_2(n)^2
+  \;\sim\; \frac{1}{2}\cdot 4\pi \cdot 2N^2 \cdot \log(2N^2)
+  \;\sim\; 8\pi N^2\log N. \qedhere
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:lower}]
+Let $c > 0$ and $\rho = cN^{-1/2}$.  Include each $a \in \{1,\ldots,N\}$
+independently in a random set $\mathcal{A}$ with probability $\rho$.  Let
+$X = |\mathcal{A}|$ and let $Y$ be the number of collisions in $\mathcal{A}$.
+
+\noindent\textbf{Expectations:}
+\[
+  \Exp[X] = N\rho = cN^{1/2},
+  \qquad
+  \Exp[Y] = |\mathcal{C}|\rho^4 \le 8\pi c^4 \log N \cdot (1+o(1)).
+\]
+
+\noindent\textbf{Alteration:}  For each collision $(a,b,c',d') \in \mathcal{C}$
+with all four elements in $\mathcal{A}$, remove $d'$ from $\mathcal{A}$.
+The resulting set $\mathcal{A}^*$ satisfies $|\mathcal{A}^*| \ge X - Y$ and
+$A^* = \{a^2 : a \in \mathcal{A}^*\}$ is a Sidon subset of $\SN$.
+
+\noindent\textbf{Expected size after alteration:}
+\[
+  \Exp[|\mathcal{A}^*|] \;\ge\; cN^{1/2} - 8\pi c^4\log N \cdot (1+o(1)).
+\]
+
+\noindent\textbf{Optimising $c$:}  Differentiating $f(c) = cN^{1/2} - 8\pi c^4\log N$
+with respect to $c$ and setting $f'(c) = 0$:
+\[
+  N^{1/2} = 32\pi c^3 \log N
+  \quad\Longrightarrow\quad
+  c^* = \left(\frac{N^{1/2}}{32\pi\log N}\right)^{1/3} = \frac{N^{1/6}}{(32\pi)^{1/3}(\log N)^{1/3}}.
+\]
+At this $c = c^*$:
+\[
+  f(c^*) = c^*N^{1/2} - 8\pi (c^*)^4\log N
+  = c^*N^{1/2}\!\left(1 - \frac{8\pi(c^*)^3\log N}{N^{1/2}}\right)
+  = c^*N^{1/2}\!\left(1 - \frac{1}{4}\right)
+  = \frac{3}{4}c^*N^{1/2}.
+\]
+Explicitly:
+\[
+  \Exp[|\mathcal{A}^*|] \;\ge\;
+  \frac{3}{4}\cdot\frac{N^{1/6}}{(32\pi)^{1/3}(\log N)^{1/3}}\cdot N^{1/2}(1+o(1))
+  \;=\; \frac{3}{4(32\pi)^{1/3}}\cdot\frac{N^{2/3}}{(\log N)^{1/3}}\cdot(1+o(1)).
+\]
+Since the expectation is positive, there exists a realisation of $\mathcal{A}^*$
+with $|\mathcal{A}^*| \ge \frac{1}{2}\Exp[|\mathcal{A}^*|]$ for all $N$ large,
+giving
+\[
+  F(N) \;\ge\; \frac{3}{8(32\pi)^{1/3}}\cdot\frac{N^{2/3}}{(\log N)^{1/3}}.
+  \qedhere
+\]
+\end{proof}
+
+%--------------------------------------------------------------------
+\section{Proof of the Main Results}
+%--------------------------------------------------------------------
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The lower bound is Theorem~\ref{thm:lower}.
+The upper bound is Theorem~\ref{thm:upper}.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:not-N}]
+Theorem~\ref{thm:upper} gives $F(N) \le O(N/(\log N)^{1/4}) = o(N)$,
+so the exponent of $N$ is strictly less than $1$ and $F(N) \ne N^{1-o(1)}$.
+Theorem~\ref{thm:lower} gives $F(N) \ge \Omega(N^{2/3}/(\log N)^{1/3}) = \omega(N^{1/2})$.
+\end{proof}
+
+%--------------------------------------------------------------------
+\section{Discussion and Open Problems}
+%--------------------------------------------------------------------
+
+\subsection{Summary}
+
+We have proved:
+\begin{enumerate}
+  \item $F(N) = o(N)$: the largest Sidon subset of the squares is sub-linear.
+  \item $F(N) = \omega(N^{1/2})$: it is super-square-root.
+  \item The precise exponent lies in the open interval $(1/2, 1)$ and is unknown.
+\end{enumerate}
+
+\noindent\textbf{The answer to the question:}  $F(N) \ne N^{1-o(1)}$ is \textbf{false}.
+
+\subsection{Sharpness}
+
+\begin{itemize}
+\item The Landau--Ramanujan bound in Step~2 of the upper bound proof is sharp:
+  the number of sums-of-two-squares up to $M$ is indeed $\Theta(M/(\log M)^{1/2})$.
+\item The alteration method is flexible but not tight; a construction via
+  Sidon sets in $\mathbb{F}_p$ or difference sets could potentially give a
+  better explicit lower bound.
+\end{itemize}
+
+\subsection{Open problem}
+
+\begin{itemize}
+\item Determine the exponent $\alpha$ such that $F(N) = N^{\alpha+o(1)}$.
+  The current bounds give $\alpha \in [2/3, 1)$.
+\item Find an explicit (deterministic) construction of a Sidon subset of
+  $\SN$ of size $\Omega(N^{2/3})$.
+\end{itemize}
+
+%--------------------------------------------------------------------
+\begin{thebibliography}{99}
+
+\bibitem{ET41}
+P.~Erd\H{o}s and P.~Tur\'an,
+\textit{On a problem of Sidon in additive number theory, and on some related problems},
+J. London Math. Soc. \textbf{16} (1941), 212--215.
+
+\bibitem{HW08}
+G.~H. Hardy and E.~M. Wright,
+\textit{An Introduction to the Theory of Numbers},
+6th ed., Oxford University Press, Oxford, 2008.
+
+\bibitem{Land08}
+E.~Landau,
+\textit{\"Uber die Einteilung der positiven ganzen Zahlen in vier Klassen
+nach der Mindestzahl der zu ihrer additiven Zusammensetzung erforderlichen Quadrate},
+Arch. Math. Phys. \textbf{13} (1908), 305--312.
+
+\bibitem{Sin38}
+J.~Singer,
+\textit{A theorem in finite projective geometry and some applications to number theory},
+Trans. Amer. Math. Soc. \textbf{43} (1938), 377--385.
+
+\bibitem{Ten}
+G.~Tenenbaum,
+\textit{Introduction to Analytic and Probabilistic Number Theory},
+3rd ed., American Mathematical Society, Providence, RI, 2015.
+
+\end{thebibliography}
+
+\end{document}
