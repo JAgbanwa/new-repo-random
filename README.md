@@ -47,6 +47,37 @@ The exceptional $n$ have natural density **zero** (doubly prime conditions make 
 | `DivisorTheorem/Main.lean` | Lean 4 / Mathlib formalisation (in progress) |
 | `Diophantine/Basic.lean` | Related Diophantine material |
 | `diophantine.tex` | Supporting notes |
+| `sidon_squares.tex` | Sidon subsets of perfect squares (LaTeX source) |
+| `sidon_squares.pdf` | Compiled PDF (5 pages) |
+
+---
+
+## Sidon Subsets of Perfect Squares
+
+### Problem
+
+What is the size $F(N)$ of the largest Sidon subset $A \subseteq \{1^2, 2^2, \ldots, N^2\}$?
+Is it $N^{1-o(1)}$?
+
+A **Sidon set** is a set of integers in which all pairwise sums are distinct.
+
+### Result
+
+**No, $F(N) \ne N^{1-o(1)}$.** The following bounds are proved unconditionally:
+
+$$\Omega\!\left(\frac{N^{2/3}}{(\log N)^{1/3}}\right) \;\le\; F(N) \;\le\; O\!\left(\frac{N}{(\log N)^{1/4}}\right).$$
+
+In particular $F(N) = o(N)$ (disproving the conjecture) and $F(N) = \omega(N^{1/2})$.
+
+### Proof sketch
+
+- **Upper bound:** Any Sidon subset $A \subseteq \{1^2,\ldots,N^2\}$ of size $k$ produces $\binom{k+1}{2}$ distinct pairwise sums, all of which must be sums of two positive integer squares. By the **Landau–Ramanujan theorem**, there are only $\sim KN^2/(\log N)^{1/2}$ such integers up to $2N^2$, forcing $k \le O(N/(\log N)^{1/4})$.
+
+- **Lower bound:** A **probabilistic alteration** argument. Select each $a \in \{1,\ldots,N\}$ with probability $\rho = cN^{-1/2}$, then delete one element from each Sidon-violating quadruple. Using the second-moment estimate $\sum_{n \le M} r_2(n)^2 \sim 4\pi M \log M$, optimising $c = \Theta(N^{1/6}/(\log N)^{1/3})$ gives a Sidon subset of expected size $\Omega(N^{2/3}/(\log N)^{1/3})$.
+
+### Status
+
+The disproof of $F(N) = N^{1-o(1)}$ is **complete**. The exact value of the exponent $\alpha$ in $F(N) \approx N^\alpha$ is **open**; the current bounds give $\alpha \in [2/3, 1)$.
 
 ## Building the PDF
 
