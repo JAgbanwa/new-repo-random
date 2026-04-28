@@ -222,10 +222,13 @@ the number of collisions in $\mathcal{A}$.
   \Exp[Y] = |\mathcal{C}|\lambda^4 \le 8\pi N^2\log N\cdot\lambda^4\cdot(1+o(1)).
 \]
 
-\noindent\textbf{Alteration:}  For each collision $(a,b,c',d') \in \mathcal{C}$
-with all four elements in $\mathcal{A}$, remove one element from $\mathcal{A}$.
-The resulting set $\mathcal{A}^*$ satisfies $|\mathcal{A}^*| \ge X - Y$, and
-$A^* = \{a^2 : a \in \mathcal{A}^*\}$ is a Sidon subset of $\SN$.  Hence
+\noindent\textbf{Alteration:}  For each collision in $\mathcal{C}$ whose four
+elements all lie in $\mathcal{A}$, mark one of the four for deletion; then
+delete the union of all marked elements from $\mathcal{A}$, obtaining a
+surviving index set~$\mathcal{A}^*$.  Because every collision is hit
+by this procedure, the square set $\{a^2 : a \in \mathcal{A}^*\}$ is a
+Sidon subset of $\SN$.  At most one element is deleted per collision,
+so $|\mathcal{A}^*| \ge X - Y$.  Hence
 \[
   \Exp[|\mathcal{A}^*|] \;\ge\;
   N\lambda - 8\pi N^2\log N\cdot\lambda^4\cdot(1+o(1)).
@@ -253,12 +256,8 @@ With $\lambda = \lambda^*$,
   \Exp[|\mathcal{A}^*|] \;\ge\;
   \frac{3}{4(32\pi)^{1/3}}\cdot\frac{N^{2/3}}{(\log N)^{1/3}}\cdot(1+o(1)).
 \]
-Since $|\mathcal{A}^*|$ is integer-valued, if every outcome had
-$|\mathcal{A}^*| < \Exp[|\mathcal{A}^*|]$ then every outcome would have
-$|\mathcal{A}^*| \le \lfloor\Exp[|\mathcal{A}^*|]\rfloor$,
-forcing $\Exp[|\mathcal{A}^*|] \le \lfloor\Exp[|\mathcal{A}^*|]\rfloor
-< \Exp[|\mathcal{A}^*|]$, a contradiction.
-Hence there exists a realisation with
+Since the maximum of a random variable is at least its expectation,
+there exists a realisation with
 \[
   |\mathcal{A}^*| \;\ge\; \Exp[|\mathcal{A}^*|]
   \;\ge\; \frac{3}{4(32\pi)^{1/3}}\cdot\frac{N^{2/3}}{(\log N)^{1/3}}\cdot(1+o(1)),
@@ -317,7 +316,7 @@ strictly smaller.  Closing this gap is the central open problem.
 
 \begin{itemize}
 \item Determine the exponent $\alpha$ such that $F(N) = N^{\alpha+o(1)}$.
-  The current bounds give $\alpha \in [2/3, 1)$.
+  The current bounds give $\alpha \in [2/3, 1]$.
 \item Find an explicit (deterministic) construction of a Sidon subset of
   $\SN$ of size $\Omega(N^{2/3})$.
 \end{itemize}
