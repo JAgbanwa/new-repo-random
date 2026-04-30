@@ -311,14 +311,54 @@ strictly smaller.  Closing this gap is the central open problem.
   better explicit lower bound.
 \end{itemize}
 
-\subsection{Open problem}
+\subsection{Why the $N^{1-o(1)}$ question remains open}
+
+Neither bound in Theorem~\ref{thm:main} is strong enough to determine
+whether $\alpha = 1$.
+
+\paragraph{The upper bound does not exclude $\alpha = 1$.}
+The proof of Theorem~\ref{thm:upper} uses only the inequality
+$\tbinom{|A|+1}{2} \le |R_N|$, where $|R_N| \sim KN^2/\sqrt{\log N}$.
+This gives $F(N) \le O(N/(\log N)^{1/4})$, but
+\[
+  \frac{\log\bigl(N/(\log N)^{1/4}\bigr)}{\log N}
+  \;=\; 1 - \frac{\log\log N}{4\log N} \;\longrightarrow\; 1,
+\]
+so the bound is $N^{1-o(1)}$ and places no constraint on
+the true exponent $\alpha$ being strictly less than~$1$.
+No variant of this counting argument can yield a power-saving bound
+$O(N^{1-\varepsilon})$ for any fixed $\varepsilon > 0$, because the
+argument uses only the \emph{cardinality} of $R_N$ and not the deeper
+additive structure of sums of two squares.
+
+\paragraph{The lower bound does not reach $N^{1-o(1)}$.}
+The probabilistic construction gives $F(N) \ge \Omega(N^{2/3}/(\log N)^{1/3})$,
+an exponent of $2/3 + o(1)$.  A construction of size $N^{1-o(1)}$
+would require a Sidon subset of $\SN$ of size $N/(\log N)^{o(1)}$, which
+is far beyond the reach of current methods.
+
+\medskip\noindent
+Resolving whether $\alpha = 1$ therefore requires either:
+\begin{enumerate}
+  \item a new upper bound exploiting the multiplicative structure of the
+        integers beyond a sums-of-two-squares count, sufficient to give
+        $F(N) = O(N^{1-\varepsilon})$ for some fixed $\varepsilon > 0$; or
+  \item an algebraic or number-theoretic construction of a Sidon subset of
+        $\SN$ of size $N/(\log N)^{o(1)}$.
+\end{enumerate}
+Both appear to require genuinely new ideas.
+
+\subsection{Open problems}
 
 \begin{itemize}
-\item Determine the exponent $\alpha$ such that $F(N) = N^{\alpha+o(1)}$.
-  If $F(N) = N^{\alpha+o(1)}$ for some exponent $\alpha$, then the bounds
-  are consistent with $\alpha \in [2/3, 1]$.
-\item Find an explicit (deterministic) construction of a Sidon subset of
-  $\SN$ of size $\Omega(N^{2/3})$.
+\item \textbf{Determine the exponent $\alpha$} (assuming $F(N) = N^{\alpha+o(1)}$).
+  The current bounds show $\alpha \in [2/3,1]$ but do not pin down the
+  value, or even whether $\alpha < 1$.
+\item \textbf{Improve the upper bound.}  Prove $F(N) = O(N^{1-\varepsilon})$
+  for some fixed $\varepsilon > 0$, or else exhibit a Sidon subset of $\SN$
+  of size $\omega(N^{2/3})$.
+\item \textbf{Explicit construction.}  Find a deterministic construction of
+  a Sidon subset of $\SN$ of size $\Omega(N^{2/3})$.
 \end{itemize}
 
 %--------------------------------------------------------------------
