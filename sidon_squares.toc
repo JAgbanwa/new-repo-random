@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Introduction and Statement of Results}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Historical context}{2}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Preliminaries}{2}{section.2}%
+\contentsline {section}{\numberline {3}Upper Bound}{3}{section.3}%
+\contentsline {section}{\numberline {4}Lower Bound}{3}{section.4}%
+\contentsline {section}{\numberline {5}Proof of the Main Results}{4}{section.5}%
+\contentsline {section}{\numberline {6}Discussion and Open Problems}{5}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Summary}{5}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Sharpness}{5}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Why the $N^{1-o(1)}$ question remains open}{5}{subsection.6.3}%
+\contentsline {paragraph}{The upper bound does not exclude $\alpha = 1$.}{5}{section*.2}%
+\contentsline {paragraph}{The lower bound does not reach $N^{1-o(1)}$.}{5}{section*.3}%
+\contentsline {subsection}{\numberline {6.4}Open problems}{6}{subsection.6.4}%

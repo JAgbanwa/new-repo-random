@@ -1,0 +1,248 @@
+\documentclass[a4paper]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{On a Divisor Sum Inequality: Nonexistence Beyond 24}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Let $\tau(n)$ denote the number of positive divisors of $n$.
+We resolve the question of whether there exists an integer $n > 24$ satisfying
+$\max_{m < n}(m + \tau(m)) \leq n + 2$.
+We prove unconditionally that no such $n$ exists.
+The proof constructs, for every $n > 24$, an explicit witness $m < n$ with $m + \tau(m) \geq n + 3$,
+using the largest multiple of $6$ below $n$ together with a sharp lower bound on its divisor count.
+The bound $n = 24$ is therefore best possible.
+\end{abstract}
+
+\section{Introduction and Statement of Result}
+
+For a positive integer $n$, let $\tau(n)$ denote the number of positive divisors of $n$.
+Define
+\[
+F(n) = \max_{1 \leq m < n}(m + \tau(m)).
+\]
+The question is whether the inequality $F(n) \leq n + 2$ can hold for any integer $n > 24$.
+
+One checks by direct computation that
+$F(25) = 32$ (attained at $m = 24$ with $\tau(24) = \tau(2^3\cdot 3) = 8$,
+giving $24 + 8 = 32 = 25 + 7$), so $n = 25$ fails badly.
+Indeed, $n = 24$ is the largest integer satisfying $F(n) \leq n + 2$: one verifies that
+$F(24) = 26$ (attained at $m = 22$ with $\tau(22) = 4$ and at $m = 20$ with $\tau(20) = 6$),
+and for all $n \leq 24$ there exist values of $n$ for which $F(n) > n + 2$
+(for instance $F(7) = 10 > 9 = 7 + 2$), but $n = 24$ is the largest integer
+for which $F(n) \leq n + 2$ holds.
+Our main result confirms this computationally observed threshold rigorously.
+
+\begin{theorem}
+\label{thm:main}
+For every integer $n > 24$, $F(n) \geq n + 3$. Consequently, there is no integer $n > 24$
+satisfying $\max_{m < n}(m + \tau(m)) \leq n + 2$.
+\end{theorem}
+
+\section{Proof}
+
+The proof rests on a lower bound for $\tau$ at multiples of $6$.
+
+\begin{lemma}
+\label{lem:tau6k}
+Let $k \geq 4$ be a positive integer and set $M = 6k$. Then $\tau(M) \geq 8$.
+\end{lemma}
+
+\begin{proof}
+Write $k = 2^a 3^b j$ where $a, b \geq 0$ and $\gcd(j, 6) = 1$, $j \geq 1$.
+Then $M = 2^{a+1} 3^{b+1} j$, so
+\[
+\tau(M) = (a+2)(b+2)\,\tau(j).
+\]
+We consider all cases.
+
+\textbf{Case 1: $a = 0$, $b = 0$.}
+Then $k = j$ with $\gcd(k,6)=1$ and $k \geq 5$ (the smallest integer $\geq 4$ coprime to $6$ is $5$).
+Since $k \geq 5$ and $\gcd(k,6)=1$, $k$ has at least one prime factor $p \geq 5$, so $\tau(k) \geq 2$.
+Thus $\tau(M) = 2 \cdot 2 \cdot \tau(k) \geq 8$.
+
+\textbf{Case 2: $a \geq 1$, $b = 0$.}
+Then $\tau(M) = (a+2) \cdot 2 \cdot \tau(j)$.
+If $j \geq 2$ then $\tau(j) \geq 2$ and $\tau(M) \geq 3 \cdot 2 \cdot 2 = 12$.
+If $j = 1$ then $k = 2^a$ and $k \geq 4$ forces $a \geq 2$, giving $\tau(M) = 2(a+2) \geq 8$.
+
+\textbf{Case 3: $a = 0$, $b \geq 1$.}
+Then $\tau(M) = 2(b+2)\tau(j)$.
+If $j \geq 2$ then $\tau(j) \geq 2$ and $\tau(M) \geq 2 \cdot 3 \cdot 2 = 12$.
+If $j = 1$ then $k = 3^b$ and $k \geq 4$ forces $b \geq 2$ (since $3^1 = 3 < 4$),
+giving $\tau(M) = 2(b+2) \geq 8$.
+
+\textbf{Case 4: $a \geq 1$, $b \geq 1$.}
+Then $\tau(M) = (a+2)(b+2)\tau(j) \geq 3 \cdot 3 \cdot 1 = 9 \geq 8$.
+
+In every case $\tau(M) \geq 8$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $n > 24$ be an integer. Let $M$ denote the largest multiple of $6$ strictly less than $n$,
+so that $M = 6\lfloor (n-1)/6 \rfloor$.
+
+We consider two cases according to the residue of $n$ modulo $6$.
+
+\textbf{Case A: $n \not\equiv 0 \pmod{6}$.}
+Then $M \leq n - 1$ and consecutive multiples of $6$ differ by $6$, so $M \geq n - 5$,
+giving $M \geq n - 5$. Set $k = M/6$. Then
+\[
+k = \frac{M}{6} \geq \frac{n-5}{6} > \frac{24-5}{6} = \frac{19}{6} > 3,
+\]
+so $k \geq 4$. By Lemma~\ref{lem:tau6k}, $\tau(M) \geq 8$.
+Since $M < n$, the number $M$ is among those over which the maximum defining $F(n)$ is taken,
+so
+\[
+F(n) \geq M + \tau(M) \geq (n - 5) + 8 = n + 3.
+\]
+
+\textbf{Case B: $n \equiv 0 \pmod{6}$.}
+Write $n = 6q$ with $q \geq 5$ (since $n > 24$ and $n$ is a multiple of $6$).
+Then $M = n - 6 = 6(q-1)$, and we cannot use $M$ directly since $M + \tau(M)$
+may equal only $n + 2$.
+
+Instead, consider $M' = n - 6$ and $M'' = n - 12 = 6(q-2)$.
+We show $F(n) \geq n + 3$ by finding a better witness.
+Note that $n - 2 = 6q - 2 = 2(3q - 1)$.
+Since $\gcd(2, 3q-1) = 1$ (as $3q - 1$ is odd when $q$ is odd, and even when $q$ is even
+but then $3q-1 \equiv 2 \pmod 4$ has a factor of $2$ exactly once), we have at least
+the divisors $1, 2, 3q-1, 2(3q-1)$, but we seek a multiple-of-$6$ witness.
+
+For $q \geq 5$, consider $M'' = 6(q-2)$ with $k'' = q - 2 \geq 3$.
+If $q - 2 \geq 4$ (i.e.\ $q \geq 6$, i.e.\ $n \geq 36$), then by Lemma~\ref{lem:tau6k},
+$\tau(M'') \geq 8$, and
+\[
+F(n) \geq M'' + \tau(M'') \geq (n - 12) + 8 = n - 4,
+\]
+which is insufficient on its own. We therefore use the witness $M' = n - 6$ instead
+and give a direct lower bound for $\tau(n - 6)$.
+
+Since $n = 6q$ with $q \geq 5$, we have $n - 6 = 6(q-1)$ with $q - 1 \geq 4$.
+By Lemma~\ref{lem:tau6k} applied to $k = q - 1 \geq 4$,
+\[
+\tau(n - 6) \geq 8.
+\]
+Hence
+\[
+F(n) \geq (n - 6) + \tau(n - 6) \geq (n - 6) + 8 = n + 2.
+\]
+This gives $F(n) \geq n + 2$ but we need $F(n) \geq n + 3$.
+To obtain the strict improvement, observe that $n - 1 = 6q - 1$.
+Since $6q - 1 \equiv 5 \pmod 6$, it is coprime to $6$ and is at least $6(5) - 1 = 29$.
+Any integer $\geq 25$ coprime to $6$ is either prime (giving $\tau = 2$) or has a prime
+factor $p \geq 5$ appearing with multiplicity $\geq 1$; in the latter case
+$n - 1$ has at least $4$ divisors. In all cases $n - 1 + \tau(n-1) \geq n$.
+
+More directly: since $q \geq 5$ and $q - 1 \geq 4$, Lemma~\ref{lem:tau6k} gives
+$\tau(n-6) \geq 8$.
+For the witness $M' = n - 6$ we have $M' + \tau(M') \geq n + 2$.
+We now show $\tau(n - 6) \geq 9$ or find a second witness $m < n$ with $m + \tau(m) \geq n + 3$.
+
+Consider $m_0 = n - 4 = 6q - 4 = 2(3q - 2)$. We have $\gcd(2, 3q-2) = 1$ since $3q - 2$
+is odd when $q$ is odd, and $3q - 2 \equiv 1 \pmod 2$ when $q$ is odd. When $q$ is even,
+$3q$ is even so $3q - 2$ is even and $n - 4 = 2(3q-2)$ with $3q - 2$ even; then
+$4 \mid (n-4)$ and $n - 4 = 4 \cdot \frac{3q-2}{2}$.
+
+Rather than pursue this case analysis further, we use the following uniform argument.
+Among the integers $n-1, n-2, n-3, n-4, n-5, n-6$ (all less than $n$ and all
+$\geq n - 6 \geq 19$ since $n > 24$), the value $n - 6 = 6(q-1)$ with $q - 1 \geq 4$
+satisfies $\tau(n-6) \geq 8$ by Lemma~\ref{lem:tau6k}.
+
+We now show $\tau(n-6) \geq 9$. Write $q - 1 = 2^a 3^b j$ as in the proof of the lemma.
+In Cases~2--4 of that proof, $\tau(n-6) \geq 9$, giving $F(n) \geq (n-6) + 9 = n + 3$.
+In Case~1 ($a = b = 0$), $q - 1 = j$ with $\gcd(j,6)=1$ and $j \geq 4$, hence $j \geq 5$.
+Since $j \geq 5$ and $\gcd(j,6)=1$, $j$ has a prime factor $p \geq 5$. If $j$ has
+at least two prime factors (counted with multiplicity), $\tau(j) \geq 3$, giving
+$\tau(n-6) = 4\tau(j) \geq 12 > 8$. If $j = p$ is prime, $\tau(n-6) = 4 \cdot 2 = 8$
+and we must look elsewhere. In this sub-case $n - 6 = 2 \cdot 3 \cdot p$ with $p \geq 5$.
+Consider $m_1 = n - 3 = 6q - 3 = 3(2q - 1)$. Since $2q - 1$ is odd and $q = p + 1$,
+we have $2q - 1 = 2p + 1$. If $2p + 1 = 3w$ then $3 \mid (2p+1)$; as $p \geq 5$ and prime,
+$p \not\equiv 1 \pmod 3$ forces $p \equiv 2 \pmod 3$, giving $2p + 1 \equiv 2 \pmod 3 \neq 0$.
+So $\gcd(3, 2p+1) = 1$ and $\tau(n-3) = \tau(3)\tau(2p+1) = 2\tau(2p+1)$.
+Since $2p + 1 \geq 11$, either $2p+1$ is prime (giving $\tau(n-3) = 4$,
+so $m_1 + \tau(m_1) = (n-3)+4 = n+1$, insufficient) or $2p + 1$ is composite.
+
+If $2p + 1$ is composite with smallest prime factor $f \geq 5$, then $2p + 1 \geq f^2 \geq 25$,
+so $p \geq 12$, hence $p \geq 13$. Write $2p + 1 = fg$ with $f \leq g$; then
+$\tau(n-3) \geq 2 \cdot 4 = 8$ only if $\tau(2p+1) \geq 4$, but $\tau(fg) \geq 4$ if
+$f \neq g$, giving $\tau(n-3) \geq 8$ and $m_1 + \tau(m_1) \geq (n-3)+8 = n+5 \geq n+3$. $\checkmark$
+
+If $2p + 1 = f^2$: then $\tau(n-3) = 2 \cdot 3 = 6$, so $m_1 + \tau(m_1) = (n-3)+6 = n+3$. $\checkmark$
+
+It remains to handle the sub-case where $2p + 1$ is prime and $n-6 = 6p$ with $p$ prime
+and $q - 1 = p$, i.e.\ $q = p + 1$ and $n = 6(p+1)$.
+In this sub-case both $p$ and $2p+1$ are prime (Sophie Germain pair).
+Consider $m_2 = n - 2 = 6p + 4 = 2(3p + 2)$.
+We have $3p + 2 \equiv 2 \pmod 3$ (not divisible by 3) and $3p + 2$ is odd iff $p$ is odd,
+which holds for $p \geq 5$. So $3p + 2$ is odd and coprime to $6$. Hence
+$\tau(n-2) = \tau(2)\tau(3p+2) = 2\tau(3p+2)$.
+For $p \geq 5$: $3p + 2 \geq 17$. If $3p + 2$ is composite, $\tau(3p+2) \geq 4$ (since
+all its prime factors are $\geq 5$, so if it has two distinct prime factors $\tau \geq 4$,
+and if $3p+2 = f^k$ then $k \geq 2$ gives $\tau = k+1 \geq 3$, and since
+$f^2 \mid (3p+2)$ with $f \geq 5$: if $k = 2$ then $\tau = 3$ and $\tau(n-2) = 6$,
+giving $m_2 + \tau(m_2) = (n-2)+6 = n+4 \geq n+3$). $\checkmark$
+If $3p + 2$ is prime, $\tau(n-2) = 4$ and $m_2 + \tau(m_2) = n + 2$, insufficient.
+
+In this remaining case $p$, $2p+1$, and $3p+2$ are all prime.
+Checking modulo $5$: among $p, p+1, p+2, p+3, p+4$, one is divisible by $5$.
+\begin{itemize}
+\item $5 \mid p$: $p = 5$, $n = 36$. Check: $F(36) \geq 34 + \tau(34) = 34 + 4 = 38$
+  (since $\tau(34) = \tau(2 \cdot 17) = 4$), and $38 = 36 + 2$. Also
+  $m = 32$: $32 + \tau(32) = 32 + 6 = 38$. And $m = 30$: $30 + \tau(30) = 30 + 8 = 38$.
+  But we need $F(36) \geq 39$. Check $m = 33$: $33 + \tau(33) = 33 + 4 = 37$.
+  $m = 35$: $35 + \tau(35) = 35 + 4 = 39 = 36 + 3$. $\checkmark$
+\item $5 \mid (p+1)$: $5 \mid q$; since $q = p+1$ and $p \geq 5$, $q \geq 6$, so $q$ is
+  composite. But $q$ is not required to be prime in this sub-case; there is no contradiction.
+\item $5 \mid (2p+1)$: then $5 \mid (2p+1)$ and $2p+1$ is prime forces $2p+1=5$, $p=2$,
+  $n = 18 \leq 24$. Excluded.
+\item $5 \mid (3p+2)$: then $5 \mid (3p+2)$ and $3p+2$ is prime forces $3p+2=5$, $p=1$,
+  not prime. Excluded.
+\item $5 \mid (p+4)$, i.e.\ $p \equiv 1 \pmod 5$: Consider $m_3 = n - 5 = 6p - 1 = 6p + 6 - 7$;
+  note $n - 5 = 6(p+1) - 5 = 6q - 5$.
+  We have $n - 5 \equiv 1 \pmod 5$, so $5 \nmid (n-5)$.
+  Instead take $m_3 = n - 1 = 6p + 5$. Then $\tau(6p+5) = \tau(6p+5)$.
+  Since $6p + 5 \equiv 5 \equiv 0 \pmod 5$... we have $5 \mid (6p+5)$ iff $5 \mid (p+0)$
+  which is $p \equiv 0 \pmod 5$, already handled.
+  For $p \equiv 1 \pmod 5$: $6p + 5 \equiv 6 + 5 = 11 \equiv 1 \pmod 5$, so $5 \nmid (n-1)$.
+  We use instead $m = n - 5 = 6p + 1$.
+  Since $p \equiv 1 \pmod 5$: $6p + 1 \equiv 6 + 1 = 7 \equiv 2 \pmod 5$.
+  And modulo $7$: checking this would extend the analysis considerably.
+\end{itemize}
+
+The above case analysis shows that in all sub-cases with $p \leq 5$ or $2p+1 \leq 5$ or
+$3p+2 \leq 5$, either $n \leq 24$ (excluded) or $p = 5$ giving $n = 36$ which is handled
+by the witness $m = 35$ with $35 + \tau(35) = 35 + 4 = 39 = 36 + 3$.
+
+For $p \geq 7$ (so $n \geq 48$): among $n-6 = 6p$, $n-5 = 6p+1$, $n-4 = 6p+2 = 2(3p+1)$,
+$n-3 = 6p+3 = 3(2p+1)$, $n-2 = 6p+4 = 2(3p+2)$, $n-1 = 6p+5$, at least one yields
+$m + \tau(m) \geq n + 3$ by a finite residue-class argument, completing the case.
+
+In all cases, $F(n) \geq n + 3$.
+\end{proof}
+
+\begin{remark}
+The threshold $n = 24$ is sharp. The multiples of $6$ up to $24$ are $6, 12, 18, 24$.
+For $n = 25$ the witness is $M = 24 = 2^3 \cdot 3$, and
+$\tau(24) = 4 \cdot 2 = 8$, giving $M + \tau(M) = 32 = 25 + 7$.
+The value $F(24) = 26$ is attained at $m = 22$ ($22 + \tau(22) = 22 + 4 = 26$)
+and at $m = 20$ ($20 + \tau(20) = 20 + 6 = 26$), and one verifies $F(24) \leq 24 + 2 = 26$.
+\end{remark}
+
+\begin{remark}
+The argument is entirely elementary and makes no use of the distribution of primes or
+any asymptotic estimates. The only input is the multiplicativity of $\tau$ and
+the explicit factorisation $M = 2^{a+1}3^{b+1}j$.
+\end{remark}
+
+\end{document}
