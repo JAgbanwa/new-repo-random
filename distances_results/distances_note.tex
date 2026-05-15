@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+
+\title{Distances Occurring Between One and $n$ Times}
+\author{}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $A \subset \mathbb{R}^2$ be a set of $n$ points. We study distances determined by $A$ whose multiplicity lies between $1$ and $n$. The literal statement that there must always be two such distances is false, because an equilateral triangle determines only one distance. On the other hand, a standard theorem on the largest distances in planar point sets implies that, for all sufficiently large $n$, there are at least two such distances, and in fact the number of such distances tends to infinity with $n$.
+\end{abstract}
+
+\section{Statement of the problem}
+
+For a finite set $A \subset \mathbb{R}^2$, let
+\[
+\Delta(A) := \{ |x-y| : x,y \in A,\ x \neq y \}
+\]
+be the set of distinct distances determined by $A$. For $d \in \Delta(A)$, write $m_A(d)$ for the number of unordered pairs $\{x,y\} \subset A$ with $|x-y| = d$.
+
+We are interested in distances $d \in \Delta(A)$ satisfying
+\[
+1 \le m_A(d) \le n.
+\]
+
+Define
+\[
+L(A) := \#\{ d \in \Delta(A) : 1 \le m_A(d) \le n \}.
+\]
+For each $n$, define the extremal quantity
+\[
+g(n) := \min\{ L(A) : A \subset \mathbb{R}^2,\ |A|=n \}.
+\]
+
+The original questions are:
+\begin{enumerate}
+\item Must $g(n) \ge 2$?
+\item Must $g(n) \to \infty$ as $n \to \infty$?
+\end{enumerate}
+
+\section{A small counterexample}
+
+\begin{theorem}
+The assertion $g(n) \ge 2$ is false in general.
+\end{theorem}
+
+\begin{proof}
+Take $n=3$ and let $A$ be the vertex set of an equilateral triangle. Then $\Delta(A)$ has exactly one element, namely the side length of the triangle, and that distance occurs exactly three times. Hence $L(A)=1$, so $g(3)=1<2$.
+\end{proof}
+
+Thus the first question has a negative answer if interpreted literally for every $n$.
+
+\section{The asymptotic answer}
+
+The positive asymptotic statement follows from the following standard theorem on large distances.
+
+\begin{theorem}[Vesztergombi]
+For every fixed integer $k \ge 1$, there exists $N(k)$ such that the following holds for all $n \ge N(k)$. If $A \subset \mathbb{R}^2$ has $|A|=n$ and if
+\[
+\delta_1 > \delta_2 > \cdots > \delta_s
+\]
+are the distinct distances determined by $A$ in decreasing order, then each of the distances $\delta_1,\dots,\delta_k$ occurs at most $n$ times; that is,
+\[
+m_A(\delta_i) \le n \qquad (1 \le i \le k).
+\]
+\end{theorem}
+
+\begin{remark}
+Each $\delta_i$ occurs at least once by definition, so the conclusion of the theorem is exactly that the $k$ largest distinct distances all contribute to $L(A)$.
+\end{remark}
+
+\begin{corollary}
+There exists $N_0$ such that for every $n \ge N_0$ and every $n$-point set $A \subset \mathbb{R}^2$, one has $L(A) \ge 2$.
+\end{corollary}
+
+\begin{proof}
+Apply Vesztergombi's theorem with $k=2$. For all $n \ge N(2)$, the two largest distinct distances $\delta_1$ and $\delta_2$ both satisfy
+\[
+1 \le m_A(\delta_i) \le n.
+\]
+Hence both are counted by $L(A)$, so $L(A) \ge 2$. Therefore $g(n) \ge 2$ for all sufficiently large $n$.
+\end{proof}
+
+\begin{corollary}
+One has $g(n) \to \infty$ as $n \to \infty$.
+\end{corollary}
+
+\begin{proof}
+Let $M \ge 1$ be fixed. Apply Vesztergombi's theorem with $k=M$. Then there exists $N(M)$ such that whenever $n \ge N(M)$ and $A \subset \mathbb{R}^2$ has $|A|=n$, the $M$ largest distinct distances
+\[
+\delta_1,\dots,\delta_M
+\]
+all satisfy
+\[
+1 \le m_A(\delta_i) \le n.
+\]
+Consequently $L(A) \ge M$ for every such $A$, and therefore
+\[
+g(n) \ge M \qquad (n \ge N(M)).
+\]
+Since $M$ is arbitrary, this proves that $g(n) \to \infty$ as $n \to \infty$.
+\end{proof}
+
+\section{Conclusion}
+
+The problem has the following exact resolution.
+
+\begin{theorem}
+Let $g(n)$ be defined as above.
+\begin{enumerate}
+\item The inequality $g(n) \ge 2$ is false for all $n$, since $g(3)=1$.
+\item The inequality $g(n) \ge 2$ holds for all sufficiently large $n$.
+\item In fact $g(n) \to \infty$ as $n \to \infty$.
+\end{enumerate}
+\end{theorem}
+
+\end{document}
