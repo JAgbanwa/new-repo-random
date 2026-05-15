@@ -14,7 +14,7 @@
 \maketitle
 
 \begin{abstract}
-Let $A \subset \mathbb{R}^2$ be a set of $n$ points. We study distances determined by $A$ whose multiplicity lies between $1$ and $n$. The literal statement that there must always be two such distances is false, because an equilateral triangle determines only one distance. On the other hand, a standard theorem on the largest distances in planar point sets implies that, for all sufficiently large $n$, there are at least two such distances, and in fact the number of such distances tends to infinity with $n$.
+Let $A \subset \mathbb{R}^2$ be a set of $n$ points. We study distances determined by $A$ whose multiplicity lies between $1$ and $n$. We give a complete unconditional disproof of the literal statement that there must always be two such distances: an equilateral triangle determines only one distance. We also record the actual status of the stronger asymptotic question in the literature: known results on large distances do not yield the bound needed for a proof that $g(n) \to \infty$.
 \end{abstract}
 
 \section{Statement of the problem}
@@ -57,68 +57,74 @@ Take $n=3$ and let $A$ be the vertex set of an equilateral triangle. Then $\Delt
 
 Thus the first question has a negative answer if interpreted literally for every $n$.
 
-\section{The asymptotic answer}
+\section{What the literature does and does not give}
 
-The positive asymptotic statement follows from the following standard theorem on large distances.
+The argument in an earlier draft appealed to the following strong assertion: for each fixed $k$, the $k$ largest distinct distances determined by a planar $n$-point set each occur at most $n$ times. If this were available, then the asymptotic conclusions would follow immediately. However, this is not what the classical papers prove.
 
-\begin{theorem}[Vesztergombi]
-For every fixed integer $k \ge 1$, there exists $N(k)$ such that the following holds for all $n \ge N(k)$. If $A \subset \mathbb{R}^2$ has $|A|=n$ and if
+For clarity, define the following assertion.
+
+\begin{quote}
+For every fixed integer $k \ge 1$, there exists $N(k)$ such that for every $n \ge N(k)$ and every set $A \subset \mathbb{R}^2$ with $|A|=n$, if
 \[
 \delta_1 > \delta_2 > \cdots > \delta_s
 \]
-are the distinct distances determined by $A$ in decreasing order, then each of the distances $\delta_1,\dots,\delta_k$ occurs at most $n$ times; that is,
+are the distinct distances determined by $A$ in decreasing order, then
 \[
 m_A(\delta_i) \le n \qquad (1 \le i \le k).
 \]
-\end{theorem}
+\end{quote}
+
+If this assertion is accepted, then for each fixed $k$ the $k$ largest distances all contribute to $L(A)$, and hence $g(n) \ge k$ for all sufficiently large $n$. In particular one would obtain both eventual validity of $g(n) \ge 2$ and the divergence $g(n) \to \infty$.
+
+What is actually available online from standard references is weaker.
+
+\begin{enumerate}
+\item In \emph{On large distances in planar sets} (Discrete Mathematics, 1987), Vesztergombi studied the multiplicity of the second-largest distance among $n$ points in the plane.
+Later survey and expository sources summarizing this paper state that the second-largest distance can occur at most $\tfrac{3}{2}n$ times.
+
+\item In later summaries of the large-distance literature, one finds the statement that the number of occurrences of the $k$-th largest distance in the plane is always smaller than $2kn$.
+This is again far weaker than the bound $n$ required above.
+\end{enumerate}
+
+Thus the statement needed by the earlier draft is not supplied by these references. In particular, the known bound $m_A(\delta_2) \le \tfrac{3}{2}n$ does not even imply that the second-largest distance contributes to $L(A)$, because our threshold is exactly $n$.
+
+Therefore the asymptotic claims are not merely missing a citation in the present note: they require genuinely stronger input than the classical bounds quoted above.
 
 \begin{remark}
-Each $\delta_i$ occurs at least once by definition, so the conclusion of the theorem is exactly that the $k$ largest distinct distances all contribute to $L(A)$.
+There is therefore a sharp distinction between the two parts of the original problem.
+The first question has a complete unconditional negative answer, proved above.
+The stronger asymptotic claims require additional input not currently justified by the standard large-distance references discussed here.
 \end{remark}
-
-\begin{corollary}
-There exists $N_0$ such that for every $n \ge N_0$ and every $n$-point set $A \subset \mathbb{R}^2$, one has $L(A) \ge 2$.
-\end{corollary}
-
-\begin{proof}
-Apply Vesztergombi's theorem with $k=2$. For all $n \ge N(2)$, the two largest distinct distances $\delta_1$ and $\delta_2$ both satisfy
-\[
-1 \le m_A(\delta_i) \le n.
-\]
-Hence both are counted by $L(A)$, so $L(A) \ge 2$. Therefore $g(n) \ge 2$ for all sufficiently large $n$.
-\end{proof}
-
-\begin{corollary}
-One has $g(n) \to \infty$ as $n \to \infty$.
-\end{corollary}
-
-\begin{proof}
-Let $M \ge 1$ be fixed. Apply Vesztergombi's theorem with $k=M$. Then there exists $N(M)$ such that whenever $n \ge N(M)$ and $A \subset \mathbb{R}^2$ has $|A|=n$, the $M$ largest distinct distances
-\[
-\delta_1,\dots,\delta_M
-\]
-all satisfy
-\[
-1 \le m_A(\delta_i) \le n.
-\]
-Consequently $L(A) \ge M$ for every such $A$, and therefore
-\[
-g(n) \ge M \qquad (n \ge N(M)).
-\]
-Since $M$ is arbitrary, this proves that $g(n) \to \infty$ as $n \to \infty$.
-\end{proof}
 
 \section{Conclusion}
 
-The problem has the following exact resolution.
+The present note proves the following unconditional statement.
 
 \begin{theorem}
 Let $g(n)$ be defined as above.
 \begin{enumerate}
 \item The inequality $g(n) \ge 2$ is false for all $n$, since $g(3)=1$.
-\item The inequality $g(n) \ge 2$ holds for all sufficiently large $n$.
-\item In fact $g(n) \to \infty$ as $n \to \infty$.
+\item No unconditional proof of the asymptotic statements is given in this note, and the standard large-distance bounds quoted in the literature do not suffice to prove them.
 \end{enumerate}
 \end{theorem}
+
+\begin{thebibliography}{9}
+
+\bibitem{V87}
+K.~Vesztergombi,
+\emph{On large distances in planar sets},
+Discrete Mathematics \textbf{67} (1987), 191--198.
+
+\bibitem{ELV89}
+P.~Erd\H{o}s, L.~Lov\'asz, and K.~Vesztergombi,
+\emph{On the graph of large distances},
+Discrete \& Computational Geometry \textbf{4} (1989), 541--549.
+
+\bibitem{MP13}
+F.~Mori\'c and J.~Pach,
+\emph{Large simplices determined by finite point sets},
+Beitr\"age zur Algebra und Geometrie \textbf{54} (2013), 481--487.
+
+\end{thebibliography}
 
 \end{document}
